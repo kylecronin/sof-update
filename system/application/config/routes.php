@@ -41,7 +41,7 @@
 */
 
 $route['default_controller'] = "welcome";
-$route['scaffolding_trigger'] = "";
+$route['scaffolding_trigger'] = "gnidloffacs";
 
 
 /* End of file routes.php */

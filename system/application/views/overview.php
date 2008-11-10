@@ -1,0 +1,28 @@
+<tr><td colspan="5"><h3>Overview:</h3></td></tr>
+<?php
+
+function overview($new, $old, $caption)
+{
+	$diff = $new - $old;
+	
+	if ($diff > 0) $style = "up";
+	else if ($diff < 0) $style = "down";
+	else $style = "nc";
+	
+	if ($diff >= 0) $diff = "+$diff";
+
+	?>
+	<tr>
+		<td class="<?=$style?>" align="right">&nbsp;&nbsp;<?=$diff?>&nbsp;&nbsp;</td>
+		<td colspan="2" align="right">&nbsp;&nbsp;<?=$new?>&nbsp;&nbsp;</td>
+		<td><?=$caption?></td>
+	</tr>
+	<?php
+}
+
+overview(count($questions), $dbitem->questions, "Questions");
+overview(count($answers), $dbitem->answers, "Answers");
+overview($rep, $dbitem->rep, "<a href=\"/sof2/tracker/chart/$user\">Reputation</a>");
+overview($badge, $dbitem->badges, "Badges");
+
+?>
