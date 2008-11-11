@@ -618,3 +618,75 @@ DEBUG - 2008-11-09 13:15:26 --> File loaded: /Users/kyle/Projects/sof2/system/ap
 DEBUG - 2008-11-09 13:15:26 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/footer.php
 DEBUG - 2008-11-09 13:15:26 --> Final output sent to browser
 DEBUG - 2008-11-09 13:15:26 --> Total execution time: 0.0922
+DEBUG - 2008-11-09 21:03:05 --> Config Class Initialized
+DEBUG - 2008-11-09 21:03:05 --> Hooks Class Initialized
+DEBUG - 2008-11-09 21:03:05 --> URI Class Initialized
+DEBUG - 2008-11-09 21:03:05 --> Router Class Initialized
+DEBUG - 2008-11-09 21:03:05 --> Output Class Initialized
+DEBUG - 2008-11-09 21:03:05 --> Input Class Initialized
+DEBUG - 2008-11-09 21:03:05 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-09 21:03:05 --> Language Class Initialized
+DEBUG - 2008-11-09 21:03:05 --> Loader Class Initialized
+DEBUG - 2008-11-09 21:03:05 --> Controller Class Initialized
+DEBUG - 2008-11-09 21:03:05 --> Database Driver Class Initialized
+DEBUG - 2008-11-09 21:03:05 --> Helper loaded: numformat_helper
+DEBUG - 2008-11-09 21:03:11 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/header.php
+DEBUG - 2008-11-09 21:03:11 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/overview.php
+DEBUG - 2008-11-09 21:03:11 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/questans.php
+DEBUG - 2008-11-09 21:03:11 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/questans.php
+DEBUG - 2008-11-09 21:03:11 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/timer.php
+DEBUG - 2008-11-09 21:03:11 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/footer.php
+DEBUG - 2008-11-09 21:03:11 --> Final output sent to browser
+DEBUG - 2008-11-09 21:03:11 --> Total execution time: 6.3049
+DEBUG - 2008-11-09 21:03:21 --> Config Class Initialized
+DEBUG - 2008-11-09 21:03:21 --> Hooks Class Initialized
+DEBUG - 2008-11-09 21:03:21 --> URI Class Initialized
+DEBUG - 2008-11-09 21:03:21 --> Router Class Initialized
+DEBUG - 2008-11-09 21:03:21 --> Output Class Initialized
+DEBUG - 2008-11-09 21:03:21 --> Input Class Initialized
+DEBUG - 2008-11-09 21:03:21 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-09 21:03:21 --> Language Class Initialized
+DEBUG - 2008-11-09 21:03:21 --> Loader Class Initialized
+DEBUG - 2008-11-09 21:03:21 --> Controller Class Initialized
+DEBUG - 2008-11-09 21:03:21 --> Database Driver Class Initialized
+DEBUG - 2008-11-09 21:03:21 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/header.php
+DEBUG - 2008-11-09 21:03:21 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/chart.php
+DEBUG - 2008-11-09 21:03:21 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/footer.php
+DEBUG - 2008-11-09 21:03:21 --> Final output sent to browser
+DEBUG - 2008-11-09 21:03:21 --> Total execution time: 0.0460
+DEBUG - 2008-11-09 21:08:09 --> Config Class Initialized
+DEBUG - 2008-11-09 21:08:09 --> Hooks Class Initialized
+DEBUG - 2008-11-09 21:08:09 --> URI Class Initialized
+DEBUG - 2008-11-09 21:08:09 --> Router Class Initialized
+DEBUG - 2008-11-09 21:08:09 --> Output Class Initialized
+DEBUG - 2008-11-09 21:08:09 --> Input Class Initialized
+DEBUG - 2008-11-09 21:08:09 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-09 21:08:09 --> Language Class Initialized
+DEBUG - 2008-11-09 21:08:09 --> Loader Class Initialized
+DEBUG - 2008-11-09 21:08:09 --> Controller Class Initialized
+DEBUG - 2008-11-09 21:08:09 --> Database Driver Class Initialized
+DEBUG - 2008-11-09 21:08:09 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/header.php
+DEBUG - 2008-11-09 21:08:09 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/chart.php
+DEBUG - 2008-11-09 21:08:09 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/footer.php
+DEBUG - 2008-11-09 21:08:09 --> Final output sent to browser
+DEBUG - 2008-11-09 21:08:09 --> Total execution time: 0.0586
+DEBUG - 2008-11-09 21:45:33 --> Config Class Initialized
+DEBUG - 2008-11-09 21:45:33 --> Hooks Class Initialized
+DEBUG - 2008-11-09 21:45:33 --> URI Class Initialized
+DEBUG - 2008-11-09 21:45:33 --> Router Class Initialized
+DEBUG - 2008-11-09 21:45:33 --> Output Class Initialized
+DEBUG - 2008-11-09 21:45:33 --> Input Class Initialized
+DEBUG - 2008-11-09 21:45:33 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-09 21:45:33 --> Language Class Initialized
+DEBUG - 2008-11-09 21:45:33 --> Loader Class Initialized
+DEBUG - 2008-11-09 21:45:33 --> Controller Class Initialized
+DEBUG - 2008-11-09 21:45:33 --> Database Driver Class Initialized
+DEBUG - 2008-11-09 21:45:33 --> Helper loaded: numformat_helper
+DEBUG - 2008-11-09 21:45:36 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/header.php
+DEBUG - 2008-11-09 21:45:36 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/overview.php
+DEBUG - 2008-11-09 21:45:36 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/questans.php
+DEBUG - 2008-11-09 21:45:36 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/questans.php
+DEBUG - 2008-11-09 21:45:36 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/timer.php
+DEBUG - 2008-11-09 21:45:36 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/footer.php
+DEBUG - 2008-11-09 21:45:36 --> Final output sent to browser
+DEBUG - 2008-11-09 21:45:36 --> Total execution time: 2.5678

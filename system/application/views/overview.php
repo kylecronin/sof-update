@@ -22,7 +22,7 @@ function overview($new, $old, $caption)
 
 overview(count($questions), $dbitem->questions, "Questions");
 overview(count($answers), $dbitem->answers, "Answers");
-overview($rep, $dbitem->rep, "<a href=\"/sof2/tracker/chart/$user\">Reputation</a>");
+overview($rep, $dbitem->rep, "<a href=\"/tracker/chart/$user\">Reputation</a>");
 overview($badge, $dbitem->badges, "Badges");
 
 ?>

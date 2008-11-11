@@ -17,7 +17,11 @@ foreach ($stuff as $s)
 	
 	$show = false;
 	
-	$accepted = $acreg - $dbitem->accepted;
+	if ($dbitem)
+		$accepted = $acreg - $dbitem->accepted;
+	else
+		$accepted = $acreg;
+		
 	if (!$dbitem || $accepted != 0)
 		$show = true;
 	
