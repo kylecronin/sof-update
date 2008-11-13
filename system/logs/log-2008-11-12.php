@@ -329,3 +329,7 @@ DEBUG - 2008-11-12 21:40:38 --> File loaded: /Users/kyle/Projects/sof2/system/ap
 DEBUG - 2008-11-12 21:40:38 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/footer.php
 DEBUG - 2008-11-12 21:40:38 --> Final output sent to browser
 DEBUG - 2008-11-12 21:40:38 --> Total execution time: 0.0623
+DEBUG - 2008-11-12 21:58:21 --> Config Class Initialized
+DEBUG - 2008-11-12 21:58:21 --> Hooks Class Initialized
+DEBUG - 2008-11-12 21:58:21 --> URI Class Initialized
+ERROR - 2008-11-12 21:58:21 --> 404 Page Not Found --> u

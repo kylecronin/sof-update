@@ -11,20 +11,12 @@
 	$dateformat = "Y-m-d H:i:s";
 
 	foreach($query->result_array() as $r)
-	//while($r = mysql_fetch_array($result))
 	{
-		//print_r($r);
-		//continue;
 		echo "<tr><td>".$r['count(user)']."</td><td><a href=\"http://stackoverflow.com/users/".$r['user']."\">".$r['user']."</a></td>";
 		echo "<td>(<a href=\"/tracker/chart/".$r['user']."\">chart</a>)</td><td>".date($dateformat, $r['max(date)'])."</td><td>".date($dateformat, $r['min(date)'])."</td></tr>\n";
 		$count++;
 	}
 
 	echo "<small><i>count: $count</i></small>";
-
-
-
-
-
 
 ?>
