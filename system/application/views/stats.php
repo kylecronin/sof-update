@@ -16,7 +16,7 @@
 		//print_r($r);
 		//continue;
 		echo "<tr><td>".$r['count(user)']."</td><td><a href=\"http://stackoverflow.com/users/".$r['user']."\">".$r['user']."</a></td>";
-		echo "<td>(<a href=\"chart.php?u=".$r['user']."\">chart</a>)</td><td>".date($dateformat, $r['max(date)'])."</td><td>".date($dateformat, $r['min(date)'])."</td></tr>\n";
+		echo "<td>(<a href=\"/tracker/chart/".$r['user']."\">chart</a>)</td><td>".date($dateformat, $r['max(date)'])."</td><td>".date($dateformat, $r['min(date)'])."</td></tr>\n";
 		$count++;
 	}
 
