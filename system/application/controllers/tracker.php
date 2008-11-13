@@ -99,8 +99,28 @@ class Tracker extends Controller {
 	}
 	
 	
-	
-	
+	function stats($order='top', $num='30', $lt='0')
+	{
+		$this->load->database();
+
+		if (!strcmp($order, ""))
+			$order = "top";
+		if (!strcmp($order, "last"))
+			$ob = "max(date) DESC";
+		if (!strcmp($order, "top"))
+			$ob = "count(user) DESC";
+		if (!strcmp($order, "first"))
+			$ob = "min(date) ASC";
+		if (!strcmp($order, "newbies"))
+			$ob = "min(date) DESC";
+
+		$query = $this->db->query("SELECT user, count(user), max(date), min(date) FROM profile GROUP BY user HAVING count(user) >= '$lt' ORDER BY $ob LIMIT $num");
+		//$result = mysql_query($query);
+
+		$this->load->view('stats', compact('query'));
+		
+		$this->load->view('footer');
+	}
 	
 }
 ?>

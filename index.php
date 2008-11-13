@@ -10,6 +10,18 @@
 |
 */
 	error_reporting(E_ALL);
+	
+/*
+|---------------------------------------------------------------
+| *** PRODUCTION VARIABLE ***
+|---------------------------------------------------------------
+|
+| In order to smooth the deployment from the testing server to the
+| production server, this constant is introduced to allow the config
+| files to set the database and other variables based on where this
+| application is run
+*/
+	define('IS_PRODUCTION', ($_SERVER['SERVER_NAME'] != 'localhost'));
 
 /*
 |---------------------------------------------------------------
