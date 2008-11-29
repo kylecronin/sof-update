@@ -136,7 +136,7 @@ class Tracker extends Controller {
 		if (!strcmp($order, "newbies"))
 			$ob = "min(date) DESC";
 
-		$query = $this->db->query("SELECT user, count(user), max(date), min(date) FROM profile GROUP BY user HAVING count(user) >= '$lt' ORDER BY $ob LIMIT $num");
+		$query = $this->db->query("SELECT user, count(user), max(date), min(date) FROM profile GROUP BY user HAVING count(user) >= $lt ORDER BY $ob LIMIT $num");
 		//$result = mysql_query($query);
 
 		$this->load->view('stats', compact('query'));

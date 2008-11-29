@@ -518,6 +518,11 @@ class CI_DB_pdo_driver extends CI_DB
         // Do nothing since PDO don't have close
     }
 
+	function trans_rollback()
+	{
+		echo "trans rollback called\n";
+	}
+
 }
 
 ?>

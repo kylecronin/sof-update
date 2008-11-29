@@ -4,6 +4,7 @@
 $skipped = 0;
 $new = false;
 
+$this->db->query("BEGIN");
 
 foreach ($stuff as $s)
 {
@@ -28,7 +29,10 @@ foreach ($stuff as $s)
 	if ($dbitem)
 	{
 		$lastQ = $s[1] - $dbitem->votes;
-		mysql_query("UPDATE Questions SET votes = '$s[1]', accepted = '$acreg' WHERE id = '$s[2]'");
+		
+		// I have no idea what took me this long to do this
+		if ($accepted || $lastQ)
+			$this->db->query("UPDATE Questions SET votes = '$s[1]', accepted = '$acreg' WHERE id = '$s[2]'");
 		if ($lastQ != 0)
 			$show = true;
 		//$new = false;
@@ -69,6 +73,9 @@ if ($skipped != 0)
 	echo "<tr><td colspan=\"3\" align=\"right\"><i>$skipped&nbsp;&nbsp;</i></td>";
 	echo "<td><i>unchanged not shown</i></td></tr>";
 }
+
+
+$this->db->query("END");
 
 
 
