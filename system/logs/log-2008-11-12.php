@@ -333,3 +333,328 @@ DEBUG - 2008-11-12 21:58:21 --> Config Class Initialized
 DEBUG - 2008-11-12 21:58:21 --> Hooks Class Initialized
 DEBUG - 2008-11-12 21:58:21 --> URI Class Initialized
 ERROR - 2008-11-12 21:58:21 --> 404 Page Not Found --> u
+DEBUG - 2008-11-12 22:14:07 --> Config Class Initialized
+DEBUG - 2008-11-12 22:14:07 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:14:07 --> URI Class Initialized
+DEBUG - 2008-11-12 22:14:07 --> Router Class Initialized
+DEBUG - 2008-11-12 22:14:07 --> Output Class Initialized
+DEBUG - 2008-11-12 22:14:07 --> Input Class Initialized
+DEBUG - 2008-11-12 22:14:07 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:14:07 --> Language Class Initialized
+DEBUG - 2008-11-12 22:14:07 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:14:07 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:14:07 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:14:07 --> Final output sent to browser
+DEBUG - 2008-11-12 22:14:07 --> Total execution time: 0.0409
+DEBUG - 2008-11-12 22:14:37 --> Config Class Initialized
+DEBUG - 2008-11-12 22:14:37 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:14:37 --> URI Class Initialized
+DEBUG - 2008-11-12 22:14:37 --> Router Class Initialized
+DEBUG - 2008-11-12 22:14:37 --> Output Class Initialized
+DEBUG - 2008-11-12 22:14:37 --> Input Class Initialized
+DEBUG - 2008-11-12 22:14:37 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:14:37 --> Language Class Initialized
+DEBUG - 2008-11-12 22:14:37 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:14:37 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:14:37 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:14:37 --> Final output sent to browser
+DEBUG - 2008-11-12 22:14:37 --> Total execution time: 0.0234
+DEBUG - 2008-11-12 22:14:47 --> Config Class Initialized
+DEBUG - 2008-11-12 22:14:47 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:14:47 --> URI Class Initialized
+DEBUG - 2008-11-12 22:14:47 --> Router Class Initialized
+DEBUG - 2008-11-12 22:14:47 --> Output Class Initialized
+DEBUG - 2008-11-12 22:14:47 --> Input Class Initialized
+DEBUG - 2008-11-12 22:14:47 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:14:47 --> Language Class Initialized
+DEBUG - 2008-11-12 22:14:47 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:14:47 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:14:47 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:14:47 --> Final output sent to browser
+DEBUG - 2008-11-12 22:14:47 --> Total execution time: 0.0536
+DEBUG - 2008-11-12 22:15:06 --> Config Class Initialized
+DEBUG - 2008-11-12 22:15:06 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:15:06 --> URI Class Initialized
+DEBUG - 2008-11-12 22:15:06 --> Router Class Initialized
+DEBUG - 2008-11-12 22:15:06 --> Output Class Initialized
+DEBUG - 2008-11-12 22:15:06 --> Input Class Initialized
+DEBUG - 2008-11-12 22:15:06 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:15:06 --> Language Class Initialized
+DEBUG - 2008-11-12 22:15:06 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:15:06 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:15:06 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:15:06 --> Final output sent to browser
+DEBUG - 2008-11-12 22:15:06 --> Total execution time: 0.0096
+DEBUG - 2008-11-12 22:15:22 --> Config Class Initialized
+DEBUG - 2008-11-12 22:15:22 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:15:22 --> URI Class Initialized
+DEBUG - 2008-11-12 22:15:22 --> Router Class Initialized
+DEBUG - 2008-11-12 22:15:22 --> Output Class Initialized
+DEBUG - 2008-11-12 22:15:22 --> Input Class Initialized
+DEBUG - 2008-11-12 22:15:22 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:15:22 --> Language Class Initialized
+DEBUG - 2008-11-12 22:15:22 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:15:22 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:15:22 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:15:22 --> Final output sent to browser
+DEBUG - 2008-11-12 22:15:22 --> Total execution time: 0.0110
+DEBUG - 2008-11-12 22:15:29 --> Config Class Initialized
+DEBUG - 2008-11-12 22:15:29 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:15:29 --> URI Class Initialized
+DEBUG - 2008-11-12 22:15:29 --> Router Class Initialized
+DEBUG - 2008-11-12 22:15:29 --> Output Class Initialized
+DEBUG - 2008-11-12 22:15:29 --> Input Class Initialized
+DEBUG - 2008-11-12 22:15:29 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:15:29 --> Language Class Initialized
+DEBUG - 2008-11-12 22:15:29 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:15:29 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:15:29 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:15:29 --> Final output sent to browser
+DEBUG - 2008-11-12 22:15:29 --> Total execution time: 0.0122
+DEBUG - 2008-11-12 22:16:44 --> Config Class Initialized
+DEBUG - 2008-11-12 22:16:44 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:16:44 --> URI Class Initialized
+DEBUG - 2008-11-12 22:16:44 --> Router Class Initialized
+DEBUG - 2008-11-12 22:16:44 --> Output Class Initialized
+DEBUG - 2008-11-12 22:16:44 --> Input Class Initialized
+DEBUG - 2008-11-12 22:16:44 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:16:44 --> Language Class Initialized
+DEBUG - 2008-11-12 22:16:44 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:16:44 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:16:44 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:16:44 --> Final output sent to browser
+DEBUG - 2008-11-12 22:16:44 --> Total execution time: 0.0153
+DEBUG - 2008-11-12 22:16:59 --> Config Class Initialized
+DEBUG - 2008-11-12 22:16:59 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:16:59 --> URI Class Initialized
+DEBUG - 2008-11-12 22:16:59 --> Router Class Initialized
+DEBUG - 2008-11-12 22:16:59 --> Output Class Initialized
+DEBUG - 2008-11-12 22:16:59 --> Input Class Initialized
+DEBUG - 2008-11-12 22:16:59 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:16:59 --> Language Class Initialized
+DEBUG - 2008-11-12 22:16:59 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:16:59 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:16:59 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:16:59 --> Final output sent to browser
+DEBUG - 2008-11-12 22:16:59 --> Total execution time: 0.0136
+DEBUG - 2008-11-12 22:18:15 --> Config Class Initialized
+DEBUG - 2008-11-12 22:18:15 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:18:15 --> URI Class Initialized
+DEBUG - 2008-11-12 22:18:15 --> Router Class Initialized
+DEBUG - 2008-11-12 22:18:15 --> Output Class Initialized
+DEBUG - 2008-11-12 22:18:15 --> Input Class Initialized
+DEBUG - 2008-11-12 22:18:15 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:18:15 --> Language Class Initialized
+DEBUG - 2008-11-12 22:18:15 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:18:15 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:18:15 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:18:15 --> Final output sent to browser
+DEBUG - 2008-11-12 22:18:15 --> Total execution time: 0.0095
+DEBUG - 2008-11-12 22:18:32 --> Config Class Initialized
+DEBUG - 2008-11-12 22:18:33 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:18:33 --> URI Class Initialized
+DEBUG - 2008-11-12 22:18:33 --> Router Class Initialized
+DEBUG - 2008-11-12 22:18:33 --> Output Class Initialized
+DEBUG - 2008-11-12 22:18:33 --> Input Class Initialized
+DEBUG - 2008-11-12 22:18:33 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:18:33 --> Language Class Initialized
+DEBUG - 2008-11-12 22:18:33 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:18:33 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:18:33 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:18:33 --> Final output sent to browser
+DEBUG - 2008-11-12 22:18:33 --> Total execution time: 0.5495
+DEBUG - 2008-11-12 22:18:50 --> Config Class Initialized
+DEBUG - 2008-11-12 22:18:50 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:18:50 --> URI Class Initialized
+DEBUG - 2008-11-12 22:18:50 --> Router Class Initialized
+DEBUG - 2008-11-12 22:18:50 --> Output Class Initialized
+DEBUG - 2008-11-12 22:18:50 --> Input Class Initialized
+DEBUG - 2008-11-12 22:18:50 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:18:50 --> Language Class Initialized
+DEBUG - 2008-11-12 22:18:50 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:18:50 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:18:50 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:18:50 --> Final output sent to browser
+DEBUG - 2008-11-12 22:18:50 --> Total execution time: 0.0142
+DEBUG - 2008-11-12 22:18:58 --> Config Class Initialized
+DEBUG - 2008-11-12 22:18:58 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:18:58 --> URI Class Initialized
+DEBUG - 2008-11-12 22:18:58 --> Router Class Initialized
+DEBUG - 2008-11-12 22:18:58 --> Output Class Initialized
+DEBUG - 2008-11-12 22:18:58 --> Input Class Initialized
+DEBUG - 2008-11-12 22:18:58 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:18:58 --> Language Class Initialized
+DEBUG - 2008-11-12 22:18:58 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:18:58 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:18:58 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:18:58 --> Final output sent to browser
+DEBUG - 2008-11-12 22:18:58 --> Total execution time: 0.0104
+DEBUG - 2008-11-12 22:19:05 --> Config Class Initialized
+DEBUG - 2008-11-12 22:19:05 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:19:05 --> URI Class Initialized
+DEBUG - 2008-11-12 22:19:05 --> Router Class Initialized
+DEBUG - 2008-11-12 22:19:05 --> Output Class Initialized
+DEBUG - 2008-11-12 22:19:05 --> Input Class Initialized
+DEBUG - 2008-11-12 22:19:05 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:19:05 --> Language Class Initialized
+DEBUG - 2008-11-12 22:19:05 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:19:05 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:19:05 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:19:05 --> Final output sent to browser
+DEBUG - 2008-11-12 22:19:05 --> Total execution time: 0.0131
+DEBUG - 2008-11-12 22:19:47 --> Config Class Initialized
+DEBUG - 2008-11-12 22:19:47 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:19:47 --> URI Class Initialized
+DEBUG - 2008-11-12 22:19:47 --> Router Class Initialized
+DEBUG - 2008-11-12 22:19:47 --> Output Class Initialized
+DEBUG - 2008-11-12 22:19:47 --> Input Class Initialized
+DEBUG - 2008-11-12 22:19:47 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:19:47 --> Language Class Initialized
+DEBUG - 2008-11-12 22:19:47 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:19:47 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:19:47 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:19:47 --> Final output sent to browser
+DEBUG - 2008-11-12 22:19:47 --> Total execution time: 0.0285
+DEBUG - 2008-11-12 22:19:57 --> Config Class Initialized
+DEBUG - 2008-11-12 22:19:57 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:19:57 --> URI Class Initialized
+DEBUG - 2008-11-12 22:19:57 --> Router Class Initialized
+DEBUG - 2008-11-12 22:19:57 --> Output Class Initialized
+DEBUG - 2008-11-12 22:19:57 --> Input Class Initialized
+DEBUG - 2008-11-12 22:19:57 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:19:57 --> Language Class Initialized
+DEBUG - 2008-11-12 22:19:57 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:19:57 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:19:57 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:19:57 --> Final output sent to browser
+DEBUG - 2008-11-12 22:19:57 --> Total execution time: 0.0334
+DEBUG - 2008-11-12 22:20:06 --> Config Class Initialized
+DEBUG - 2008-11-12 22:20:06 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:20:06 --> URI Class Initialized
+DEBUG - 2008-11-12 22:20:06 --> Router Class Initialized
+DEBUG - 2008-11-12 22:20:06 --> Output Class Initialized
+DEBUG - 2008-11-12 22:20:06 --> Input Class Initialized
+DEBUG - 2008-11-12 22:20:06 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:20:06 --> Language Class Initialized
+DEBUG - 2008-11-12 22:20:06 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:20:06 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:20:06 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:20:06 --> Final output sent to browser
+DEBUG - 2008-11-12 22:20:06 --> Total execution time: 0.0128
+DEBUG - 2008-11-12 22:20:36 --> Config Class Initialized
+DEBUG - 2008-11-12 22:20:36 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:20:36 --> URI Class Initialized
+DEBUG - 2008-11-12 22:20:36 --> Router Class Initialized
+DEBUG - 2008-11-12 22:20:36 --> Output Class Initialized
+DEBUG - 2008-11-12 22:20:36 --> Input Class Initialized
+DEBUG - 2008-11-12 22:20:36 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:20:36 --> Language Class Initialized
+DEBUG - 2008-11-12 22:20:36 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:20:36 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:20:36 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:20:36 --> Final output sent to browser
+DEBUG - 2008-11-12 22:20:36 --> Total execution time: 0.0145
+DEBUG - 2008-11-12 22:20:43 --> Config Class Initialized
+DEBUG - 2008-11-12 22:20:43 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:20:43 --> URI Class Initialized
+DEBUG - 2008-11-12 22:20:43 --> Router Class Initialized
+DEBUG - 2008-11-12 22:20:43 --> Output Class Initialized
+DEBUG - 2008-11-12 22:20:43 --> Input Class Initialized
+DEBUG - 2008-11-12 22:20:43 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:20:43 --> Language Class Initialized
+DEBUG - 2008-11-12 22:20:43 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:20:43 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:20:43 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:20:43 --> Final output sent to browser
+DEBUG - 2008-11-12 22:20:43 --> Total execution time: 0.0166
+DEBUG - 2008-11-12 22:20:54 --> Config Class Initialized
+DEBUG - 2008-11-12 22:20:54 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:20:54 --> URI Class Initialized
+DEBUG - 2008-11-12 22:20:54 --> Router Class Initialized
+DEBUG - 2008-11-12 22:20:54 --> Output Class Initialized
+DEBUG - 2008-11-12 22:20:54 --> Input Class Initialized
+DEBUG - 2008-11-12 22:20:54 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:20:54 --> Language Class Initialized
+DEBUG - 2008-11-12 22:20:54 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:20:54 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:20:54 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:20:54 --> Final output sent to browser
+DEBUG - 2008-11-12 22:20:54 --> Total execution time: 0.0128
+DEBUG - 2008-11-12 22:21:02 --> Config Class Initialized
+DEBUG - 2008-11-12 22:21:02 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:21:02 --> URI Class Initialized
+DEBUG - 2008-11-12 22:21:02 --> Router Class Initialized
+DEBUG - 2008-11-12 22:21:02 --> Output Class Initialized
+DEBUG - 2008-11-12 22:21:02 --> Input Class Initialized
+DEBUG - 2008-11-12 22:21:02 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:21:02 --> Language Class Initialized
+DEBUG - 2008-11-12 22:21:02 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:21:02 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:21:02 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:21:02 --> Final output sent to browser
+DEBUG - 2008-11-12 22:21:02 --> Total execution time: 0.0145
+DEBUG - 2008-11-12 22:21:09 --> Config Class Initialized
+DEBUG - 2008-11-12 22:21:09 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:21:10 --> URI Class Initialized
+DEBUG - 2008-11-12 22:21:10 --> Router Class Initialized
+DEBUG - 2008-11-12 22:21:10 --> Output Class Initialized
+DEBUG - 2008-11-12 22:21:10 --> Input Class Initialized
+DEBUG - 2008-11-12 22:21:10 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:21:10 --> Language Class Initialized
+DEBUG - 2008-11-12 22:21:10 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:21:10 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:21:10 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:21:10 --> Final output sent to browser
+DEBUG - 2008-11-12 22:21:10 --> Total execution time: 0.2514
+DEBUG - 2008-11-12 22:21:19 --> Config Class Initialized
+DEBUG - 2008-11-12 22:21:19 --> Hooks Class Initialized
+DEBUG - 2008-11-12 22:21:19 --> URI Class Initialized
+DEBUG - 2008-11-12 22:21:19 --> Router Class Initialized
+DEBUG - 2008-11-12 22:21:19 --> Output Class Initialized
+DEBUG - 2008-11-12 22:21:19 --> Input Class Initialized
+DEBUG - 2008-11-12 22:21:19 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 22:21:19 --> Language Class Initialized
+DEBUG - 2008-11-12 22:21:19 --> Loader Class Initialized
+DEBUG - 2008-11-12 22:21:19 --> Controller Class Initialized
+DEBUG - 2008-11-12 22:21:19 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 22:21:19 --> Final output sent to browser
+DEBUG - 2008-11-12 22:21:19 --> Total execution time: 0.0144
+DEBUG - 2008-11-12 23:46:14 --> Config Class Initialized
+DEBUG - 2008-11-12 23:46:14 --> Hooks Class Initialized
+DEBUG - 2008-11-12 23:46:14 --> URI Class Initialized
+DEBUG - 2008-11-12 23:46:14 --> Router Class Initialized
+DEBUG - 2008-11-12 23:46:14 --> Output Class Initialized
+DEBUG - 2008-11-12 23:46:14 --> Input Class Initialized
+DEBUG - 2008-11-12 23:46:14 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 23:46:14 --> Language Class Initialized
+DEBUG - 2008-11-12 23:46:14 --> Loader Class Initialized
+DEBUG - 2008-11-12 23:46:14 --> Controller Class Initialized
+DEBUG - 2008-11-12 23:46:14 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 23:46:14 --> Final output sent to browser
+DEBUG - 2008-11-12 23:46:14 --> Total execution time: 0.0232
+DEBUG - 2008-11-12 23:48:14 --> Config Class Initialized
+DEBUG - 2008-11-12 23:48:14 --> Hooks Class Initialized
+DEBUG - 2008-11-12 23:48:14 --> URI Class Initialized
+DEBUG - 2008-11-12 23:48:14 --> Router Class Initialized
+DEBUG - 2008-11-12 23:48:14 --> Output Class Initialized
+DEBUG - 2008-11-12 23:48:14 --> Input Class Initialized
+DEBUG - 2008-11-12 23:48:14 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 23:48:14 --> Language Class Initialized
+DEBUG - 2008-11-12 23:48:14 --> Loader Class Initialized
+DEBUG - 2008-11-12 23:48:14 --> Controller Class Initialized
+DEBUG - 2008-11-12 23:48:14 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 23:48:14 --> Final output sent to browser
+DEBUG - 2008-11-12 23:48:14 --> Total execution time: 0.0256
+DEBUG - 2008-11-12 23:59:56 --> Config Class Initialized
+DEBUG - 2008-11-12 23:59:56 --> Hooks Class Initialized
+DEBUG - 2008-11-12 23:59:56 --> URI Class Initialized
+DEBUG - 2008-11-12 23:59:56 --> Router Class Initialized
+DEBUG - 2008-11-12 23:59:56 --> Output Class Initialized
+DEBUG - 2008-11-12 23:59:56 --> Input Class Initialized
+DEBUG - 2008-11-12 23:59:56 --> Global POST and COOKIE data sanitized
+DEBUG - 2008-11-12 23:59:56 --> Language Class Initialized
+DEBUG - 2008-11-12 23:59:56 --> Loader Class Initialized
+DEBUG - 2008-11-12 23:59:56 --> Controller Class Initialized
+DEBUG - 2008-11-12 23:59:56 --> File loaded: /Users/kyle/Projects/sof2/system/application/views/tracker_index.php
+DEBUG - 2008-11-12 23:59:56 --> Final output sent to browser
+DEBUG - 2008-11-12 23:59:56 --> Total execution time: 0.0668

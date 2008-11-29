@@ -3,7 +3,20 @@ class Tracker extends Controller {
 
 	function index()
 	{
-		echo 'Hello World!';
+		
+		
+	$url = "";
+
+	       for ($i = 0; $i < func_num_args(); $i++)
+	       {
+	          $url .= func_get_arg($i) . "/";
+	       }
+
+	       // $url is now the url in the address
+	
+	echo $url;
+		
+		$this->load->view('tracker_index');
 	}
 	
 	function updatedb()
@@ -11,6 +24,7 @@ class Tracker extends Controller {
 		echo "what's up?";
 	}
 	
+
 	function chart($user)
 	{
 		$this->load->database();
@@ -81,6 +95,14 @@ class Tracker extends Controller {
 		// get existing profile and insert updated one
 		$dbitem = $this->db->query("SELECT * FROM profile WHERE user = '$user' ORDER BY date DESC LIMIT 1")->row();
 		$this->db->query("INSERT INTO profile VALUES('$rep', '$badge','".count($questions)."','".count($answers)."','".time()."','$user')");
+
+		
+
+		// if we're a new user
+		if (!$dbitem)
+		{
+			$dbitem = (object) array('questions' => 0, 'answers' => 0, 'rep' => 0, 'badges' => 0);
+		}
 
 		//print_r($profile);
 		
