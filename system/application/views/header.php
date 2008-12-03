@@ -38,6 +38,9 @@
 		if (minutes < 10){
 		minutes = "0" + minutes;
 		}
+		if (seconds < 10){
+		seconds = "0" + seconds;
+		}
 		document.write(month + "/" + day + "/" + year + "&nbsp;&nbsp;&nbsp;" + hours + ":" + minutes + ":" + seconds + " ");
 		if(hours > 11){
 		document.write("PM");
