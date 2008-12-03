@@ -24,6 +24,28 @@
 		
 	</style>
 	<script type="text/javascript" src="http://stackoverflow.com/Content/Js/jquery.package.master.js?d=20081101"></script>
+	<script type="text/javascript">
+	function showtime(t)
+	{
+		var currentTime = new Date(t);
+		var month = currentTime.getMonth() + 1;
+		var day = currentTime.getDate();
+		var year = currentTime.getFullYear();
+		var hours = currentTime.getHours();
+		var minutes = currentTime.getMinutes();
+		var seconds = currentTime.getSeconds();
+		document.write();
+		if (minutes < 10){
+		minutes = "0" + minutes;
+		}
+		document.write(month + "/" + day + "/" + year + "&nbsp;&nbsp;&nbsp;" + hours + ":" + minutes + ":" + seconds + " ");
+		if(hours > 11){
+		document.write("PM");
+		} else {
+		document.write("AM");
+		}
+	}
+	</script>
 </head>
 <body>
 	<table cellpadding="0" cellspacing="0" border="0">

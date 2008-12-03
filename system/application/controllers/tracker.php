@@ -96,8 +96,6 @@ class Tracker extends Controller {
 		$dbitem = $this->db->query("SELECT * FROM profile WHERE user = '$user' ORDER BY date DESC LIMIT 1")->row();
 		$this->db->query("INSERT INTO profile VALUES('$rep', '$badge','".count($questions)."','".count($answers)."','".time()."','$user')");
 
-		
-
 		// if we're a new user
 		if (!$dbitem)
 		{
@@ -108,14 +106,14 @@ class Tracker extends Controller {
 		
 		$this->load->view('header', compact('user'));
 		$this->load->view('overview', compact('questions', 'answers', 'rep', 'badge', 'dbitem'));
-		$this->load->view('questans', array('stuff' => $questions, 'name' => 'Questions'));
-		$this->load->view('questans', array('stuff' => $answers, 'name' => 'Answers'));
+		$this->load->view('questans', array('stuff' => $questions, 'name' => 'questions'));
+		$this->load->view('questans', array('stuff' => $answers, 'name' => 'answers'));
 		
 		$after = microtime(true);
 		$pageload = number_format($during-$before, 2, '.', '');
 		$dbprocess = number_format($after-$during, 2, '.', '');
 
-		$this->load->view('timer', compact('pageload', 'dbprocess'));
+		$this->load->view('timer', compact('pageload', 'dbprocess', 'dbitem'));
 		$this->load->view('footer');
 		
 	}

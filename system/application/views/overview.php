@@ -1,4 +1,4 @@
-<tr><td colspan="5"><h3>Overview:</h3></td></tr>
+<tr><td colspan="5"><h3>overview:</h3></td></tr>
 <?php
 
 function overview($new, $old, $caption)
@@ -20,9 +20,9 @@ function overview($new, $old, $caption)
 	<?php
 }
 
-overview(count($questions), $dbitem->questions, "Questions");
-overview(count($answers), $dbitem->answers, "Answers");
-overview($rep, $dbitem->rep, "<a href=\"/tracker/chart/$user\">Reputation</a>");
-overview($badge, $dbitem->badges, "Badges");
+overview(count($questions), $dbitem->questions, "questions");
+overview(count($answers), $dbitem->answers, "answers");
+overview($rep, $dbitem->rep, "<a href=\"/tracker/chart/$user\">reputation</a>");
+overview($badge, $dbitem->badges, "badges");
 
 ?>
