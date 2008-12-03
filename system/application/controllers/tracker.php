@@ -25,11 +25,21 @@ class Tracker extends Controller {
 	}
 	
 
-	function chart($user)
+	function chart($user, $low = false, $high = false)
 	{
 		$this->load->database();
 		
-		$query = $this->db->query("SELECT rep, questions, answers, date FROM profile WHERE user = '$user' ORDER BY date DESC");
+		if (!$low)
+			$low = time()-2592000;
+			
+		if (!$high)
+			$high = time();
+		
+		if (!strcmp($low, "all"))
+			$low = 0;
+		
+		
+		$query = $this->db->query("SELECT rep, questions, answers, date FROM profile WHERE user = '$user' AND $low < date AND date < $high ORDER BY date DESC");
 
 		$data = "";
 
