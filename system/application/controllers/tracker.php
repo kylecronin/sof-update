@@ -19,25 +19,27 @@ class Tracker extends Controller {
 		$this->load->view('tracker_index');
 	}
 	
-	function updatedb()
-	{
-		echo "what's up?";
-	}
-	
 
 	function chart($user, $low = false, $high = false)
 	{
 		$this->load->database();
 		
 		if (!$low)
-			$low = time()-2592000;
-			
+			$low = "month";
 		if (!$high)
 			$high = time();
-		
 		if (!strcmp($low, "all"))
 			$low = 0;
-		
+		if (!strcmp($low, "year"))
+			$low = time()-31557600;
+		if (!strcmp($low, "month"))
+			$low = time()-2592000;
+		if (!strcmp($low, "week"))
+			$low = time()-604800;
+		if (!strcmp($low, "day"))
+			$low = time()-86400;
+		if (!strcmp($low, "hour"))
+			$low = time()-3600;
 		
 		$query = $this->db->query("SELECT rep, questions, answers, date FROM profile WHERE user = '$user' AND $low < date AND date < $high ORDER BY date DESC");
 
@@ -75,6 +77,8 @@ class Tracker extends Controller {
 		
 		$before = microtime(true);
 		$page = file_get_contents("http://stackoverflow.com/users/$user/");
+		$between = microtime(true);
+		$page2 = file_get_contents("http://stackoverflow.com/users/$user?sort=responses");
 		$during = microtime(true);
 		
 		
@@ -120,10 +124,11 @@ class Tracker extends Controller {
 		$this->load->view('questans', array('stuff' => $answers, 'name' => 'answers'));
 		
 		$after = microtime(true);
-		$pageload = number_format($during-$before, 2, '.', '');
+		$pageload = number_format($between-$before, 2, '.', '');
+		$page2load = number_format($during-$between, 2, '.', '');
 		$dbprocess = number_format($after-$during, 2, '.', '');
 
-		$this->load->view('timer', compact('pageload', 'dbprocess', 'dbitem'));
+		$this->load->view('timer', compact('pageload', 'page2load', 'dbprocess', 'dbitem'));
 		$this->load->view('footer');
 		
 	}

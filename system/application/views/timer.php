@@ -1,5 +1,5 @@
 </table>
-<br><small><i>scrape: <?=$pageload?>s&nbsp;&nbsp;&nbsp;process: <?=$dbprocess?>s</i></small>
+<br><small><i>scrape: [<?=$pageload?>s, <?=$page2load?>]&nbsp;&nbsp;&nbsp;process: <?=$dbprocess?>s</i></small>
 <br><br>
 <?php
 	function RelativeTime($time, $now = false)

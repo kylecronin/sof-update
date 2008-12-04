@@ -2,8 +2,9 @@
 <script type="text/javascript" src="http://stackoverflow.com/Content/Js/third-party/jquery.flot.pack.js"></script>
 <div>
     <div id="placeholder" style="width:900px;height:450px;float:left;"></div>
-
+<!-- <div><a href="all">see entire history</a></div> -->
 </div>
+<br>
 
 <script id="source" language="javascript" type="text/javascript">
 $(function () {
