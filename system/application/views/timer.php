@@ -38,7 +38,7 @@
 	}
 ?>
 <table border="0">
-	<tr><td><small><b>inverval:</b></small></td><td><small><?=RelativeTime($dbitem->date)?></small></td></tr>
+	<tr><td><small><b>interval:</b></small></td><td><small><?=RelativeTime($dbitem->date)?></small></td></tr>
 	<tr><td><small><b>last update:</b></small></td><td><small>
 		<script type="text/javascript">showtime(<?=$dbitem->date."000"?>)</script>
 	</small></td></tr>
