@@ -2,20 +2,7 @@
 class Tracker extends Controller {
 
 	function index()
-	{
-		
-		
-	$url = "";
-
-	       for ($i = 0; $i < func_num_args(); $i++)
-	       {
-	          $url .= func_get_arg($i) . "/";
-	       }
-
-	       // $url is now the url in the address
-	
-	echo $url;
-		
+	{	
 		$this->load->view('tracker_index');
 	}
 	
@@ -116,13 +103,38 @@ class Tracker extends Controller {
 		{
 			$dbitem = (object) array('questions' => 0, 'answers' => 0, 'rep' => 0, 'badges' => 0);
 		}
+		
+		// get chart data
+		$low = time()-2592000;
+		$query = $this->db->query("SELECT rep, questions, answers, date FROM profile WHERE user = '$user' AND $low < date ORDER BY date DESC");
+
+		$data = "";
+
+		foreach ($query->result() as $row)
+		{
+			$r = $row->rep;
+			$q = $row->questions;
+			$a = $row->answers;
+			$pd = $row->date;
+			$d = $pd."000";
+			
+			$data .= "[$d, $r, $q, $a],";
+		}
+
+		$data = "[$data];";
+		
 
 		//print_r($profile);
 		
 		$this->load->view('header', compact('user'));
 		$this->load->view('overview', compact('questions', 'answers', 'rep', 'badge', 'dbitem'));
+		
 		$this->load->view('questans', array('stuff' => $questions, 'name' => 'questions <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions/ask"><font color="999999">ask</font></a>)</i></small></font>'));
 		$this->load->view('questans', array('stuff' => $answers, 'name' => 'answers <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions"><font color="999999">answer</font></a>)</i></small></font>'));
+		
+		if (strcmp($data, "[];"))
+			$this->load->view('rep', compact('data'));
+		
 		
 		$after = microtime(true);
 		$pageload = number_format($between-$before, 2, '.', '');

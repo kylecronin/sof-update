@@ -50,6 +50,8 @@
 		}
 	}
 	</script>
+	<!--[if IE]><script language="javascript" type="text/javascript" src="http://stackoverflow.com/Content/Js/third-party/excanvas.pack.js"></script><![endif]-->
+	<script type="text/javascript" src="http://stackoverflow.com/Content/Js/third-party/jquery.flot.pack.js"></script>
 </head>
 <body>
 	<table cellpadding="0" cellspacing="0" border="0">
