@@ -28,6 +28,13 @@
 	<script type="text/javascript">
 	function showtime(t)
 	{
+		if (t == 0)
+		{
+			document.write("never");
+			return;
+		}
+		
+	
 		var currentTime = new Date(t);
 		var month = currentTime.getMonth() + 1;
 		var day = currentTime.getDate();

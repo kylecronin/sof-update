@@ -4,6 +4,9 @@
 <?php
 	function RelativeTime($time, $now = false)
 	{
+		if ($time == 0)
+			return "n/a";
+	
 		$time = (int) $time;
 		$curr = $now ? $now : time();
 		$shift = $curr - $time;

@@ -101,7 +101,7 @@ class Tracker extends Controller {
 		// if we're a new user
 		if (!$dbitem)
 		{
-			$dbitem = (object) array('questions' => 0, 'answers' => 0, 'rep' => 0, 'badges' => 0);
+			$dbitem = (object) array('questions' => 0, 'answers' => 0, 'rep' => 0, 'badges' => 0, 'date' => 0, 'user' => $user);
 		}
 		
 		// get chart data
