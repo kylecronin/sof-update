@@ -109,20 +109,23 @@ class Tracker extends Controller {
 		$query = $this->db->query("SELECT rep, questions, answers, date FROM profile WHERE user = '$user' AND $low < date ORDER BY date DESC");
 
 		$data = "";
-
-		foreach ($query->result() as $row)
-		{
-			$r = $row->rep;
-			$q = $row->questions;
-			$a = $row->answers;
-			$pd = $row->date;
-			$d = $pd."000";
-			
-			$data .= "[$d, $r, $q, $a],";
-		}
-
-		$data = "[$data];";
 		
+		if ($query->num_rows() > 1)
+		{
+			$data = "";
+			foreach ($query->result() as $row)
+			{
+				$r = $row->rep;
+				$q = $row->questions;
+				$a = $row->answers;
+				$pd = $row->date;
+				$d = $pd."000";
+			
+				$data .= "[$d, $r, $q, $a],";
+			}
+		}
+		else
+			$data = false;
 
 		//print_r($profile);
 		
@@ -132,7 +135,7 @@ class Tracker extends Controller {
 		$this->load->view('questans', array('stuff' => $questions, 'name' => 'questions <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions/ask"><font color="999999">ask</font></a>)</i></small></font>'));
 		$this->load->view('questans', array('stuff' => $answers, 'name' => 'answers <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions"><font color="999999">answer</font></a>)</i></small></font>'));
 		
-		if (strcmp($data, "[];"))
+		if ($data)
 			$this->load->view('rep', compact('data'));
 		
 		
