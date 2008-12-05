@@ -1,4 +1,4 @@
-<tr><td colspan="5"><br><h3>reputation</h3></td></tr>
+<tr><td colspan="5"><br><h3><a href="/tracker/chart/<?=$user?>">reputation</a></h3></td></tr>
 
 
 <tr>

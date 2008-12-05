@@ -22,7 +22,7 @@ function overview($new, $old, $caption)
 
 overview(count($questions), $dbitem->questions, "questions");
 overview(count($answers), $dbitem->answers, "answers");
-overview($rep, $dbitem->rep, "<a href=\"/tracker/chart/$user\">reputation</a>");
+overview($rep, $dbitem->rep, "reputation");
 overview($badge, $dbitem->badges, "badges");
 
 ?>

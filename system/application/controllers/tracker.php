@@ -136,7 +136,7 @@ class Tracker extends Controller {
 		$this->load->view('questans', array('stuff' => $answers, 'name' => 'answers <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions"><font color="999999">answer</font></a>)</i></small></font>'));
 		
 		if ($data)
-			$this->load->view('rep', compact('data'));
+			$this->load->view('rep', compact('data', 'user'));
 		
 		
 		$after = microtime(true);

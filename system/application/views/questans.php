@@ -74,11 +74,9 @@ foreach ($stuff as $s)
 
 }
 
-if ($skipped != 0)
-{
 	echo "<tr><td colspan=\"3\" align=\"right\"><i>$skipped&nbsp;&nbsp;</i></td>";
 	echo "<td><i>unchanged not shown</i></td></tr>";
-}
+
 
 
 $this->db->query("END");
