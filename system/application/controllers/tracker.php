@@ -77,6 +77,7 @@ class Tracker extends Controller {
 		
 		$before = microtime(true);
 		$page = file_get_contents("http://stackoverflow.com/users/$user/");
+		//$page = file_get_contents("profile.cache");
 		$between = microtime(true);
 		//$page2 = file_get_contents("http://stackoverflow.com/users/$user?sort=responses");
 		$during = microtime(true);
@@ -120,8 +121,8 @@ class Tracker extends Controller {
 		
 		$this->load->view('header', compact('user'));
 		$this->load->view('overview', compact('questions', 'answers', 'rep', 'badge', 'dbitem'));
-		$this->load->view('questans', array('stuff' => $questions, 'name' => 'questions <small><i>(<a href="http://stackoverflow.com/questions/ask">ask</a>)</i></small>'));
-		$this->load->view('questans', array('stuff' => $answers, 'name' => 'answers <small><i>(<a href="http://stackoverflow.com/questions">answer</a>)</i></small>'));
+		$this->load->view('questans', array('stuff' => $questions, 'name' => 'questions <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions/ask"><font color="999999">ask</font></a>)</i></small></font>'));
+		$this->load->view('questans', array('stuff' => $answers, 'name' => 'answers <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions"><font color="999999">answer</font></a>)</i></small></font>'));
 		
 		$after = microtime(true);
 		$pageload = number_format($between-$before, 2, '.', '');

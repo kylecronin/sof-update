@@ -1,4 +1,4 @@
-<tr><td colspan="5"><h3>overview:</h3></td></tr>
+<tr><td colspan="5"><h3>overview</h3></td></tr>
 <?php
 
 function overview($new, $old, $caption)

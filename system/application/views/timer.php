@@ -42,11 +42,11 @@
 	}
 ?>
 <table border="0">
-	<tr><td><small><b>interval:</b></small></td><td><small><?=RelativeTime($dbitem->date)?></small></td></tr>
-	<tr><td><small><b>last update:</b></small></td><td><small>
+	<tr><td align="right"><small><b>interval</b></small></td><td><small>&nbsp;</small></td><td><small><?=RelativeTime($dbitem->date)?></small></td></tr>
+	<tr><td align="right"><small><b>last update</b></small></td><td><small>&nbsp;</small></td><td><small>
 		<script type="text/javascript">showtime(<?=$dbitem->date."000"?>)</script>
 	</small></td></tr>
-	<tr><td><small><b>current time:</b></small></td><td><small>
+	<tr><td align="right"><small><b>current time</b></small></td><td><small>&nbsp;</small></td><td><small>
 		<script type="text/javascript">showtime(<?=time()."000"?>)</script>
 	</small></td></tr>
 </table>

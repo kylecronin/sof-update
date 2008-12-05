@@ -1,4 +1,4 @@
-<tr><td colspan="5"><br><h3><?=$name?>:</h3></td></tr>
+<tr><td colspan="5"><br><h3><?=$name?></h3></td></tr>
 <?php
 
 $skipped = 0;
