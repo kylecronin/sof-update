@@ -1,4 +1,5 @@
-<tr><td colspan="5"><br><h3><a href="/tracker/chart/<?=$user?>">reputation</a></h3></td></tr>
+<tr><td colspan="5"><br><h3>reputation <font color="AAAAAA"><small><i>(<a href="/tracker/chart/<?=$user?>"><font color="999999">chart</font></a>)</i></small></font></h3></td></tr>
+
 
 
 <tr>
@@ -21,7 +22,7 @@ $(function () {
              points: { show: false },
              //selection: { mode: "xy" },
              grid: { hoverable: false, clickable: false },
-			xaxis: { mode: "time", timeformat: "%d", ticks: 15},
+			xaxis: { mode: "time", timeformat: "%m/%d", ticks: 6},
             //yaxis: { ticks: "4"}
              });
 

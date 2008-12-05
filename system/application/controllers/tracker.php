@@ -105,8 +105,8 @@ class Tracker extends Controller {
 		}
 		
 		// get chart data
-		$low = time()-2592000;
-		$query = $this->db->query("SELECT rep, questions, answers, date FROM profile WHERE user = '$user' AND $low < date ORDER BY date DESC");
+		// $low = time()-2592000;
+		$query = $this->db->query("SELECT rep, questions, answers, date FROM profile WHERE user = '$user' ORDER BY date DESC");
 
 		$data = "";
 		
