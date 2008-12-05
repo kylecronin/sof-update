@@ -2,6 +2,7 @@
 <?php
 
 $skipped = 0;
+$shown = 0;
 $new = false;
 
 $this->db->query("BEGIN");
@@ -50,6 +51,10 @@ foreach ($stuff as $s)
 		$skipped += 1;
 		continue;
 	}
+	else
+	{
+		$shown += 1;
+	}
 	
 	echo "<tr";
 	if ($new) echo " class=\"new\"";
@@ -68,6 +73,7 @@ foreach ($stuff as $s)
 	
 
 }
+
 if ($skipped != 0)
 {
 	echo "<tr><td colspan=\"3\" align=\"right\"><i>$skipped&nbsp;&nbsp;</i></td>";

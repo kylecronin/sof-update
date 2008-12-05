@@ -1,5 +1,5 @@
 </table>
-<br><small><i>scrape: [<?=$pageload?>s, <?=$page2load?>]&nbsp;&nbsp;&nbsp;process: <?=$dbprocess?>s</i></small>
+<br><small><i>scrape: <?=$pageload?>s,&nbsp;&nbsp;&nbsp;process: <?=$dbprocess?>s</i></small>
 <br><br>
 <?php
 	function RelativeTime($time, $now = false)
@@ -24,10 +24,14 @@
 				$diff = floor($shift / 60 / 60);
 				$shift %= 3600;
 				$term = "hour";
-			else:
+			elseif ($shift < 604800):
 				$diff = floor($shift / 60 / 60 / 24);
 				$shift %= 86400;
 				$term = "day";
+			else:
+				$diff = floor($shift / 60 / 60 / 24 / 7);
+				$shift %= 604800;
+				$term = "week";
 			endif;
 
 			if ($diff != 1) $term .= "s";

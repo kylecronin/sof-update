@@ -78,7 +78,7 @@ class Tracker extends Controller {
 		$before = microtime(true);
 		$page = file_get_contents("http://stackoverflow.com/users/$user/");
 		$between = microtime(true);
-		$page2 = file_get_contents("http://stackoverflow.com/users/$user?sort=responses");
+		//$page2 = file_get_contents("http://stackoverflow.com/users/$user?sort=responses");
 		$during = microtime(true);
 		
 		
@@ -120,12 +120,12 @@ class Tracker extends Controller {
 		
 		$this->load->view('header', compact('user'));
 		$this->load->view('overview', compact('questions', 'answers', 'rep', 'badge', 'dbitem'));
-		$this->load->view('questans', array('stuff' => $questions, 'name' => 'questions'));
-		$this->load->view('questans', array('stuff' => $answers, 'name' => 'answers'));
+		$this->load->view('questans', array('stuff' => $questions, 'name' => 'questions <small><i>(<a href="http://stackoverflow.com/questions/ask">ask</a>)</i></small>'));
+		$this->load->view('questans', array('stuff' => $answers, 'name' => 'answers <small><i>(<a href="http://stackoverflow.com/questions">answer</a>)</i></small>'));
 		
 		$after = microtime(true);
 		$pageload = number_format($between-$before, 2, '.', '');
-		$page2load = number_format($during-$between, 2, '.', '');
+		//$page2load = number_format($during-$between, 2, '.', '');
 		$dbprocess = number_format($after-$during, 2, '.', '');
 
 		$this->load->view('timer', compact('pageload', 'page2load', 'dbprocess', 'dbitem'));
