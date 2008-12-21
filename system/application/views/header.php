@@ -23,6 +23,11 @@
 		a:hover { color: #555555; }
 		a:active { color: #333333;}
 		
+		body {
+		font-family:		Lucida Grande, Verdana, Sans-serif;
+		font-size:			12px;
+		}
+		
 	</style>
 	<script type="text/javascript" src="http://stackoverflow.com/Content/Js/jquery.package.master.js?d=20081101"></script>
 	<script type="text/javascript">

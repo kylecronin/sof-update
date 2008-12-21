@@ -8,12 +8,10 @@ $new = false;
 $this->db->query("BEGIN");
 
 foreach ($stuff as $s)
-{
-	//$query = "SELECT votes, accepted FROM Questions WHERE id = '$s[2]'";
-	//$dbitem = $db->query($query);//->fetch(PDO::FETCH_ASSOC);
-	//$dbitem = mysql_fetch_assoc(mysql_query($query));
-	
-	$dbitem = $this->db->query("SELECT votes, accepted FROM Questions WHERE id = '$s[2]'")->row();
+{	
+	$this->db->query("DELETE FROM Questions WHERE id = '$s[2]' AND reset = 1");
+
+	$dbitem = $this->db->query("SELECT votes, accepted FROM Questions WHERE id = '$s[2]' ")->row();
 	
 	$acreg = preg_match('/answered-accepted" title/s', $s[0]);
 	
@@ -31,16 +29,11 @@ foreach ($stuff as $s)
 	{
 		$lastQ = $s[1] - $dbitem->votes;
 		
-		// I have no idea what took me this long to do this
-		if ($accepted || $lastQ)
-			$this->db->query("UPDATE Questions SET votes = '$s[1]', accepted = '$acreg' WHERE id = '$s[2]'");
 		if ($lastQ != 0)
 			$show = true;
-		//$new = false;
 	}
 	else
 	{
-		$this->db->query("INSERT INTO Questions VALUES('$s[3]', '$s[1]', '$s[2]', '$acreg')");
 		$lastQ = 0;
 		$show = true;
 		$new = true;
@@ -52,9 +45,9 @@ foreach ($stuff as $s)
 		continue;
 	}
 	else
-	{
 		$shown += 1;
-	}
+		
+	$this->db->query("INSERT INTO Questions VALUES('$s[3]', '$s[1]', '$s[2]', '$acreg', 1)");
 	
 	echo "<tr";
 	if ($new) echo " class=\"new\"";
@@ -74,15 +67,9 @@ foreach ($stuff as $s)
 
 }
 
-	echo "<tr><td colspan=\"3\" align=\"right\"><i>$skipped&nbsp;&nbsp;</i></td>";
-	echo "<td><i>unchanged not shown</i></td></tr>";
-
-
-
 $this->db->query("END");
 
-
-
-
+echo "<tr><td colspan=\"3\" align=\"right\"><i>$skipped&nbsp;&nbsp;</i></td>";
+echo "<td><i>unchanged not shown</i></td></tr>";
 
 ?>

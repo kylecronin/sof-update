@@ -28,7 +28,8 @@ class Tracker extends Controller {
 		if (!strcmp($low, "hour"))
 			$low = time()-3600;
 		
-		$query = $this->db->query("SELECT rep, questions, answers, date FROM profile WHERE user = '$user' AND $low < date AND date < $high ORDER BY date DESC");
+		$query = $this->db->query("SELECT rep, questions, answers, date FROM profile WHERE user = '$user' AND ".
+			"$low < date AND date < $high ORDER BY date DESC");
 
 		$data = "";
 
@@ -50,8 +51,44 @@ class Tracker extends Controller {
 		$this->load->view('footer');
 	}
 	
+	
+	function reset($user)
+	{
+		$this->load->database();
+		
+		if (!preg_match('/^\d+$/', $user))
+		{
+			$this->load->view('invalid_user', compact('user'));
+			return;
+		}
+		
+		$this->db->query("UPDATE profile SET reset = 1 WHERE user = '$user'");
+		
+		$page = file_get_contents("http://stackoverflow.com/users/$user/");
+		
+		$qreg = '/question-summary narrow.*?vote-count-post"><strong.*?>(-?\d*).*?\/questions\/(\d*).*?>(.*?)<\/a>/s';
+		preg_match_all($qreg, $page, $questions, PREG_SET_ORDER);
+
+		$areg = '/answer-votes.*?>([-\d]*).*?#(\d*)">([^<]*)/';
+		preg_match_all($areg, $page, $answers, PREG_SET_ORDER);
+	
+		$this->db->query("BEGIN");
+
+		foreach (array_merge($questions, $answers) as $s)
+		{
+			$this->db->query("DELETE FROM Questions WHERE id = '$s[2]' AND reset = 0");
+			$this->db->query("UPDATE Questions SET reset = 0 WHERE id = '$s[2]'");
+		}
+
+		$this->db->query("END");
+		
+	}
+	
+	
 	function update($user)
 	{
+		$this->output->enable_profiler(TRUE);
+	
 		$this->load->database();	// load database - we'll need it later
 		
 		$this->load->helper('numformat');
@@ -95,8 +132,8 @@ class Tracker extends Controller {
 		preg_match_all($areg, $page, $answers, PREG_SET_ORDER);
 		
 		// get existing profile and insert updated one
-		$dbitem = $this->db->query("SELECT * FROM profile WHERE user = '$user' ORDER BY date DESC LIMIT 1")->row();
-		$this->db->query("INSERT INTO profile VALUES('$rep', '$badge','".count($questions)."','".count($answers)."','".time()."','$user')");
+		$dbitem = $this->db->query("SELECT * FROM profile WHERE user = '$user' AND reset = 1 ORDER BY date DESC LIMIT 1")->row();
+		$this->db->query("INSERT INTO profile VALUES('$rep', '$badge','".count($questions)."','".count($answers)."','".time()."','$user', 0)");
 
 		// if we're a new user
 		if (!$dbitem)
