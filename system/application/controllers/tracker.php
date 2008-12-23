@@ -125,8 +125,12 @@ class Tracker extends Controller {
 		preg_match_all($areg, $page, $answers, PREG_SET_ORDER);
 		
 		// get existing profile and insert updated one
-		$dbitem = $this->db->query("SELECT * FROM profile WHERE user = '$user' AND reset = 1 ORDER BY date DESC LIMIT 1")->row();
-		$this->db->query("INSERT INTO profile VALUES('$rep', '$badge','".count($questions)."','".count($answers)."','".time()."','$user', 0)");
+		//$dbitem = $this->db->query("SELECT * FROM profile WHERE user = '$user' AND reset = 1 ORDER BY date DESC LIMIT 1")->row();
+		//$this->db->query("INSERT INTO profile VALUES('$rep', '$badge','".count($questions)."','".count($answers)."','".time()."','$user', 0)");
+		
+		$lastcheck = $this->db->query("SELECT * FROM profiles WHERE user=$user ORDER BY date DESC LIMIT 1")->row();
+		$lastreset = $this->db->query("SELECT * FROM profiles WHERE user=$user AND reset=1 ORDER BY date DESC LIMIT 1")->row();
+		
 
 		// if we're a new user
 		if (!$dbitem)

@@ -142,8 +142,6 @@ I'm having a deep existential crisis about the necessity of the updates table. T
 
 OK, so I've decided that I am going to get rid of the extraneous ID row in the updates table, and every other table will have a (user, timestamp) combination that will indicate a unique update.
 
-
-
 INSERT INTO 
 
 
@@ -173,8 +171,7 @@ I want to support resets. This shouldn't be a big deal, as we've stored enough i
 
 the last reset, of course, being stored in the updates table
 
-
-
+it almost seems anticlimactic - all I have to do left is code the thing. I have enough designed that I can duplicate the functionality of the old version. Time to go do that.
 
 
 
