@@ -237,10 +237,24 @@ INSERT INTO badges VALUES (11, 1, 'Taxonomist', 'Created a tag used by 50 questi
 INSERT INTO badges VALUES (1, 0, 'Teacher', 'Answered first question with at least one up vote');
 INSERT INTO badges VALUES (13, 1, 'Yearling', 'Active member for a year');
 
-
-
 INSERT INTO 
 
+
+Before I proceed any further, I need to iron out the mechanics of getting and storing the data that I collect.
+
+First up: general profile info.
+
+This is actually really easy:
+
+> SELECT * FROM profiles WHERE user=$user ORDER BY time DESC LIMIT 1;
+
+Compare this to the scrape, and if it differs insert a row accordingly.
+
+Questions/Answers:
+
+> select * from test where user=$user group by id having time=max(time);
+
+this returns all the questions/answers for a specific user with the latest updates.
 
 
 
