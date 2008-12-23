@@ -1,14 +1,11 @@
 <?php
 class Tracker extends Controller {
 
-	function index()
-	{	
+	function index() {	
 		$this->load->view('tracker_index');
 	}
 	
-
-	function chart($user, $low = false, $high = false)
-	{
+	function chart($user, $low = false, $high = false) {
 		$this->load->database();
 		
 		if (!$low)
@@ -51,9 +48,7 @@ class Tracker extends Controller {
 		$this->load->view('footer');
 	}
 	
-	
-	function reset($user)
-	{
+	function reset($user) {
 		$this->load->database();
 		
 		if (!preg_match('/^\d+$/', $user))
@@ -84,9 +79,7 @@ class Tracker extends Controller {
 		
 	}
 	
-	
-	function update($user)
-	{
+	function update($user) {
 		$this->output->enable_profiler(TRUE);
 	
 		$this->load->database();	// load database - we'll need it later
@@ -186,9 +179,7 @@ class Tracker extends Controller {
 		
 	}
 	
-	
-	function stats($order='top', $num='30', $lt='0')
-	{
+	function stats($order='top', $num='30', $lt='0') {
 		$this->load->database();
 
 		if (!strcmp($order, ""))

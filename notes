@@ -1,0 +1,261 @@
+I want the reset to be 'safe', as in if data comes in between an update and a reset that the data is available on the next update.
+
+To do this, we need to store enough data in the DB that we can perform the reset without getting the page again (thus saving time as well)
+
+CREATE TABLE 'Questions' (
+  'Question' varchar(128) NOT NULL,
+  'votes' int(11) NOT NULL,
+  'id' INTEGER PRIMARY KEY NOT NULL,
+  'accepted' tinyint(4) NOT NULL
+);
+
+CREATE TABLE 'profile' (
+  'rep'          int(11)      NOT NULL,
+  'badges'       int(11)      NOT NULL, 
+  'questions'    int(11)      NOT NULL,
+  'answers'      int(11)      NOT NULL,
+  'date'         varchar(16)  NOT NULL,
+  'user'         int(11)      NOT NULL
+);
+
+...
+
+OK, as I've had more time to think about this, I've come to the decision that I'm going to completely rethink my database schema and include all the possible features that I want to include. This is so that I don't have to continue to modify the database structure. Basically, take a long hard look at the profile page and see what can be gleaned every time it's fetched.
+
+
+Features:
+
+1. separate the update and reset (make reset separate action)
+1.1 could make it even more granular by allowing people to clear individual lines
+2. track more profile and question information (favorites, user profile, everything in the sofstats scrape)
+3. add user id to questions table (so I can select by userid)
+4. rename the questions table
+5. possibly keep track of replies, but that can be in a separate table
+6. Investigate user accounts, with some way to verify the user is in control of their SOF account
+
+Before I go to bed, I want to try to think about how some of these might be accomplished.
+
+First, let's start with some basic separation of concerns. It seems to me that most of these changes involve logging much more information that we currently do. As such I am deeply concerned with database performance. I don't know if it's my code or the database itself (or the hosting or several other possible factors) but the page processing time is much more than I would prefer. I just don't know how much of it is the database, as the database accesses are sprinkled in all parts of the app.
+
+I'm going to proceed with the assumption that I won't encounter any database slowdown. So what does this entail? First, if we're storing all the historical data for every question, that's a lot of data, and most of it won't change all that much. Should I, then, do an insert for every question on every update? I wonder what the speed tradeoff is between inserting and updating. We're currently updating with an index, so I don't think that switching it over to inserts is especially efficient (especially with SQLite).
+
+
+OK, so here's what I'm thinking:
+
+- A table for updates
+ - a record in this table has an id and a timestamp and a user ID, and basically acts as an official way
+   to indicate which other tables' rows belong to which update
+- Still keeping questions and answers in the same table, with the following information
+  attached to a row:
+ - update id
+ - title
+ - reputation
+ - accepted answer
+ - answer id (for questions it's the same as qid)
+ - question id
+
+- for questions, keep the following additional info:
+ - favorites
+ - answers
+ - (views?) Since views over 1000 are suffixed with k, this won't be accurate or useful
+ - (tags?) Could be interesting data to collect, but I don't see much use
+
+- for profiles, keep all the data that is collected with the scrape
+
+- for users, keep:
+ - name
+ - user id #
+ - openid
+
+
+
+First, I'm going to get reset working on the existing site/db, then I'll
+work on these new features.
+
+We could store the page itself..? That sounds like a really bad idea.
+
+OK, here's the crazy:
+
+- Questions stores two copies, the current one and the reset one
+- reset=0, old version; reset=1, new version
+- when an update occurs:
+ - delete all with reset=1
+ - insert all new records with reset=1
+- when a reset occurs
+ - delete all with reset=0
+ - set reset=1 on all with reset=1
+
+???
+
+profit!
+
+OK, this isn't going so well... queries are taking an absurd amount of time
+to execute. This is probably because we're storing all data gathered from the
+page, like I initially did, rather than the diffs. So we'll forget about pushing
+through a half-update until I'm done with the overhaul.
+
+
+OK, so someone hits on the update page and the following happens:
+
+1. The profile is downloaded from SOF
+3. Last profile info retrieved
+ a. If same as 
+2. Timestamp generated, row inserted into updates table
+
+... scratch that ...
+
+My goal of only storing the diffs seems to have hit a many/many relationship whereby (many) questions are paired with (many) timestamps. Of course, the way to handle many/many in SQL is to create a table to link the two. Not only will it involve doing potentially slow joins to retrieve the pertinent data, it will also involve doing O(n) inserts (into the many/many table) for every update, something that I'd like to avoid.
+
+maybe a different tack..?
+
+The real reason why I want to store the diffs is to allow users the ability to refresh the page at a much higher rate than automatic (or lassevk's twice hourly)In order to avoid storing rendundant data (and taking the time to do so) I decided to only store the diffs. Storing each individual diff separately would garner the greatest savings, but it might be possible to store all data related to an update with any change together. Does this buy us anything? Not really.
+
+What to do? I want to be able to store an amount of data proportional to the difference between the current update and the last update.
+
+Wait - glorious insight! I don't need to store the fact that something did not change, the non-changiness can be inferred! And because we're using ascending row IDs, all we have to do is store a change and link to the timestamp (wondering if we need a separate table for this) The answer to the parenthetical is yes, because that's a key piece of being able to determine exactly when the update occurred.
+
+This is going to make my select statements a bit tricky, but I don't think that read access time will ever be as big an issue as write access time.
+
+This is cool.
+
+Process when update is loaded:
+
+1. Download profile from SOF
+2. Get timestamp and insert row into updates
+3. Get latest profile and compare with scraped page
+ a. If there's a difference, insert a row into profiles
+ b. If not, ignore it
+4. For each question and answer get latest version and compare to scrape
+ a. If difference, insert row
+ b. If not, ignore
+
+There is one thing that I need to make sure I take care of, and that's the issue of deleted questions/answers. In order to do this, I need to essentially get a list of all the questions/answers that a user has, preferably only with the latest version. What sort of query would work?
+
+
+I want to store badges earned as well. What this will involve is a badges table to store the badge ids and the names of the badges. What is also required is a usersxbadges table...? (am I going to want to 'track' the quantity of x badge over time? I think it's safe to say that as long as we can track the total number of badges over time (as the profiles table does) that it's not necessary.
+
+So we've got a usersXbadges table (uid, badgeid, quantity)
+
+...
+
+I'm having a deep existential crisis about the necessity of the updates table. The timestamp can serve as effectively as an ID. In fact, this might be preferable, as that way a lookup to the updates table doesn't have to be performed for every row with an update id.
+
+OK, so I've decided that I am going to get rid of the extraneous ID row in the updates table, and every other table will have a (user, timestamp) combination that will indicate a unique update.
+
+CREATE TABLE 'updates' (
+  'user'          INTEGER,
+  'time'          INTEGER
+);
+
+CREATE TABLE 'posts' (
+  'id'            INTEGER,
+  'qid'           INTEGER,
+  'user'          INTEGER,
+  'time'          INTEGER,
+  'rep'           INTEGER,
+  'accepted'      INTEGER,
+  'favorites'     INTEGER,
+  'answers'       INTEGER,
+  'views'         INTEGER,
+  'title'         TEXT
+);
+
+CREATE TABLE 'profiles' (
+  'user'          INTEGER,
+  'time'          INTEGER,
+  'rep'           INTEGER,
+  'questions'     INTEGER,
+  'answers'       INTEGER,
+  'upvotes'       INTEGER,
+  'downvotes'     INTEGER,
+  'tags'          INTEGER,
+  'badges'        INTEGER,
+  'age'           INTEGER,
+  'acctage'       INTEGER,
+  'name'          TEXT,
+  'type'          TEXT,
+  'website'       TEXT,
+  'location'      TEXT,
+  'bio'           TEXT
+);
+
+CREATE TABLE 'badgetypes' (
+  'id'            INTEGER PRIMARY KEY,
+  'name'          TEXT
+);
+
+CREATE TABLE 'badges' (
+  'id'            INTEGER PRIMARY KEY,
+  'type'          INTEGER,               
+  'name'	      TEXT,
+  'desc'          TEXT
+);
+
+CREATE TABLE 'userbadges' (
+  'user'          INTEGER,
+  'badge'         INTEGER,
+  'quantity'      INTEGER
+);
+
+INSERT INTO badgetypes VALUES (0, 'bronze');
+INSERT INTO badgetypes VALUES (1, 'silver');
+INSERT INTO badgetypes VALUES (2, 'gold');
+
+INSERT INTO badges VALUES (9, 0, 'Autobiographer', 'Completed all user profile fields');
+INSERT INTO badges VALUES (30, 1, 'Beta', 'Actively participated in the Stack Overflow private beta');
+INSERT INTO badges VALUES (8, 0, 'Citizen Patrol', 'First flagged post');
+INSERT INTO badges VALUES (32, 1, 'Civic Duty', 'Voted 300 times');
+INSERT INTO badges VALUES (4, 0, 'Cleanup', 'First rollback');
+INSERT INTO badges VALUES (31, 0, 'Commentatior', 'Left 10 comments');
+INSERT INTO badges VALUES (7, 0, 'Critic', 'First down vote');
+INSERT INTO badges VALUES (37, 0, 'Disciplined', 'Deleted own post with 3 or more upvotes');
+INSERT INTO badges VALUES (3, 0, 'Editor', 'First Edit');
+INSERT INTO badges VALUES (19, 1, 'Enlightened', 'First answer was accepted with at least 10 up votes');
+INSERT INTO badges VALUES (28, 2, 'Famous Question', 'Asked a question with 10,000 views');
+INSERT INTO badges VALUES (33, 1, 'Favorite Question', 'Question favored by 25 users');
+INSERT INTO badges VALUES (15, 1, 'Generalist', 'Active in many different tags');
+INSERT INTO badges VALUES (24, 1, 'Good Answer', 'Answer voted up more than 25 times');
+INSERT INTO badges VALUES (21, 1, 'Good Question', 'Question voted up more than 25 times');
+INSERT INTO badges VALUES (25, 2, 'Great Answer', 'Answer voted up more than 100 times');
+INSERT INTO badges VALUES (22, 2, 'Great Question', 'Question voted up more than 100 times');
+INSERT INTO badges VALUES (18, 1, 'Guru', 'Judged best answer and voted up 40 times');
+INSERT INTO badges VALUES (17, 1, 'Necromancer', 'Answered a question more than 60 days later with at least 5 votes');
+INSERT INTO badges VALUES (23, 0, 'Nice Answer', 'Answer voted up more than 10 times');
+INSERT INTO badges VALUES (20, 0, 'Nice Question', 'Question voted up more than 10 times');
+INSERT INTO badges VALUES (27, 1, 'Notable Question', 'Asked a question with 2,500 views');
+INSERT INTO badges VALUES (5, 0, 'Organizer', 'First retag');
+INSERT INTO badges VALUES (38, 0, 'Peer Pressure', 'Deleted own post with 3 or more downvotes');
+INSERT INTO badges VALUES (26, 0, 'Popular Question', 'Asked a question with 1,000 views');
+INSERT INTO badges VALUES (10, 0, 'Scholar', 'First accepted answer');
+INSERT INTO badges VALUES (14, 0, 'Self-Learner', 'Answered your own question with at least 3 up votes');
+INSERT INTO badges VALUES (16, 1, 'Specialist', 'Highly active within a specific tag');
+INSERT INTO badges VALUES (36, 2, 'Stellar Question', 'Question favorited by 100 users');
+INSERT INTO badges VALUES (12, 1, 'Strunk & White', 'Edited 100 entries');
+INSERT INTO badges VALUES (2, 0, 'Student', 'Asked first question with at least one up vote');
+INSERT INTO badges VALUES (6, 0, 'Supporter', 'First up vote');
+INSERT INTO badges VALUES (11, 1, 'Taxonomist', 'Created a tag used by 50 questions');
+INSERT INTO badges VALUES (1, 0, 'Teacher', 'Answered first question with at least one up vote');
+INSERT INTO badges VALUES (13, 1, 'Yearling', 'Active member for a year');
+
+
+
+INSERT INTO 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                     
