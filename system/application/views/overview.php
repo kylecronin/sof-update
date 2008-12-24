@@ -20,9 +20,17 @@ function overview($new, $old, $caption)
 	<?php
 }
 
-overview(count($questions), $dbitem->questions, "questions");
-overview(count($answers), $dbitem->answers, "answers");
-overview($rep, $dbitem->rep, "reputation");
-overview($badge, $dbitem->badges, "badges");
+if (!$lastreset)
+{
+	$lastreset['questions'] = 0;
+	$lastreset['answers'] = 0;
+	$lastreset['rep'] = 0;
+	$lastreset['badges'] = 0;
+}
+
+overview($profile['questions'], $lastreset['questions'], "questions");
+overview($profile['answers'], $lastreset['answers'], "answers");
+overview($profile['rep'], $lastreset['rep'], "reputation");
+overview($profile['badges'], $lastreset['badges'], "badges");
 
 ?>

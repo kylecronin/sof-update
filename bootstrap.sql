@@ -1,7 +1,6 @@
 CREATE TABLE updates (
   user          INTEGER,
-  time          INTEGER,
-  reset         INTEGER
+  time          INTEGER
 );
 
 CREATE TABLE posts (
@@ -9,6 +8,7 @@ CREATE TABLE posts (
   qid           INTEGER,
   user          INTEGER,
   time          INTEGER,
+  reset			INTEGER,
   rep           INTEGER,
   accepted      INTEGER,
   favorites     INTEGER,
@@ -20,6 +20,7 @@ CREATE TABLE posts (
 CREATE TABLE profiles (
   user          INTEGER,
   time          INTEGER,
+  reset         INTEGER,
   rep           INTEGER,
   questions     INTEGER,
   answers       INTEGER,

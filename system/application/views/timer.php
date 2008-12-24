@@ -45,12 +45,12 @@
 	}
 ?>
 <table border="0">
-	<tr><td align="right"><small><b>interval</b></small></td><td><small>&nbsp;</small></td><td><small><?=RelativeTime($dbitem->date)?></small></td></tr>
-	<tr><td align="right"><small><b>last update</b></small></td><td><small>&nbsp;</small></td><td><small>
-		<script type="text/javascript">showtime(<?=$dbitem->date."000"?>)</script>
+	<tr><td align="right"><small><b>interval</b></small></td><td><small>&nbsp;</small></td><td><small><?=RelativeTime($reset, $time)?></small></td></tr>
+	<tr><td align="right"><small><b>last reset</b></small></td><td><small>&nbsp;</small></td><td><small>
+		<script type="text/javascript">showtime(<?=$reset."000"?>)</script>
 	</small></td></tr>
 	<tr><td align="right"><small><b>current time</b></small></td><td><small>&nbsp;</small></td><td><small>
-		<script type="text/javascript">showtime(<?=time()."000"?>)</script>
+		<script type="text/javascript">showtime(<?=$time."000"?>)</script>
 	</small></td></tr>
 </table>
 <br><small><a href="http://stackoverflow.com/questions/61553/track-your-reputation"><font color="444444">feedback welcome</font></a></small>

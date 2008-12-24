@@ -175,6 +175,25 @@ it almost seems anticlimactic - all I have to do left is code the thing. I have 
 
 
 
+this is coming along really well. I have all the code for tracking the changes in the profile information all set. It reads the last db insert, determines if there are any diffs, and if there are it inserts a row.
+
+of course - we just call up the appropriate view...
+
+
+great - existential crisis. The way I've implemented reset will interfere with the ability to selectively reset. I'm going to need to rethink this.
+
+ok, solution found. we add a reset flag to the profiles and posts databases. 
+
+
+Feature Requests:
+
+1. Authenticate using OpenID
+2. Write local tray version
+3. Document how to get set up on server
+4. Indicate deleted answers/questions
+5. User accounts verified by scraping
+6. Add responses scrape
+
 
 
 
