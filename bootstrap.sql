@@ -11,6 +11,7 @@ CREATE TABLE posts (
   reset			INTEGER,
   rep           INTEGER,
   accepted      INTEGER,
+  quantity      INTEGER,
   favorites     INTEGER,
   answers       INTEGER,
   views         INTEGER,

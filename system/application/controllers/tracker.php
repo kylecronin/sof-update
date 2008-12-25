@@ -145,6 +145,86 @@ class Tracker extends Controller {
 		$this->load->view('overview', compact('profile', 'lastreset'));
 	}
 	
+	function _doposts($user, $page) {
+	
+		// extract questions from $page, store in $questions (array)
+		// for a $q in $questions:
+		//	$q[2] => favorites (blank of no favorites, should reset to 0)
+		//  $q[3] => votes
+		//  $q[4] => accepted (blank not, not blank is)
+		//	$q[5] => answers
+		//  $q[6] => views
+		//  $q[7] => id/qid
+		//  $q[8] => title
+		$qreg = '/(b>(\d*)<\/b><\/div>\s*)?<div class="question-summary.*?190%">(-?\d*).*?answered(-accepted)?.*?190%">(\d+).*?190%">(\d+k?).*?\/questions\/(\d*).*?>(.*?)<\/a>/s';
+		preg_match_all($qreg, $page, $pageqs, PREG_SET_ORDER);
+		
+		$newqs = array();
+		
+		foreach ($pageqs as $q)
+		{
+			if (!$q[2]) $q[2] = 0;
+				
+			if ($q[4]) $q[4] = 1;
+			else $q[4] = 0;
+			
+			if ($q[6][strlen($q[6])-1] == 'k')
+				$q[6] = substr($q[6], 0, strlen($q[6])-1);
+				
+			array_push($newqs,
+				array(	'id'        => $q[7],
+						'qid'       => $q[7],
+						'user'      => $user,
+						'time'      => $time,
+						'reset'     => 0,
+						'rep'       => $q[3],
+						'accepted'  => $q[4],
+						'quantity'  => 1,
+						'favorites' => $q[2],
+						'answers'   => $q[5],
+						'views'     => $q[6],
+						'title'     => $q[8]));
+		}
+		
+		// do something with $newqs
+		
+
+		// extract answers from $page, store in $answers (array)
+		// for an $a in $answers:
+		//	$a[1] => votes
+		//	$a[2] => answer id
+		//	$a[3] => answer text
+		$areg = '/answer-votes( answered-accepted)?.*?>([-\d]*).*?\/questions\/(\d*)\/.*?#(\d*)">([^<]*)<\/a>( \((\d*)\))?<\/div/';
+		preg_match_all($areg, $page, $pageas, PREG_SET_ORDER);
+		
+		$newas = array();
+		
+		foreach ($pageas as $a)
+		{		
+			if ($a[1]) $a[1] = 1;
+			else $a[1] = 0;
+			
+			if (count($a) < 8)
+				$a[7] = 1;
+				
+			array_push($newas,
+				array(	'id' => $a[4],
+						'qid' => $a[3],
+						'user' => $user,
+						'time' => $time,
+						'reset' => 0,
+						'rep' => $a[2],
+						'accepted' => $a[1],
+						'quantity' => $a[7],
+						'favorites' => 0,
+						'answers' => 0,
+						'views' => 0,
+						'title' => $a[5]));
+		}	
+		
+		// do something with 
+	}
+	
 	function update($user) {
 		$this->output->enable_profiler(TRUE);
 		$this->load->database();
@@ -159,13 +239,17 @@ class Tracker extends Controller {
 		$time = time(); // this is the official time
 		
 		$before = microtime(true);
-		$page = file_get_contents("http://stackoverflow.com/users/$user/");
+		//$page = file_get_contents("http://stackoverflow.com/users/$user/");
+		$page = file_get_contents("profile.cache");
 		$during = microtime(true);
 		
 			
+		
 		$this->load->view('header', compact('user'));
 		
 		$this->_doprofile($user, $page);
+		
+		$this->_doposts($user, $page);
 		
 		
 		$after = microtime(true);
@@ -174,41 +258,22 @@ class Tracker extends Controller {
 		$reset = $this->db->query("SELECT max(time) as time FROM profiles WHERE user=$user AND reset=1")->row()->time;
 		$this->load->view('timer', compact('pageload', 'dbprocess', 'time', 'reset'));
 		
+		
 		$this->load->view('footer');
-		
-		
 		return;
 		
 		
 		
-		
-		
-		
-		
-		
-		// extract reputation from $page, store in $rep
-		preg_match('/summarycount">.*?([,\d]+)<\/div>.*?Reputation/s', $page, $rep);
-		$rep = preg_replace("/,/", "", $rep[1]);
 
-		// extract number of badges from $page, store in $badge
-		preg_match('/iv class="summarycount".{10,60} (\d+)<\/d.{10,140}Badges/s', $page, $badge);
-		$badge = $badge[1];
+		
+		
 
-		// extract questions from $page, store in $questions (array)
-		// for a $q in $questions:
-		//	$q[1] => votes
-		//	$q[2] => question id
-		//	$q[3] => question text
-		$qreg = '/question-summary narrow.*?vote-count-post"><strong.*?>(-?\d*).*?\/questions\/(\d*).*?>(.*?)<\/a>/s';
-		preg_match_all($qreg, $page, $questions, PREG_SET_ORDER);
 
-		// extract answers from $page, store in $answers (array)
-		// for an $a in $answers:
-		//	$a[1] => votes
-		//	$a[2] => answer id
-		//	$a[3] => answer text
-		$areg = '/answer-votes.*?>([-\d]*).*?#(\d*)">([^<]*)/';
-		preg_match_all($areg, $page, $answers, PREG_SET_ORDER);
+		
+		
+		
+
+		
 		
 		// get existing profile and insert updated one
 		//$dbitem = $this->db->query("SELECT * FROM profile WHERE user = '$user' AND reset = 1 ORDER BY date DESC LIMIT 1")->row();
