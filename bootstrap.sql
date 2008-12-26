@@ -8,7 +8,7 @@ CREATE TABLE posts (
   qid           INTEGER,
   user          INTEGER,
   time          INTEGER,
-  reset			INTEGER,
+  reset         INTEGER,
   rep           INTEGER,
   accepted      INTEGER,
   quantity      INTEGER,

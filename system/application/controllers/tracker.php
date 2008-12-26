@@ -81,8 +81,8 @@ class Tracker extends Controller {
 			$this->db->query($this->_makeinsert($table, $new));
 	}
 	
-	function _doprofile($user, $page) {
-		$profile = array('user' => $user, 'time' => time(), 'reset' => 0);
+	function _doprofile($user, $page, $time) {
+		$profile = array('user' => $user, 'time' => $time, 'reset' => 0);
 
 		preg_match('/<h1>\s*(.*?)\s*</s', $page, $name);
 		$profile['name'] = $name[1];
@@ -145,7 +145,95 @@ class Tracker extends Controller {
 		$this->load->view('overview', compact('profile', 'lastreset'));
 	}
 	
-	function _doposts($user, $page) {
+	function _idsort($a, $b) {
+		return $a['id'] - $b['id'];
+	}
+	
+	function _restof($array) {
+		$ret = array();
+		while (current($array))
+		{
+			array_push($ret, current($array));
+			next($array);
+		}
+	
+		return $ret;
+	}
+	
+	function _postdiffs($old, $new) {
+		usort($old, array($this, "_idsort"));
+		usort($new, array($this, "_idsort"));
+		
+		/*
+		
+			Should I integrate the reset data into this function? I don't know. I've decided to keep them
+			separate, since even though there are similarities, attempting to do both simultaneously is
+			difficult.
+		
+			Basically what we need to do here is iterate down both $old as $o and $new as $n, testing:
+			
+			- did we run out of $old? 
+			 - if so, add the rest of $new to added array
+			- did we run out of $new?
+			 - if so, add the rest of $old to deleted array
+			- is $o.id == $n.id?
+			 - if yes, is $o == $n? (excluding time and reset)
+			  - if yes, increment $o and $n and goto beginning
+			  - if no, add ($o, $n) to changed array, increment both $o and $n, and goto beginning
+			 - if no, is $o.id < $n.id? (id comparison)
+			  - if yes, a $o was deleted, add to deleted array, increment $o and goto beginning
+			  - if no, $o > $n, therefore this was undeleted (very rare, but possible), add to added array, goto beginning
+			 
+		
+		*/
+		
+		$added   = array();
+		$removed = array();
+		$changed = array();
+		
+		reset($old);
+		reset($new);
+		
+		echo "old\n"; print_r($old);
+		echo "new\n"; print_r($new);
+		
+		while (current($old) && current($new))
+			if ($old[key($old)]['id'] == $new[key($new)]['id'])
+			{
+				if ($this->_except(current($old), array('time', 'reset')) !=
+					$this->_except(current($new), array('time', 'reset')))
+						array_push($changed, array(current($old), current($new)));
+				
+				next($old);
+				next($new);
+			}		
+			else
+				if ($old[key($old)]['id'] < $new[key($new)]['id'])
+				{
+					array_push($removed, current($old));
+					next($old);
+				}
+				else
+				{
+					array_push($added, current($new));
+					next($new);
+				}
+				
+		echo "done\n";
+		
+		$added  = array_merge($added, $this->_restof($new));
+		$removed = array_merge($removed, $this->_restof($old));
+		
+		foreach ($added as $a)
+			$this->db->query($this->_makeinsert('posts', $a));
+		
+		echo "added\n"; print_r($added);
+		echo "removed\n"; print_r($removed);
+		echo "changed\n"; print_r($changed);
+		
+	}
+	
+	function _doposts($user, $page, $time) {
 	
 		// extract questions from $page, store in $questions (array)
 		// for a $q in $questions:
@@ -187,6 +275,10 @@ class Tracker extends Controller {
 		}
 		
 		// do something with $newqs
+		
+		$oldqs = $this->db->query("select * from posts where user=$user group by id having time=max(time)")->result_array();
+		
+		$this->_postdiffs($oldqs, $newqs);
 		
 
 		// extract answers from $page, store in $answers (array)
@@ -239,17 +331,17 @@ class Tracker extends Controller {
 		$time = time(); // this is the official time
 		
 		$before = microtime(true);
-		//$page = file_get_contents("http://stackoverflow.com/users/$user/");
-		$page = file_get_contents("profile.cache");
+		$page = file_get_contents("http://stackoverflow.com/users/$user/");
+		//$page = file_get_contents("profile.cache");
 		$during = microtime(true);
 		
 			
 		
 		$this->load->view('header', compact('user'));
 		
-		$this->_doprofile($user, $page);
+		$this->_doprofile($user, $page, $time);
 		
-		$this->_doposts($user, $page);
+		$this->_doposts($user, $page, $time);
 		
 		
 		$after = microtime(true);
