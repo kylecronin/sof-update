@@ -74,8 +74,18 @@ foreach ($stuff as $s)
 
 }
 
-	echo "<tr><td colspan=\"3\" align=\"right\"><i>$skipped&nbsp;&nbsp;</i></td>";
-	echo "<td><i>unchanged not shown</i></td></tr>";
+echo "<tr><td colspan=\"3\" align=\"right\"><i>$skipped&nbsp;&nbsp;</i></td>";
+echo "<td><i>unchanged not shown</i></td></tr>";
+
+if ($count != count($stuff))
+  {
+    echo "<tr><td colspan=\"3\" align=\"right\"><i>";
+    echo $count-count($stuff);
+    echo "&nbsp;&nbsp;</i></td>";
+    echo "<td><i>unable to be tracked</i></td></tr>";
+  }
+
+
 
 
 

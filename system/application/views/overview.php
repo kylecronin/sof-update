@@ -21,7 +21,7 @@ function overview($new, $old, $caption)
 }
 
 overview(count($questions), $dbitem->questions, "questions");
-overview(count($answers), $dbitem->answers, "answers");
+overview($answercount, $dbitem->answers, "answers");
 overview($rep, $dbitem->rep, "reputation");
 overview($badge, $dbitem->badges, "badges");
 

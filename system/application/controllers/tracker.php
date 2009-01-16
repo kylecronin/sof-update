@@ -83,8 +83,9 @@ class Tracker extends Controller {
 		//	$q[1] => votes
 		//	$q[2] => question id
 		//	$q[3] => question text
-		$qreg = '/question-summary narrow.*?vote-count-post"><strong.*?>(-?\d*).*?\/questions\/(\d*).*?>(.*?)<\/a>/s';
+		$qreg = '/question-summary narrow.*?>(-?\d+)<.*?\/questions\/(\d*).*?>(.*?)<\/a>/s';
 		preg_match_all($qreg, $page, $questions, PREG_SET_ORDER);
+		
 
 		// extract answers from $page, store in $answers (array)
 		// for an $a in $answers:
@@ -93,10 +94,20 @@ class Tracker extends Controller {
 		//	$a[3] => answer text
 		$areg = '/answer-votes.*?>([-\d]*).*?#(\d*)">([^<]*)/';
 		preg_match_all($areg, $page, $answers, PREG_SET_ORDER);
-		
+
+		$acreg = '/"answers".*?<div.*?>(\d+)/s';
+		preg_match_all($acreg, $page, $ac, PREG_SET_ORDER);
+	
+
+
+		//$answercount = $ac[1];
+		//echo($ac[1]);
+		//$answercount = count($answers);
+		$answercount = $ac[0][1];
+
 		// get existing profile and insert updated one
 		$dbitem = $this->db->query("SELECT * FROM profile WHERE user = '$user' ORDER BY date DESC LIMIT 1")->row();
-		$this->db->query("INSERT INTO profile VALUES('$rep', '$badge','".count($questions)."','".count($answers)."','".time()."','$user')");
+		$this->db->query("INSERT INTO profile VALUES('$rep', '$badge','".count($questions)."','".$answercount."','".time()."','$user')");
 
 		// if we're a new user
 		if (!$dbitem)
@@ -130,10 +141,10 @@ class Tracker extends Controller {
 		//print_r($profile);
 		
 		$this->load->view('header', compact('user'));
-		$this->load->view('overview', compact('questions', 'answers', 'rep', 'badge', 'dbitem'));
+		$this->load->view('overview', compact('questions', 'answers', 'answercount', 'rep', 'badge', 'dbitem'));
 		
-		$this->load->view('questans', array('stuff' => $questions, 'name' => 'questions <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions/ask"><font color="999999">ask</font></a>)</i></small></font>'));
-		$this->load->view('questans', array('stuff' => $answers, 'name' => 'answers <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions"><font color="999999">answer</font></a>)</i></small></font>'));
+		$this->load->view('questans', array('stuff' => $questions, 'count' => count($questions), 'name' => 'questions <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions/ask"><font color="999999">ask</font></a>)</i></small></font>'));
+		$this->load->view('questans', array('stuff' => $answers, 'count' => $answercount, 'name' => 'answers <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions"><font color="999999">answer</font></a>)</i></small></font>'));
 		
 		if ($data)
 			$this->load->view('rep', compact('data', 'user'));

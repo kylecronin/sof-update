@@ -16,8 +16,7 @@ $(function () {
              points: { show: true },
              //selection: { mode: "xy" },
              grid: { hoverable: true, clickable: true },
-			xaxis: { mode: "time" },
-            // yaxis: { min: -1.2, max: 1.2 }
+			xaxis: { mode: "time" } // thanks for catching this James Curran :)
              });
 
     function showTooltip(x, y, contents) {
