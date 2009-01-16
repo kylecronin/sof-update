@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Stack Overflow Update Script</title>
+	<title>Stack  Overflow Update Script</title>
 	<meta id="viewport" name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
 	<style type="text/css">
 	  	.new { 	background-color: green;
