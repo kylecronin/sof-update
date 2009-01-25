@@ -198,13 +198,58 @@ Feature Requests:
 note: track open/closed question status
 
 
+it seems to me that Jeff has no intention of creating a proper API, so I'll have to make do with what they offer.
+
+on the profile page, you can find:
+- all questions (good)
+- top 100 ranked answers
+
+in the api, you can find:
+- questions and answers that gave rep (and others that would have, had they not hit a cap)
+
+is one a subset of the other?
+
+- profile does not include lowest ranked
+- api does not include those that did not grant rep (i.e. wiki)
 
 
+                    |             In API              |            Not In API
+     --------------------------------------------------------------------------------------                                    
+         In Profile | answers that have a high score  | high-ranking wiki answers
+                    | and also gave the user some     |                                                            
+                    | rep.                            |                                                            
+                    |                                 |                                                            
+                    | the amount of rep may not be    |                                                            
+                    | the same as the number of       |                                                            
+                    | points, as cap/late wiki may    |                                                            
+                    | apply                           |                                                            
+                    |                                 |                                                                                                 
+     --------------------------------------------------------------------------------------
+     Not In Profile | low-ranking, non-wiki answers   | this is the most dangerous category
+                    |                                 | low-ranked wiki answers are here, as
+                    |                                 | are all new answers
+                    |                                 |                                                            
+                    |                                 |                                                            
+                    |                                 |                                                            
+                    |                                 |                                                            
+                    |                                 |                                                            
+                    |                                 |                                                            
+                    |                                 |                                                            
 
+crazy idea - should a fetch be done for all known answers? i.e. should the question page
+be fetched and the result scraped for the score of the answer?
 
+I just tried this, and while it worked better than I expected it to, it nonetheless takes too long to fetch
+every single answer on the question page. Tested with Jon Skeet's account, and it scraped ~1500 in a little over 9s.
+Still, that's a bit of a load on the SO server - I'm half-heartedly considering doing it just to spite Jeff for
+truncating the answer section and not giving me a suitable API to replace it, but I think that it's an unwise
+policy to anger the guy whose platform this service runs off of. You never know when he might block or throttle
+traffic.
 
+I think that a good compromise would be to report the upvotes that are known about. This means using the stats
+page whenever possible, but also using the JSON to supplement and track questions that aren't included.
 
-
+Detection of added answers is still possible. Detection of new answers is still possible, 
 
 
 

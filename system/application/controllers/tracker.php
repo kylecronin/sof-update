@@ -93,12 +93,11 @@ class Tracker extends Controller {
 		preg_match('/>\s*(.*?egistered User|Moderator)<\/h2>/', $page, $registered);
 		$profile['type'] = $registered[1];
 
-		preg_match('/\s*(.*?) days\s*<\/td>/', $page, $memberfor);
-		//print_r($memberfor);
+		// now gets the textual representation, i.e. '5 months'
+		preg_match('/Member for.*?(\d+.*?)\s*</s', $page, $memberfor);
 		$profile['acctage'] = $memberfor[1];
 
 		preg_match('/"(nofollow )?me\">\s*(.*?)</s', $page, $website);
-		//print_r($website);
 		$profile['website'] = $website[2];
 
 		preg_match('/Location\s*<\/td>\s*<td>\s*(.*?)\s*</s', $page, $location);
@@ -135,6 +134,8 @@ class Tracker extends Controller {
 		// extract number of badges from $page, store in $badge
 		preg_match('/iv class="summarycount".{10,60} (\d+)<\/d.{10,140}Badges/s', $page, $badge);
 		$profile['badges'] = $badge[1];
+		
+	//	print_r($profile);
 		
 		
 		$lastdiff  = $this->db->query("SELECT * FROM profiles WHERE time=(select max(time) from profiles where user=$user)")->row_array();
@@ -341,7 +342,7 @@ class Tracker extends Controller {
 		
 		$this->_doprofile($user, $page, $time);
 		
-		$this->_doposts($user, $page, $time);
+		//$this->_doposts($user, $page, $time);
 		
 		
 		$after = microtime(true);
