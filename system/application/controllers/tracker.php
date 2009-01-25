@@ -50,6 +50,31 @@ class Tracker extends Controller {
 		$this->load->view('footer');
 	}
 	
+	function _multifetch($urls)
+	{
+		$mh = curl_multi_init();
+		$handles = array();
+
+		foreach (array_keys($urls) as $urlkey)
+		{
+			$ch = curl_init($urls[$urlkey]);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			$handles[$urlkey] = $ch;
+			curl_multi_add_handle($mh, $ch);
+		}
+
+		do {
+		    curl_multi_exec($mh, $active);
+		} while($active > 0);
+
+		$output = array();
+
+		foreach(array_keys($handles) as $hk)
+			$output[$hk] = curl_multi_getcontent($handles[$hk]);
+
+		return $output;
+	}
+	
 	function update($user)
 	{
 		$this->load->database();	// load database - we'll need it later
@@ -63,10 +88,11 @@ class Tracker extends Controller {
 		}
 		
 		$before = microtime(true);
-		$page = file_get_contents("http://stackoverflow.com/users/$user/");
-		//$page = file_get_contents("profile.cache");
-		$between = microtime(true);
-		//$page2 = file_get_contents("http://stackoverflow.com/users/$user?sort=responses");
+		$data = $this->_multifetch(array(	'page' => "http://stackoverflow.com/users/$user/",
+											'repjson' => "http://stackoverflow.com/users/$user/0/9999999999999",
+											'apijson' => "http://stackoverflow.com/users/$user/rep/2000-01-01/3000-01-01"));
+											
+		extract($data);
 		$during = microtime(true);
 		
 		
@@ -151,11 +177,11 @@ class Tracker extends Controller {
 		
 		
 		$after = microtime(true);
-		$pageload = number_format($between-$before, 2, '.', '');
+		$pageload = number_format($during-$before, 2, '.', '');
 		//$page2load = number_format($during-$between, 2, '.', '');
 		$dbprocess = number_format($after-$during, 2, '.', '');
 
-		$this->load->view('timer', compact('pageload', 'page2load', 'dbprocess', 'dbitem'));
+		$this->load->view('timer', compact('pageload', 'dbprocess', 'dbitem'));
 		$this->load->view('footer');
 		
 	}
