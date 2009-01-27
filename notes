@@ -1,0 +1,29 @@
+I need to parse multiple sources of information to present the answers section.
+
+How to do this?
+
+Obviously, the view should only get a final data structure that indicates what's supposed to be shown
+it will be an array of arrays, each sub-array containing the following data:
+
+oldscore
+newscore
+oldans
+newans
+link
+text
+
+as you can see, computing the diff and determining if it will be shown at all are decisions made by the
+view, as well as general ordering. all we need to do is to dump the data into an array and the view
+should take care of the rest.
+
+actually, this brings up another point to separate concerns. what I could do is have one function
+extract the data from the source and another to get the corresponding data from the db.
+
+function read
+- takes input source
+- returns array of (id, score, ans, text) for each answer
+
+function addpast
+- takes array of (id, score, ans, text)
+- returns (id, newscore, oldscore, newacc, oldacc, text)
+

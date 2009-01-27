@@ -75,9 +75,73 @@ class Tracker extends Controller {
 		return $output;
 	}
 	
+	function _readstats($source)
+	{	
+		// extract answers from $page, store in $answers (array)
+		// for an $a in $answers:
+		//	$a[1] => votes
+		//	$a[2] => answer id
+		//	$a[3] => answer text
+		$areg = '/answer-votes.*?>([-\d]*).*?#(\d*)">([^<]*)/';
+		preg_match_all($areg, $source, $answers, PREG_SET_ORDER);
+		
+		$ret = array();
+		
+		foreach($answers as $a)
+		{
+			$acreg = preg_match('/answered-accepted" title/s', $a[0]);
+			array_push($ret,
+				array(	'id' => $a[2],
+						'score' => $a[1],
+						'accepted' => $acreg,
+						'text' => $a[3]));
+		}
+		
+		return $ret;
+	}
+	
+	function _addpast($answers)
+	{
+		$ret = array();
+		
+		$this->db->query("BEGIN");
+		
+		foreach ($answers as $a)
+		{
+			$dbitem = $this->db->query("SELECT votes, accepted FROM Questions WHERE id = '".$a['id']."'")->row();
+			
+			if ($dbitem)
+			{
+				$new 		= false;
+				$oldscore	= $dbitem->votes;
+				$oldacc		= $dbitem->accepted;
+			}
+			else
+			{
+				$new		= true;
+				$oldscore	= 0;
+				$oldacc		= 0;
+			}
+			
+			array_push($ret,
+				array(	'id' => $a['id'],
+						'new' => $new,
+						'newscore' => $a['score'],
+						'oldscore' => $oldscore,
+						'newacc' => $a['accepted'],
+						'oldacc' => $oldacc,
+						'text' => $a['text']));
+		}
+		
+		$this->db->query("END");
+	
+		return $ret;
+	}
+
+	
 	function update($user)
 	{
-		$this->load->database();	// load database - we'll need it later
+		$this->load->database();
 		
 		$this->load->helper('numformat');
 		
@@ -88,9 +152,9 @@ class Tracker extends Controller {
 		}
 		
 		$before = microtime(true);
-		$data = $this->_multifetch(array(	'page' => "http://stackoverflow.com/users/$user/",
-											'repjson' => "http://stackoverflow.com/users/$user/0/9999999999999",
-											'apijson' => "http://stackoverflow.com/users/$user/rep/2000-01-01/3000-01-01"));
+		$data = $this->_multifetch(array('page' => "http://stackoverflow.com/users/$user/",
+										 'repjson' => "http://stackoverflow.com/users/$user/0/9999999999999",
+										 'apijson' => "http://stackoverflow.com/users/$user/rep/2000-01-01/3000-01-01"));
 											
 		extract($data);
 		$during = microtime(true);
@@ -170,7 +234,8 @@ class Tracker extends Controller {
 		$this->load->view('overview', compact('questions', 'answers', 'answercount', 'rep', 'badge', 'dbitem'));
 		
 		$this->load->view('questans', array('stuff' => $questions, 'count' => count($questions), 'name' => 'questions <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions/ask"><font color="999999">ask</font></a>)</i></small></font>'));
-		$this->load->view('questans', array('stuff' => $answers, 'count' => $answercount, 'name' => 'answers <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions"><font color="999999">answer</font></a>)</i></small></font>'));
+		//$this->load->view('questans', array('stuff' => $answers, 'count' => $answercount, 'name' => 'answers <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions"><font color="999999">answer</font></a>)</i></small></font>'));
+		$this->load->view('answers', array('answers' => $this->_addpast($this->_readstats($page)), 'count' => $answercount));
 		
 		if ($data)
 			$this->load->view('rep', compact('data', 'user'));
