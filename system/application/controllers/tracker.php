@@ -87,58 +87,76 @@ class Tracker extends Controller {
 		
 		$ret = array();
 		
-		foreach($answers as $a)
-		{
-			$acreg = preg_match('/answered-accepted" title/s', $a[0]);
-			array_push($ret,
-				array(	'id' => $a[2],
-						'score' => $a[1],
-						'accepted' => $acreg,
-						'text' => $a[3]));
-		}
-		
-		return $ret;
-	}
-	
-	function _addpast($answers)
-	{
-		$ret = array();
-		
 		$this->db->query("BEGIN");
 		
-		foreach ($answers as $a)
+		foreach($answers as $a)
 		{
-			$dbitem = $this->db->query("SELECT votes, accepted FROM Questions WHERE id = '".$a['id']."'")->row();
+			$id = $a[2];
+			$score = $a[1];
+			$accepted = preg_match('/answered-accepted" title/s', $a[0]);
+			$text = $a[3];
+			
+			$dbitem = $this->db->query("SELECT votes, accepted FROM Questions WHERE id = '$id'")->row();
 			
 			if ($dbitem)
 			{
-				$this->db->query("UPDATE Questions SET votes = '".$a['score']."', accepted = '".$a['accepted']."' WHERE id = '".$a['id']."'");
+				$this->db->query("UPDATE Questions SET votes = '$score', accepted = '$accepted' WHERE id = '$id'");
 				$new 		= false;
 				$oldscore	= $dbitem->votes;
 				$oldacc		= $dbitem->accepted;
 			}
 			else
 			{
-				$this->db->query("INSERT INTO Questions VALUES('".$a['text']."', '".$a['score']."', '".$a['id']."', '".$a['accepted']."')");
+				$this->db->query("INSERT INTO Questions VALUES('$text', '$score', '$id', '$accepted')");
 				$new		= true;
 				$oldscore	= 0;
 				$oldacc		= 0;
 			}
 			
 			array_push($ret,
-				array(	'id' => $a['id'],
+				array(	'id' => $id,
 						'new' => $new,
-						'newscore' => $a['score'],
+						'newscore' => $score,
 						'oldscore' => $oldscore,
-						'newacc' => $a['accepted'],
+						'newacc' => $accepted,
 						'oldacc' => $oldacc,
-						'text' => $a['text']));
+						'text' => $text));
+
 		}
 		
 		$this->db->query("END");
-	
+		
 		return $ret;
 	}
+	
+	function _readapijson($source)
+	{
+		echo $source;
+	
+		$areg = '/{"PostUrl":"(\d+)#?(\d*)","PostTitle":"(.*?)","Rep":(\d+)}/s';
+		preg_match_all($areg, $source, $answers, PREG_SET_ORDER);
+		
+		print_r($answers);
+		
+		return;
+		/*
+		$ret = array();
+		
+		foreach($answers as $a)
+		{
+		
+			array_push($ret,
+				array(	'id' => $a[1],
+				
+						'score' => $a[3],
+						'accepted' => false,
+						'text' => $a[2]));
+		}
+		
+		print_r($ret);
+		return $ret;*/
+	}
+	
 
 	
 	function update($user)
@@ -156,7 +174,7 @@ class Tracker extends Controller {
 		$before = microtime(true);
 		$data = $this->_multifetch(array('page' => "http://stackoverflow.com/users/$user/",
 										 'repjson' => "http://stackoverflow.com/users/$user/0/9999999999999",
-										 'apijson' => "http://stackoverflow.com/users/$user/rep/2000-01-01/3000-01-01"));
+										 'apijson' => "http://stackoverflow.com/users/$user/rep/2000-01-01/2030-01-01"));
 											
 		extract($data);
 		$during = microtime(true);
@@ -232,12 +250,13 @@ class Tracker extends Controller {
 
 		//print_r($profile);
 		
-		$this->load->view('header', compact('user'));
-		$this->load->view('overview', compact('questions', 'answers', 'answercount', 'rep', 'badge', 'dbitem'));
+		//$this->load->view('header', compact('user'));
+		//$this->load->view('overview', compact('questions', 'answers', 'answercount', 'rep', 'badge', 'dbitem'));
 		
-		$this->load->view('questans', array('stuff' => $questions, 'count' => count($questions), 'name' => 'questions <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions/ask"><font color="999999">ask</font></a>)</i></small></font>'));
-		//$this->load->view('questans', array('stuff' => $answers, 'count' => $answercount, 'name' => 'answers <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions"><font color="999999">answer</font></a>)</i></small></font>'));
-		$this->load->view('answers', array('answers' => $this->_addpast($this->_readstats($page)), 'count' => $answercount));
+		//$this->load->view('questans', array('stuff' => $questions, 'count' => count($questions), 'name' => 'questions <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions/ask"><font color="999999">ask</font></a>)</i></small></font>'));
+		////$this->load->view('questans', array('stuff' => $answers, 'count' => $answercount, 'name' => 'answers <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions"><font color="999999">answer</font></a>)</i></small></font>'));
+		//$this->load->view('answers', array('answers' => $this->_readstats($page), 'count' => $answercount));
+		$this->_readapijson($apijson);
 		
 		if ($data)
 			$this->load->view('rep', compact('data', 'user'));
@@ -248,8 +267,8 @@ class Tracker extends Controller {
 		//$page2load = number_format($during-$between, 2, '.', '');
 		$dbprocess = number_format($after-$during, 2, '.', '');
 
-		$this->load->view('timer', compact('pageload', 'dbprocess', 'dbitem'));
-		$this->load->view('footer');
+		//$this->load->view('timer', compact('pageload', 'dbprocess', 'dbitem'));
+		//$this->load->view('footer');
 		
 	}
 	
