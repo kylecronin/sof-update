@@ -1,4 +1,4 @@
-<tr><td colspan="5"><br><h3>answers</h3></td></tr>
+<tr><td colspan="5"><br><h3>answers <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions"><font color="999999">answer</font></a>)</i></small></font></h3></td></tr>
 <?php
 
 //print_r($answers);

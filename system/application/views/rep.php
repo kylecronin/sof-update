@@ -1,4 +1,4 @@
-<tr><td colspan="5"><br><h3>reputation <font color="AAAAAA"><small><i>(<a href="/tracker/chart/<?=$user?>"><font color="999999">chart</font></a>)</i></small></font></h3></td></tr>
+<tr><td colspan="5"><br><h3>reputation graph <font color="AAAAAA"><small><i>(<a href="/tracker/chart/<?=$user?>"><font color="999999">larger</font></a>)</i></small></font></h3></td></tr>
 
 
 

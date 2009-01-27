@@ -19,6 +19,11 @@ function formatnum($num, $dispzero)
 		return "";
 }
 
+function scoresort($a, $b)
+{
+	return $a['newscore'] < $b['newscore'];
+}
+
 
 
 ?>

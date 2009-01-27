@@ -6,6 +6,7 @@
 	  	.new { 	background-color: green;
 		 	 	color: white;
 				font-weight: bold;}
+		.question { 	background-color: cccccc;}
 		.up { 	background-color: green;
 				color: white;
 				font-weight: bold;}

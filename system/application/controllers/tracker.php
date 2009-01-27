@@ -129,32 +129,59 @@ class Tracker extends Controller {
 		return $ret;
 	}
 	
-	function _readapijson($source)
+	function _readapijson($source, $user)
 	{
-		echo $source;
+	//	echo $source;
 	
-		$areg = '/{"PostUrl":"(\d+)#?(\d*)","PostTitle":"(.*?)","Rep":(\d+)}/s';
+		$areg = '/{"PostUrl":"(\d+)#?(\d*)","PostTitle":"(.*?)","Rep":(-?\d+)}/s';
 		preg_match_all($areg, $source, $answers, PREG_SET_ORDER);
 		
-		print_r($answers);
+		//print_r($answers);
 		
-		return;
-		/*
 		$ret = array();
+		
+		$this->db->query("BEGIN");
 		
 		foreach($answers as $a)
 		{
-		
+			$qid = $a[1];
+			$id = $a[2] ? $a[2] : $qid;
+			$score = $a[4];
+			$text = $a[3];
+			
+			$dbitem = $this->db->query("SELECT rep FROM posts WHERE id = '$id'")->row();
+			
+			//echo "query id $id\n";
+			//print_r($dbitem);
+			
+			if ($dbitem)
+			{
+				$this->db->query("UPDATE posts SET rep = '$score' WHERE id = '$id'");
+				$new 		= false;
+				$oldscore	= $dbitem->rep;
+			}
+			else
+			{
+				$this->db->query("INSERT INTO posts VALUES('$id', '$qid', '$user', '$score', '$text')");
+				$new		= true;
+				$oldscore	= 0;
+			}
+			
 			array_push($ret,
-				array(	'id' => $a[1],
-				
-						'score' => $a[3],
-						'accepted' => false,
-						'text' => $a[2]));
+				array(	'id' => $id,
+						'qid' => $qid,
+						'new' => $new,
+						'newscore' => $score,
+						'oldscore' => $oldscore,
+						'text' => $text));
+
 		}
 		
-		print_r($ret);
-		return $ret;*/
+		$this->db->query("END");
+		
+		//print_r($ret);
+		
+		return $ret;
 	}
 	
 
@@ -250,13 +277,13 @@ class Tracker extends Controller {
 
 		//print_r($profile);
 		
-		//$this->load->view('header', compact('user'));
-		//$this->load->view('overview', compact('questions', 'answers', 'answercount', 'rep', 'badge', 'dbitem'));
+		$this->load->view('header', compact('user'));
+		$this->load->view('overview', compact('questions', 'answers', 'answercount', 'rep', 'badge', 'dbitem'));
+		$this->load->view('reputation', array('posts' => $this->_readapijson($apijson, $user)));
 		
-		//$this->load->view('questans', array('stuff' => $questions, 'count' => count($questions), 'name' => 'questions <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions/ask"><font color="999999">ask</font></a>)</i></small></font>'));
+		$this->load->view('questans', array('stuff' => $questions, 'count' => count($questions), 'name' => 'questions <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions/ask"><font color="999999">ask</font></a>)</i></small></font>'));
 		////$this->load->view('questans', array('stuff' => $answers, 'count' => $answercount, 'name' => 'answers <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions"><font color="999999">answer</font></a>)</i></small></font>'));
-		//$this->load->view('answers', array('answers' => $this->_readstats($page), 'count' => $answercount));
-		$this->_readapijson($apijson);
+		$this->load->view('answers', array('answers' => $this->_readstats($page), 'count' => $answercount));
 		
 		if ($data)
 			$this->load->view('rep', compact('data', 'user'));
@@ -267,8 +294,8 @@ class Tracker extends Controller {
 		//$page2load = number_format($during-$between, 2, '.', '');
 		$dbprocess = number_format($after-$during, 2, '.', '');
 
-		//$this->load->view('timer', compact('pageload', 'dbprocess', 'dbitem'));
-		//$this->load->view('footer');
+		$this->load->view('timer', compact('pageload', 'dbprocess', 'dbitem'));
+		$this->load->view('footer');
 		
 	}
 	

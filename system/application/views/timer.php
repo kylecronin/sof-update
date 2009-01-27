@@ -53,4 +53,4 @@
 		<script type="text/javascript">showtime(<?=time()."000"?>)</script>
 	</small></td></tr>
 </table>
-<br><a href="http://stackoverflow.com/questions/61553/track-your-reputation"><font color="cc2222">feedback requested</font></a>
+<br><a href="http://stackoverflow.com/questions/61553/track-your-reputation"><font color="444444"><small>feedback welcome</small></font></a>
