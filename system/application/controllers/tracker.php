@@ -112,12 +112,14 @@ class Tracker extends Controller {
 			
 			if ($dbitem)
 			{
+				$this->db->query("UPDATE Questions SET votes = '".$a['score']."', accepted = '".$a['accepted']."' WHERE id = '".$a['id']."'");
 				$new 		= false;
 				$oldscore	= $dbitem->votes;
 				$oldacc		= $dbitem->accepted;
 			}
 			else
 			{
+				$this->db->query("INSERT INTO Questions VALUES('".$a['text']."', '".$a['score']."', '".$a['id']."', '".$a['accepted']."')");
 				$new		= true;
 				$oldscore	= 0;
 				$oldacc		= 0;
