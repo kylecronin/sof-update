@@ -200,7 +200,7 @@ class Tracker extends Controller {
 		
 		$before = microtime(true);
 		$data = $this->_multifetch(array('page' => "http://stackoverflow.com/users/$user/",
-										 'repjson' => "http://stackoverflow.com/users/$user/0/9999999999999",
+										 //'repjson' => "http://stackoverflow.com/users/$user/0/9999999999999",
 										 'apijson' => "http://stackoverflow.com/users/$user/rep/2000-01-01/2030-01-01"));
 											
 		extract($data);
