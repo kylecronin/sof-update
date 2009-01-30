@@ -133,7 +133,7 @@ class Tracker extends Controller {
 	{
 	//	echo $source;
 	
-		$areg = '/{"PostUrl":"(\d+)#?(\d*)","PostTitle":"(.*?)","RepPositive":(\d+),"RepNegative":(-?\d+)}/s';
+		$areg = '/{"PostUrl":"(\d+)#?(\d*)","PostTitle":"(.*?)","Rep":(-?\d+)}/s';
 		preg_match_all($areg, $source, $answers, PREG_SET_ORDER);
 		
 		//print_r($answers);
@@ -146,7 +146,7 @@ class Tracker extends Controller {
 		{
 			$qid = $a[1];
 			$id = $a[2] ? $a[2] : $qid;
-			$score = $a[4]+$a[5];
+			$score = $a[4];
 			$text = $a[3];
 			
 			$dbitem = $this->db->query("SELECT rep FROM posts WHERE id = '$id'")->row();
@@ -200,8 +200,8 @@ class Tracker extends Controller {
 		
 		$before = microtime(true);
 		$data = $this->_multifetch(array('page' => "http://stackoverflow.com/users/$user/",
-										 'apijson' => "http://stackoverflow.com/users/$user/0/9999999999999"
-										 //'apijson' => "http://stackoverflow.com/users/$user/rep/2000-01-01/2030-01-01"
+										 //'apijson' => "http://stackoverflow.com/users/$user/0/9999999999999"
+										 'apijson' => "http://stackoverflow.com/users/rep/$user/2000-01-01/2030-01-01"
 										));
 											
 		extract($data);
