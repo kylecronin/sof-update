@@ -82,7 +82,7 @@ class Tracker extends Controller {
 		//	$a[1] => votes
 		//	$a[2] => answer id
 		//	$a[3] => answer text
-		$areg = '/answer-votes.*?>([-\d]*).*?#(\d*)">([^<]*)/';
+		$areg = '/answer-votes.*?>(-?\d+).*?#(\d+).*?>(.*?)</s';
 		preg_match_all($areg, $source, $answers, PREG_SET_ORDER);
 		
 		$ret = array();
