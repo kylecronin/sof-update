@@ -16,11 +16,11 @@ foreach($answers as $answer)
 	$accepted	= $answer['newacc']		- $answer['oldacc'];
 	if (!$lastQ && !$accepted)
 	{
-		$skipped++;
+		$skipped += $answer['qty'];
 		continue;
 	}
 	else
-		$shown++;
+		$shown += $answer['qty'];
 		
 	
 	
@@ -37,7 +37,9 @@ foreach($answers as $answer)
 	echo "&nbsp;&nbsp;</td><td align=\"right\">&nbsp;&nbsp;".$answer['newscore']."&nbsp;&nbsp;</td>";
 	echo "<td><a ";
 	if ($answer['new']) echo "class=\"new\" ";
-	echo "href=\"http://stackoverflow.com/questions/".$answer['id']."/\">".$answer['text']."</td></tr>\n";
+	echo "href=\"http://stackoverflow.com/questions/".$answer['id']."/\">".$answer['text']."</a>";
+	if ($answer['qty'] != 1) echo " (".$answer['qty'].")";
+	echo "</td></tr>\n";
 	
 }
 
@@ -45,10 +47,10 @@ foreach($answers as $answer)
 echo "<tr><td colspan=\"3\" align=\"right\"><i>$skipped&nbsp;&nbsp;</i></td>";
 echo "<td><i>unchanged not shown</i></td></tr>";
 
-if ($count != count($answers))
+if ($count != ($shown+$skipped))
   {
     echo "<tr><td colspan=\"3\" align=\"right\"><i>";
-    echo $count-count($answers);
+    echo $count-$skipped;
     echo "&nbsp;&nbsp;</i></td>";
     echo "<td><i>unable to be tracked</i></td></tr>";
   }

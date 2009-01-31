@@ -82,7 +82,7 @@ class Tracker extends Controller {
 		//	$a[1] => votes
 		//	$a[2] => answer id
 		//	$a[3] => answer text
-		$areg = '/answer-votes.*?>(-?\d+).*?#(\d+).*?>(.*?)</s';
+		$areg = '/answer-votes.*?>(-?\d+).*?#(\d+).*?>(.*?)<\/a>( \((\d+)\))?(<\/div>)/s';
 		preg_match_all($areg, $source, $answers, PREG_SET_ORDER);
 		
 		$ret = array();
@@ -95,6 +95,7 @@ class Tracker extends Controller {
 			$score = $a[1];
 			$accepted = preg_match('/answered-accepted" title/s', $a[0]);
 			$text = $a[3];
+			$qty = $a[5] ? $a[5] : 1;
 			
 			$dbitem = $this->db->query("SELECT votes, accepted FROM Questions WHERE id = '$id'")->row();
 			
@@ -120,11 +121,14 @@ class Tracker extends Controller {
 						'oldscore' => $oldscore,
 						'newacc' => $accepted,
 						'oldacc' => $oldacc,
+						'qty' => $qty,
 						'text' => $text));
 
 		}
 		
 		$this->db->query("END");
+		
+		//print_r($ret);
 		
 		return $ret;
 	}
