@@ -30,7 +30,7 @@ foreach($posts as $post)
 	echo "&nbsp;&nbsp;</td><td colspan=\"2\" align=\"right\">&nbsp;&nbsp;".$post['newscore']."&nbsp;&nbsp;</td>";
 	echo "<td><a ";
 	if ($post['new']) echo "class=\"new\" ";
-	echo "href=\"http://stackoverflow.com/questions/".$post['qid'].'#'.$post['id']."\">".$post['text']."</td></tr>\n";
+	echo "href=\"http://stackoverflow.com/questions/".$post['qid'].'/'.$post['id'].'#'.$post['id']."\">".$post['text']."</td></tr>\n";
 	
 }
 

@@ -137,7 +137,7 @@ class Tracker extends Controller {
 	{
 	//	echo $source;
 	
-		$areg = '/{"PostUrl":"(\d+)#?(\d*)","PostTitle":"(.*?)","Rep":(-?\d+)}/s';
+		$areg = '/{"PostUrl":"(\d+)\/?(\d*)#?\d*","PostTitle":"(.*?)","Rep":(-?\d+)}/s';
 		preg_match_all($areg, $source, $answers, PREG_SET_ORDER);
 		
 		//print_r($answers);
