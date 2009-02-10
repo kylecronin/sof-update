@@ -13,6 +13,8 @@ usort($posts, "scoresort");
 foreach($posts as $post)
 {
 	$lastQ		= $post['newscore']	- $post['oldscore'];
+	
+	$post['text'] = preg_replace('/\\\\u(\d{4})/', '&#x$1;', $post['text']);
 
 	if (!$lastQ && !$post['new'])
 	{
