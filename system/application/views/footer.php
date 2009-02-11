@@ -6,5 +6,6 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 var pageTracker = _gat._getTracker("UA-2083337-4");
 pageTracker._trackPageview();
 </script>
+<script src="http://static.getclicky.com/73325.js" type="text/javascript"></script>
 </body>
 </html>
