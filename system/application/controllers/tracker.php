@@ -228,7 +228,7 @@ class Tracker extends Controller {
 		
 		$this->load->helper('numformat');
 		
-		$this->output->enable_profiler(TRUE);
+		//$this->output->enable_profiler(TRUE);
 		
 		if (!preg_match('/^\d+$/', $user))
 		{
