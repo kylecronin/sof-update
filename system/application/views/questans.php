@@ -29,6 +29,7 @@ foreach ($stuff as $s)
 	
 	if ($dbitem)
 	{
+	    $new - false;
 		$lastQ = $s[1] - $dbitem->votes;
 		
 		// I have no idea what took me this long to do this

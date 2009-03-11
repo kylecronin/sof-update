@@ -13,8 +13,8 @@
 		.down { background-color: red;
 				color: white;
 				font-weight: bold;}
-		.nc {   background-color: white;
-				color: black; }
+		.nc {    /*background-color: white; */
+				/*color: black;*/ }
 		a.new:link {color: #FFFFFF;}
 		a.new:visited { color: #FFFFFF; }
 		a.new:hover { color: #AAAAAA; }

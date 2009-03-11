@@ -85,6 +85,28 @@ class Tracker extends Controller {
 		$areg = '/answer-votes.*?>(-?\d+).*?#(\d+).*?>(.*?)<\/a>( \((\d+)\))?(<\/div>)/s';
 		preg_match_all($areg, $source, $answers, PREG_SET_ORDER);
 		
+		$aids = ""; // that's "answer ids"... but try not to catch it
+		
+		foreach ($answers as $a)
+		{
+		    if (strcmp($aids, ""))
+		        $aids .= ", ".$a[2];
+		    else
+		        $aids .= $a[2];
+		}
+		
+		//echo $aids;
+		
+		$query = $this->db->query("SELECT id, votes, accepted FROM Questions WHERE id IN ($aids)");
+		
+		
+		$dbr = array();
+		
+		foreach ($query->result() as $row)
+            $dbr[$row->id] = $row;
+            
+        //print_r($dbr);
+		
 		$ret = array();
 		
 		$this->db->query("BEGIN");
@@ -97,14 +119,21 @@ class Tracker extends Controller {
 			$text = $a[3];
 			$qty = $a[5] ? $a[5] : 1;
 			
-			$dbitem = $this->db->query("SELECT votes, accepted FROM Questions WHERE id = '$id'")->row();
+			//$dbitem = $this->db->query("SELECT votes, accepted FROM Questions WHERE id = '$id'")->row();
+			if (array_key_exists($id, $dbr))
+			    $dbitem = $dbr[$id];
+			else
+			    $dbitem = NULL;
 			
 			if ($dbitem)
 			{
-				$this->db->query("UPDATE Questions SET votes = '$score', accepted = '$accepted' WHERE id = '$id'");
-				$new 		= false;
+			    $new 		= false;
 				$oldscore	= $dbitem->votes;
 				$oldacc		= $dbitem->accepted;
+			    
+			    if (($score-$oldscore) || $accepted)
+				    $this->db->query("UPDATE Questions SET votes = '$score', accepted = '$accepted' WHERE id = '$id'");
+				    
 			}
 			else
 			{
@@ -160,9 +189,12 @@ class Tracker extends Controller {
 			
 			if ($dbitem)
 			{
-				$this->db->query("UPDATE posts SET rep = '$score' WHERE id = '$id'");
-				$new 		= false;
+			    $new 		= false;
 				$oldscore	= $dbitem->rep;
+				
+				if ($score-$oldscore != 0)
+				    $this->db->query("UPDATE posts SET rep = '$score' WHERE id = '$id'");
+
 			}
 			else
 			{
@@ -195,6 +227,8 @@ class Tracker extends Controller {
 		$this->load->database();
 		
 		$this->load->helper('numformat');
+		
+		$this->output->enable_profiler(TRUE);
 		
 		if (!preg_match('/^\d+$/', $user))
 		{
