@@ -22,10 +22,8 @@ var d = [
            [d],
            { lines: { show: true },
              points: { show: false },
-             //selection: { mode: "xy" },
              grid: { hoverable: false, clickable: false },
-			xaxis: { mode: "time", timeformat: "%m/%d", ticks: 6},
-            //yaxis: { ticks: "4"}
+			xaxis: { mode: "time", timeformat: "%m/%d", ticks: 6}
              });
 
 });

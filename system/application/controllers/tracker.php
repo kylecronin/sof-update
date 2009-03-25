@@ -28,7 +28,7 @@ class Tracker extends Controller {
 		if (!strcmp($low, "hour"))
 			$low = time()-3600;
 		
-		$query = $this->db->query("SELECT rep, questions, answers, date FROM profile WHERE user = '$user' AND $low < date AND date < $high ORDER BY date DESC");
+		$query = $this->db->query("SELECT rep, questions, answers, date FROM profile WHERE user = '$user' AND $low < date AND date < $high ORDER BY date ASC");
 
 		$data = "";
 
@@ -42,6 +42,8 @@ class Tracker extends Controller {
 			
 			$data .= "[$d, $r, $q, $a],\n";
 		}
+		
+		substr_replace($data, "", -1); // remove last comma
 		
 		$this->load->view('header');
 		$this->load->view('chart', compact('data'));
@@ -291,7 +293,7 @@ class Tracker extends Controller {
 		
 		// get chart data
 		// $low = time()-2592000;
-		$query = $this->db->query("SELECT rep, questions, answers, date FROM profile WHERE user = '$user' ORDER BY date DESC");
+		$query = $this->db->query("SELECT rep, questions, answers, date FROM profile WHERE user = '$user' ORDER BY date ASC");
 
 		$data = "";
 		
@@ -308,6 +310,8 @@ class Tracker extends Controller {
 			
 				$data .= "[$d, $r, $q, $a],\n";
 			}
+			
+			substr_replace($data, "", -1); // remove last comma
 		}
 		else
 			$data = false;

@@ -16,7 +16,6 @@ var d = [
            [d],
            { lines: { show: true },
              points: { show: true },
-             //selection: { mode: "xy" },
              grid: { hoverable: true, clickable: true },
 			xaxis: { mode: "time" } // thanks for catching this James Curran :)
              });
