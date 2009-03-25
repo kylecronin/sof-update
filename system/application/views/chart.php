@@ -8,7 +8,9 @@
 
 <script id="source" language="javascript" type="text/javascript">
 $(function () {
-    var d = <?=$data?>
+var d = [
+<?=$data?>
+];
 
     var plot = $.plot($("#placeholder"),
            [d],

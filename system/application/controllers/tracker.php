@@ -40,10 +40,8 @@ class Tracker extends Controller {
 			$pd = $row->date;
 			$d = $pd."000";
 			
-			$data .= "[$d, $r, $q, $a],";
+			$data .= "[$d, $r, $q, $a],\n";
 		}
-
-		$data = "[$data];";
 		
 		$this->load->view('header');
 		$this->load->view('chart', compact('data'));
@@ -308,7 +306,7 @@ class Tracker extends Controller {
 				$pd = $row->date;
 				$d = $pd."000";
 			
-				$data .= "[$d, $r, $q, $a],";
+				$data .= "[$d, $r, $q, $a],\n";
 			}
 		}
 		else
