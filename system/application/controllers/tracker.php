@@ -43,7 +43,7 @@ class Tracker extends Controller {
 			$data .= "[$d, $r, $q, $a],\n";
 		}
 		
-		substr_replace($data, "", -1); // remove last comma
+		$data = substr_replace($data, "", -2); // remove last comma
 		
 		$this->load->view('header');
 		$this->load->view('chart', compact('data'));
@@ -311,7 +311,7 @@ class Tracker extends Controller {
 				$data .= "[$d, $r, $q, $a],\n";
 			}
 			
-			substr_replace($data, "", -1); // remove last comma
+			$data = substr_replace($data, "", -2); // remove last comma
 		}
 		else
 			$data = false;
