@@ -131,7 +131,7 @@ class Tracker extends Controller {
 				$oldscore	= $dbitem->votes;
 				$oldacc		= $dbitem->accepted;
 			    
-			    if (($score-$oldscore) || $accepted)
+			    if (($score-$oldscore) || ($accepted-$oldacc))
 				    $this->db->query("UPDATE Questions SET votes = '$score', accepted = '$accepted' WHERE id = '$id'");
 				    
 			}
@@ -228,7 +228,7 @@ class Tracker extends Controller {
 		
 		$this->load->helper('numformat');
 		
-		//$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(TRUE);
 		
 		if (!preg_match('/^\d+$/', $user))
 		{

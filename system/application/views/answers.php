@@ -14,6 +14,7 @@ foreach($answers as $answer)
 
 	$lastQ		= $answer['newscore']	- $answer['oldscore'];
 	$accepted	= $answer['newacc']		- $answer['oldacc'];
+	
 	if (!$lastQ && !$accepted)
 	{
 		$skipped += $answer['qty'];
