@@ -48,7 +48,7 @@ foreach($answers as $answer)
 echo "<tr><td colspan=\"3\" align=\"right\"><i>$skipped&nbsp;&nbsp;</i></td>";
 echo "<td><i>unchanged not shown</i></td></tr>";
 
-if ($count != ($shown+$skipped))
+if ($count > ($shown+$skipped))
   {
     echo "<tr><td colspan=\"3\" align=\"right\"><i>";
     echo $count-$skipped;

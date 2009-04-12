@@ -219,7 +219,7 @@ class Tracker extends Controller {
 		
 		return $ret;
 	}
-	
+
 
 	
 	function update($user)
@@ -239,7 +239,9 @@ class Tracker extends Controller {
 		$before = microtime(true);
 		$data = $this->_multifetch(array('page' => "http://stackoverflow.com/users/$user/",
 										 //'apijson' => "http://stackoverflow.com/users/$user/0/9999999999999"
-										 'apijson' => "http://stackoverflow.com/users/rep/$user/2000-01-01/2030-01-01"
+										 'apijson' => "http://stackoverflow.com/users/rep/$user/2000-01-01/2030-01-01",
+										 'questionsapi' => "http://stackoverflow.com/api/userquestions.html?page=1&pagesize=1000000&userId=$user",
+										 'answersapi' => "http://stackoverflow.com/api/useranswers.html?page=1&pagesize=1000000&userId=$user"
 										));
 											
 		extract($data);
@@ -260,7 +262,7 @@ class Tracker extends Controller {
 		//	$q[2] => question id
 		//	$q[3] => question text
 		$qreg = '/question-summary narrow.*?>(-?\d+)<.*?\/questions\/(\d*).*?>(.*?)<\/a>/s';
-		preg_match_all($qreg, $page, $questions, PREG_SET_ORDER);
+		preg_match_all($qreg, $questionsapi, $questions, PREG_SET_ORDER);
 		
 
 		// extract answers from $page, store in $answers (array)
@@ -269,7 +271,7 @@ class Tracker extends Controller {
 		//	$a[2] => answer id
 		//	$a[3] => answer text
 		$areg = '/answer-votes.*?>([-\d]*).*?#(\d*)">([^<]*)/';
-		preg_match_all($areg, $page, $answers, PREG_SET_ORDER);
+		preg_match_all($areg, $answersapi, $answers, PREG_SET_ORDER);
 
 		$acreg = '/"answers".*?<div.*?>(\d+)/s';
 		preg_match_all($acreg, $page, $ac, PREG_SET_ORDER);
@@ -324,7 +326,7 @@ class Tracker extends Controller {
 		
 		$this->load->view('questans', array('stuff' => $questions, 'count' => count($questions), 'name' => 'questions <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions/ask"><font color="999999">ask</font></a>)</i></small></font>'));
 		////$this->load->view('questans', array('stuff' => $answers, 'count' => $answercount, 'name' => 'answers <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions"><font color="999999">answer</font></a>)</i></small></font>'));
-		$this->load->view('answers', array('answers' => $this->_readstats($page), 'count' => $answercount));
+		$this->load->view('answers', array('answers' => $this->_readstats($answersapi), 'count' => $answercount));
 		
 		if ($data)
 			$this->load->view('rep', compact('data', 'user'));
