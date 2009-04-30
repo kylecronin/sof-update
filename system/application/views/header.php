@@ -27,7 +27,7 @@
 	</style>
 	<!-- <script type="text/javascript" src="http://stackoverflow.com/Content/Js/jquery.package.master.js?d=20081101"></script> -->
 
-	<script type="text/javascript" src="http://stackoverflow.com/content/js/master.min.js?d=20081101"></script>
+	<script type="text/javascript" src="http://stackoverflow.com/content/js/master.js?v=3067"></script>
 	<script type="text/javascript" src="http://stackoverflow.com/Content/Js/third-party/jquery.flot.pack.js"></script>
 
 	<script type="text/javascript">
