@@ -70,7 +70,7 @@ foreach ($stuff as $s)
 	echo "&nbsp;&nbsp;</td><td align=\"right\">&nbsp;&nbsp;$s[1]&nbsp;&nbsp;</td>";
 	echo "<td><a ";
 	if ($new) echo "class=\"new\" ";
-	echo "href=\"http://stackoverflow.com/questions/$s[2]/\">$s[3]</td></tr>\n";
+	echo "href=\"http://$site/questions/$s[2]/\">$s[3]</td></tr>\n";
 	
 
 }

@@ -38,7 +38,7 @@ foreach($answers as $answer)
 	echo "&nbsp;&nbsp;</td><td align=\"right\">&nbsp;&nbsp;".$answer['newscore']."&nbsp;&nbsp;</td>";
 	echo "<td><a ";
 	if ($answer['new']) echo "class=\"new\" ";
-	echo "href=\"http://stackoverflow.com/questions/".$answer['id']."/\">".$answer['text']."</a>";
+	echo "href=\"http://$site/questions/".$answer['id']."/\">".$answer['text']."</a>";
 	if ($answer['qty'] != 1) echo " (".$answer['qty'].")";
 	echo "</td></tr>\n";
 	
