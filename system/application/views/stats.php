@@ -12,7 +12,7 @@
 
 	foreach($query->result_array() as $r)
 	{
-		echo "<tr><td>".$r['count(user)']."</td><td><a href=\"http://stackoverflow.com/users/".$r['user']."\">".$r['user']."</a></td>";
+		echo "<tr><td>".$r['count(user)']."</td><td><a href=\"http://stackoverflow.com/users/".$r['user']."\">".$r['user'].','$r['site']."</a></td>";
 		echo "<td>(<a href=\"/tracker/chart/".$r['user']."\">chart</a>)</td><td>".date($dateformat, $r['max(date)'])."</td><td>".date($dateformat, $r['min(date)'])."</td></tr>\n";
 		$count++;
 	}

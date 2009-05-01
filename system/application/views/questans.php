@@ -13,7 +13,7 @@ foreach ($stuff as $s)
 	//$dbitem = $db->query($query);//->fetch(PDO::FETCH_ASSOC);
 	//$dbitem = mysql_fetch_assoc(mysql_query($query));
 	
-	$dbitem = $this->db->query("SELECT votes, accepted FROM Questions WHERE id = '$s[2]'")->row();
+	$dbitem = $this->db->query("SELECT votes, accepted FROM Questions WHERE id = '$s[2]' AND site = '$siteid'")->row();
 	
 	$acreg = preg_match('/answered-accepted" title/s', $s[0]);
 	
@@ -34,14 +34,14 @@ foreach ($stuff as $s)
 		
 		// I have no idea what took me this long to do this
 		if ($accepted || $lastQ)
-			$this->db->query("UPDATE Questions SET votes = '$s[1]', accepted = '$acreg' WHERE id = '$s[2]'");
+			$this->db->query("UPDATE Questions SET votes = '$s[1]', accepted = '$acreg' WHERE id = '$s[2]' AND site = '$siteid'");
 		if ($lastQ != 0)
 			$show = true;
 		//$new = false;
 	}
 	else
 	{
-		$this->db->query("INSERT INTO Questions VALUES('$s[3]', '$s[1]', '$s[2]', '$acreg')");
+		$this->db->query("INSERT INTO Questions VALUES('$s[3]', '$s[1]', '$s[2]', '$acreg', '$siteid')");
 		$lastQ = 0;
 		$show = true;
 		$new = true;

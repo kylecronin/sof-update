@@ -7,7 +7,7 @@ class Tracker extends Controller {
 	}
 	
 
-	function chart($user, $low = false, $high = false)
+	function chart($user, $siteid = 1, $low = false, $high = false)
 	{
 		$this->load->database();
 		
@@ -28,7 +28,7 @@ class Tracker extends Controller {
 		if (!strcmp($low, "hour"))
 			$low = time()-3600;
 		
-		$query = $this->db->query("SELECT rep, questions, answers, date FROM profile WHERE user = '$user' AND $low < date AND date < $high ORDER BY date ASC");
+		$query = $this->db->query("SELECT rep, questions, answers, date FROM profile WHERE user = '$user' AND site = '$siteid' AND $low < date AND date < $high ORDER BY date ASC");
 
 		$data = "";
 
@@ -52,6 +52,8 @@ class Tracker extends Controller {
 	
 	function _multifetch($urls)
 	{
+	    // shhsecret = "Welcome to ServerFault"
+	
 		$mh = curl_multi_init();
 		$handles = array();
 
@@ -59,6 +61,7 @@ class Tracker extends Controller {
 		{
 			$ch = curl_init($urls[$urlkey]);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_COOKIE, 'shhsecret="Welcome to ServerFault"');
 			$handles[$urlkey] = $ch;
 			curl_multi_add_handle($mh, $ch);
 		}
@@ -75,7 +78,7 @@ class Tracker extends Controller {
 		return $output;
 	}
 	
-	function _readstats($source)
+	function _readstats($source, $siteid)
 	{	
 		// extract answers from $page, store in $answers (array)
 		// for an $a in $answers:
@@ -97,7 +100,7 @@ class Tracker extends Controller {
 		
 		//echo $aids;
 		
-		$query = $this->db->query("SELECT id, votes, accepted FROM Questions WHERE id IN ($aids)");
+		$query = $this->db->query("SELECT id, votes, accepted FROM Questions WHERE id IN ($aids) AND site='$siteid'");
 		
 		
 		$dbr = array();
@@ -132,12 +135,12 @@ class Tracker extends Controller {
 				$oldacc		= $dbitem->accepted;
 			    
 			    if (($score-$oldscore) || ($accepted-$oldacc))
-				    $this->db->query("UPDATE Questions SET votes = '$score', accepted = '$accepted' WHERE id = '$id'");
+				    $this->db->query("UPDATE Questions SET votes = '$score', accepted = '$accepted' WHERE id = '$id' AND site = '$siteid'");
 				    
 			}
 			else
 			{
-				$this->db->query("INSERT INTO Questions VALUES('$text', '$score', '$id', '$accepted')");
+				$this->db->query("INSERT INTO Questions VALUES('$text', '$score', '$id', '$accepted', '$siteid')");
 				$new		= true;
 				$oldscore	= 0;
 				$oldacc		= 0;
@@ -162,7 +165,7 @@ class Tracker extends Controller {
 		return $ret;
 	}
 	
-	function _readapijson($source, $user)
+	function _readapijson($source, $user, $siteid)
 	{
 	//	echo $source;
 	
@@ -182,7 +185,7 @@ class Tracker extends Controller {
 			$score = $a[4];
 			$text = $a[3];
 			
-			$dbitem = $this->db->query("SELECT rep FROM posts WHERE id = '$id'")->row();
+			$dbitem = $this->db->query("SELECT rep FROM posts WHERE id = '$id' AND site = '$siteid'")->row();
 			
 			//echo "query id $id\n";
 			//print_r($dbitem);
@@ -193,12 +196,12 @@ class Tracker extends Controller {
 				$oldscore	= $dbitem->rep;
 				
 				if ($score-$oldscore != 0)
-				    $this->db->query("UPDATE posts SET rep = '$score' WHERE id = '$id'");
+				    $this->db->query("UPDATE posts SET rep = '$score' WHERE id = '$id' AND site = '$siteid'");
 
 			}
 			else
 			{
-				$this->db->query("INSERT INTO posts VALUES('$id', '$qid', '$user', '$score', '$text')");
+				$this->db->query("INSERT INTO posts VALUES('$id', '$qid', '$user', '$score', '$text', '$siteid')");
 				$new		= true;
 				$oldscore	= 0;
 			}
@@ -221,9 +224,19 @@ class Tracker extends Controller {
 	}
 
 
-	
-	function update($user)
-	{
+    function update($user)
+    {
+        $this->_update("stackoverflow.com", 1, $user);
+    }
+
+    function sfupdate($user)
+    {
+        $this->_update("serverfault.com", 2, $user);
+    }
+
+    
+    function _update($site, $siteid, $user)
+    {
 		$this->load->database();
 		
 		$this->load->helper('numformat');
@@ -237,14 +250,19 @@ class Tracker extends Controller {
 		}
 		
 		$before = microtime(true);
-		$data = $this->_multifetch(array('page' => "http://stackoverflow.com/users/$user/",
+		$data = $this->_multifetch(array('page' => "http://$site/users/$user/",
 										 //'apijson' => "http://stackoverflow.com/users/$user/0/9999999999999"
-										 'apijson' => "http://stackoverflow.com/users/rep/$user/2000-01-01/2030-01-01",
-										 'questionsapi' => "http://stackoverflow.com/api/userquestions.html?page=1&pagesize=1000000&userId=$user",
-										 'answersapi' => "http://stackoverflow.com/api/useranswers.html?page=1&pagesize=1000000&userId=$user"
+										 'apijson' => "http://$site/users/rep/$user/2000-01-01/2030-01-01",
+										 'questionsapi' => "http://$site/api/userquestions.html?page=1&pagesize=1000000&userId=$user",
+										 'answersapi' => "http://$site/api/useranswers.html?page=1&pagesize=1000000&userId=$user"
 										));
 											
 		extract($data);
+		
+		/*print_r($data);
+		exit(0);*/
+		
+		
 		$during = microtime(true);
 		
 		
@@ -284,8 +302,8 @@ class Tracker extends Controller {
 		$answercount = $ac[0][1];
 
 		// get existing profile and insert updated one
-		$dbitem = $this->db->query("SELECT * FROM profile WHERE user = '$user' ORDER BY date DESC LIMIT 1")->row();
-		$this->db->query("INSERT INTO profile VALUES('$rep', '$badge','".count($questions)."','".$answercount."','".time()."','$user')");
+		$dbitem = $this->db->query("SELECT * FROM profile WHERE user = '$user' AND site = '$siteid' ORDER BY date DESC LIMIT 1")->row();
+		$this->db->query("INSERT INTO profile VALUES('$rep', '$badge','".count($questions)."','".$answercount."','".time()."','$user','$siteid')");
 
 		// if we're a new user
 		if (!$dbitem)
@@ -295,7 +313,7 @@ class Tracker extends Controller {
 		
 		// get chart data
 		// $low = time()-2592000;
-		$query = $this->db->query("SELECT rep, questions, answers, date FROM profile WHERE user = '$user' ORDER BY date ASC");
+		$query = $this->db->query("SELECT rep, questions, answers, date FROM profile WHERE user = '$user' AND site = '$siteid' ORDER BY date ASC");
 
 		$data = "";
 		
@@ -322,14 +340,14 @@ class Tracker extends Controller {
 		
 		$this->load->view('header', compact('user'));
 		$this->load->view('overview', compact('questions', 'answers', 'answercount', 'rep', 'badge', 'dbitem'));
-		$this->load->view('reputation', array('posts' => $this->_readapijson($apijson, $user)));
+		$this->load->view('reputation', array('posts' => $this->_readapijson($apijson, $user, $siteid)));
 		
-		$this->load->view('questans', array('stuff' => $questions, 'count' => count($questions), 'name' => 'questions <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions/ask"><font color="999999">ask</font></a>)</i></small></font>'));
+		$this->load->view('questans', array('siteid' => $siteid, 'stuff' => $questions, 'count' => count($questions), 'name' => "questions <font color=\"AAAAAA\"><small><i>(<a href=\"http://$site/questions/ask\"><font color=\"999999\">ask</font></a>)</i></small></font>"));
 		////$this->load->view('questans', array('stuff' => $answers, 'count' => $answercount, 'name' => 'answers <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions"><font color="999999">answer</font></a>)</i></small></font>'));
-		$this->load->view('answers', array('answers' => $this->_readstats($answersapi), 'count' => $answercount));
+		$this->load->view('answers', array('site' => $site, 'answers' => $this->_readstats($answersapi, $siteid), 'count' => $answercount));
 		
 		if ($data)
-			$this->load->view('rep', compact('data', 'user'));
+			$this->load->view('rep', compact('data', 'user', 'siteid'));
 		
 		
 		$after = microtime(true);
@@ -358,7 +376,7 @@ class Tracker extends Controller {
 		if (!strcmp($order, "newbies"))
 			$ob = "min(date) DESC";
 
-		$query = $this->db->query("SELECT user, count(user), max(date), min(date) FROM profile GROUP BY user HAVING count(user) >= $lt ORDER BY $ob LIMIT $num");
+		$query = $this->db->query("SELECT user, site, count(user), max(date), min(date) FROM profile GROUP BY user, site HAVING count(user) >= $lt ORDER BY $ob LIMIT $num");
 		//$result = mysql_query($query);
 
 		$this->load->view('stats', compact('query'));
