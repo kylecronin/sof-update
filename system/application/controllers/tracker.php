@@ -378,9 +378,11 @@ class Tracker extends Controller {
 
 		$query = $this->db->query("SELECT user, site, count(user), max(date), min(date) FROM profile GROUP BY user, site HAVING count(user) >= $lt ORDER BY $ob LIMIT $num");
 		//$result = mysql_query($query);
-
-		$this->load->view('stats', compact('query'));
 		
+		
+	    $this->load->view('stats', compact('query'));
+		
+		//echo "asdf";
 		$this->load->view('footer');
 	}
 	
