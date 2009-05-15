@@ -61,19 +61,24 @@ class Tracker extends Controller {
 		{
 			$ch = curl_init($urls[$urlkey]);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			//curl_setopt($ch, CURLOPT_HEADER, TRUE);
 			curl_setopt($ch, CURLOPT_COOKIE, 'shhsecret="Welcome to ServerFault"');
 			$handles[$urlkey] = $ch;
 			curl_multi_add_handle($mh, $ch);
 		}
 
-		do {
-		    curl_multi_exec($mh, $active);
-		} while($active > 0);
+		do { curl_multi_exec($mh, $active); } while($active > 0);
 
 		$output = array();
 
 		foreach(array_keys($handles) as $hk)
-			$output[$hk] = curl_multi_getcontent($handles[$hk]);
+		{
+		    $status = curl_getinfo($handles[$hk], CURLINFO_HTTP_CODE);
+		    if ($status != 200)
+		        $output[$hk] = $status;
+			else
+			    $output[$hk] = curl_multi_getcontent($handles[$hk]);
+		}
 
 		return $output;
 	}
@@ -245,7 +250,7 @@ class Tracker extends Controller {
 		
 		if (!preg_match('/^\d+$/', $user))
 		{
-			$this->load->view('invalid_user', compact('user'));
+			$this->load->view('invalid_user', compact('user', 'sitename'));
 			return;
 		}
 		
@@ -256,7 +261,16 @@ class Tracker extends Controller {
 										 'questionsapi' => "http://$site/api/userquestions.html?page=1&pagesize=1000000&userId=$user",
 										 'answersapi' => "http://$site/api/useranswers.html?page=1&pagesize=1000000&userId=$user"
 										));
-											
+				
+		foreach ($data as $page)
+		{
+		    if ($page == 404)
+		    {
+		        $this->load->view('invalid_user', compact('user', 'sitename'));
+    			return;
+		    }
+		}
+									
 		extract($data);
 		
 		/*print_r($data);
@@ -268,6 +282,11 @@ class Tracker extends Controller {
 		
 		// extract reputation from $page, store in $rep
 		preg_match('/summarycount">.*?([,\d]+)<\/div>.*?Reputation/s', $page, $rep);
+		if (empty($rep))
+		{
+		    $this->load->view('site_down', compact('user', 'sitename'));
+			return;
+		}
 		$rep = preg_replace("/,/", "", $rep[1]);
 
 		// extract number of badges from $page, store in $badge
