@@ -366,9 +366,13 @@ class Tracker extends Controller {
 		$this->load->database();
 		
 		$where = "1=1";
+		$having = "1=1";
 		
 		if (strcmp($site, '0'))
 		    $where = "site = $site AND $where";
+		    
+		if (strcmp($lt, '0'))
+		    $having = "count(user) >= $lt AND $having";
 		
 
 		if (!strcmp($order, ""))
@@ -382,7 +386,7 @@ class Tracker extends Controller {
 		if (!strcmp($order, "newbies"))
 			$ob = "min(date) DESC";
 
-		$query = $this->db->query("SELECT user, site, count(user), max(date), min(date) FROM profile WHERE $where GROUP BY user, site HAVING count(user) >= $lt ORDER BY $ob LIMIT $num");
+		$query = $this->db->query("SELECT user, site, count(user), max(date), min(date) FROM profile WHERE $where GROUP BY user, site HAVING $having ORDER BY $ob LIMIT $num");
 		//$result = mysql_query($query);
 		
 		
