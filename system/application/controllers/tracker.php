@@ -361,9 +361,15 @@ class Tracker extends Controller {
 	}
 	
 	
-	function stats($order='top', $num='30', $lt='0')
+	function stats($order='last', $num='200', $site='0', $lt='0')
 	{
 		$this->load->database();
+		
+		$where = "1=1";
+		
+		if (strcmp($site, '0'))
+		    $where = "site = $site AND $where";
+		
 
 		if (!strcmp($order, ""))
 			$order = "top";
@@ -376,7 +382,7 @@ class Tracker extends Controller {
 		if (!strcmp($order, "newbies"))
 			$ob = "min(date) DESC";
 
-		$query = $this->db->query("SELECT user, site, count(user), max(date), min(date) FROM profile GROUP BY user, site HAVING count(user) >= $lt ORDER BY $ob LIMIT $num");
+		$query = $this->db->query("SELECT user, site, count(user), max(date), min(date) FROM profile WHERE $where GROUP BY user, site HAVING count(user) >= $lt ORDER BY $ob LIMIT $num");
 		//$result = mysql_query($query);
 		
 		
