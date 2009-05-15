@@ -225,18 +225,18 @@ class Tracker extends Controller {
 
 
     function update($user)
-    {
-        $this->_update("stackoverflow.com", 1, $user);
+    {   
+        $this->_update("StackOverflow", "stackoverflow.com", 1, $user);
     }
 
     function sfupdate($user)
     {
-        $this->_update("serverfault.com", 2, $user);
+        $this->_update("ServerFault", "serverfault.com", 2, $user);
     }
 
     
-    function _update($site, $siteid, $user)
-    {
+    function _update($sitename, $site, $siteid, $user)
+    {    
 		$this->load->database();
 		
 		$this->load->helper('numformat');
@@ -338,7 +338,7 @@ class Tracker extends Controller {
 
 		//print_r($profile);
 		
-		$this->load->view('header', compact('user'));
+		$this->load->view('header', compact('user', 'sitename'));
 		$this->load->view('overview', compact('questions', 'answers', 'answercount', 'rep', 'badge', 'dbitem'));
 		$this->load->view('reputation', array('site' => $site, 'posts' => $this->_readapijson($apijson, $user, $siteid)));
 		
