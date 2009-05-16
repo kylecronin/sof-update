@@ -44,8 +44,13 @@ class Tracker extends Controller {
 		}
 		
 		$data = substr_replace($data, "", -2); // remove last comma
+
+		$sites = array(1 => array('sitename' => 'StackOverflow'),
+			       2 => array('sitename' => 'ServerFault'));
 		
-		$this->load->view('header');
+		$sitename = $sites[$siteid]['sitename'];
+		
+		$this->load->view('header', compact('sitename'));
 		$this->load->view('chart', compact('data'));
 		$this->load->view('footer');
 	}
