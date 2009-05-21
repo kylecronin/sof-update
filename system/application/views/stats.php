@@ -2,7 +2,12 @@
 <head><title>Top Scraper Users</title></head>
 <body>
 <table>
-	<tr><td><b>Visits</b></td><td><b>Site</b></td><td colspan=2><b>User</b></td><td><b>Last Visit</b></td><td><b>First Visit</b></td></tr>
+	<tr><td><b><a href="/tracker/stats/top/<?=$num?>/<?=$site?>/<?=$lt?>">Visits</a></b></td>
+	    <td><b>Site</b></td>
+	    <td colspan=2><b><a href="/tracker/stats/user/<?=$num?>/<?=$site?>/<?=$lt?>">User</a></b></td>
+	    <td><b><a href="/tracker/stats/last/<?=$num?>/<?=$site?>/<?=$lt?>">Last Visit</a></b></td>
+	    <td><b><a href="/tracker/stats/newbies/<?=$num?>/<?=$site?>/<?=$lt?>">First Visit</a></b></td>
+	</tr>
 
 <?php
 
@@ -37,6 +42,13 @@
 	
     }
 
-    echo "<small><i>count: $count</i></small>";
+    //echo "<b>count: $count</b> [10 30 100 200 500]";
 
 ?>
+<b>count: <?=$count?></b> [
+<a href="/tracker/stats/<?=$order?>/10/<?=$site?>/<?=$lt?>">10</a>&nbsp;
+<a href="/tracker/stats/<?=$order?>/30/<?=$site?>/<?=$lt?>">30</a>&nbsp;
+<a href="/tracker/stats/<?=$order?>/100/<?=$site?>/<?=$lt?>">100</a>&nbsp;
+<a href="/tracker/stats/<?=$order?>/200/<?=$site?>/<?=$lt?>">200</a>&nbsp;
+<a href="/tracker/stats/<?=$order?>/500/<?=$site?>/<?=$lt?>">500</a>&nbsp;
+]

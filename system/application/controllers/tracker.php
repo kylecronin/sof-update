@@ -417,7 +417,7 @@ class Tracker extends Controller {
 		//$result = mysql_query($query);
 		
 		
-	    $this->load->view('stats', compact('query'));
+	    $this->load->view('stats', compact('query', 'order', 'num', 'site', 'lt'));
 		
 		//echo "asdf";
 		$this->load->view('footer');
