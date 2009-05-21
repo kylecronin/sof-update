@@ -2,10 +2,11 @@
 <head><title>Top Scraper Users</title></head>
 <body>
 
+<?php $count = sizeof($query->result_array()); ?>
 
 <table>
 
-<tr><td><b>count:</b></td><td><b><?=$num?></b></td><td> [
+<tr><td><b>count:</b></td><td><b><?=$count?></b></td><td> [
 <a href="/tracker/stats/<?=$order?>/10/<?=$site?>/<?=$lt?>">10</a>&nbsp;
 <a href="/tracker/stats/<?=$order?>/30/<?=$site?>/<?=$lt?>">30</a>&nbsp;
 <a href="/tracker/stats/<?=$order?>/100/<?=$site?>/<?=$lt?>">100</a>&nbsp;
