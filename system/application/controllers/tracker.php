@@ -385,7 +385,7 @@ class Tracker extends Controller {
 	}
 	
 	
-	function stats($order='last', $num='200', $site='0', $lt='0')
+	function stats($order='last', $num='30', $site='0', $lt='0')
 	{
 		$this->load->database();
 		
