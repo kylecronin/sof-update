@@ -409,6 +409,9 @@ class Tracker extends Controller {
 			$ob = "min(date) ASC";
 		if (!strcmp($order, "newbies"))
 			$ob = "min(date) DESC";
+		if (!strcmp($order, "user"))
+		    $ob = "user ASC";
+			
 
 		$query = $this->db->query("SELECT user, site, count(user), max(date), min(date) FROM profile WHERE $where GROUP BY user, site HAVING $having ORDER BY $ob LIMIT $num");
 		//$result = mysql_query($query);
