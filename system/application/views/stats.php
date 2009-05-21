@@ -7,7 +7,7 @@
 <?php
 
     $count = 0;
-    $dateformat = "m/d H:i:s";
+    $dateformat = "m-d H:i";
     
 
     foreach($query->result_array() as $r)
