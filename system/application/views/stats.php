@@ -1,5 +1,26 @@
 <html>
 <head><title>Top Scraper Users</title></head>
+<style>
+body {
+		font-family:		Lucida Grande, Verdana, Sans-serif;
+		font-size:			8pt;
+		background-color: /*#4a5062;*/ #3e4453;
+		color: white;
+		}
+
+body,td,th {
+	font-size: 10pt;
+}
+a.new:link { color: #FFFFFF; }
+a.new:visited { color: #FFFFFF; }
+a.new:hover { color: #AAAAAA; }
+a.new:active { color: #CCCCCC; }
+a:link { color: #FFFFFF; }
+a:visited { color: #DDDD77; }
+a:hover { color: #555555; }
+a:active { color: #333333; }
+
+</style>
 <body>
 
 <?php $count = sizeof($query->result_array()); ?>
