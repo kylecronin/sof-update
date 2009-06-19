@@ -56,4 +56,3 @@
 <br>
 <a href="http://<?=$site?>/"><font color="444444"><small>back to <?=$site?></small></font></a> &#x2022;
 <a href="http://stackoverflow.com/questions/61553/track-your-reputation"><font color="444444"><small>feedback welcome</small></font></a><br/>
-<small><font color="red">NEW!</font> <a href="http://sof.modos.org/forum/index.php"><font color="444444">(unofficial) StackOverflow meta-discussion board</font></a></small>
