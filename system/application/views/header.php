@@ -66,7 +66,7 @@
 	<script type="text/javascript" src="http://stackoverflow.com/Content/Js/third-party/jquery.flot.pack.js"></script>
 </head>
 <body>
-    <small><font color="red">NEW!</font> <a href="http://sof.modos.org/forum/index.php"><font color="444444">(unofficial) StackOverflow meta-discussion board</font></a></small>
+    
 	<table cellpadding="0" cellspacing="0" border="0">
 
 	
