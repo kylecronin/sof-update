@@ -76,6 +76,11 @@ a:active { color: #333333; }
             $name = "serverfault.com";
             $abbrev = "SF";
         }
+        else if ($r['site'] == 3)
+        {
+            $name = "meta.stackoverflow.com";
+            $abbrev = "META";
+        }
         else
         {
             $name = "UNKNOWN";
