@@ -46,7 +46,8 @@ class Tracker extends Controller {
 		$data = substr_replace($data, "", -2); // remove last comma
 
 		$sites = array(1 => array('sitename' => 'StackOverflow'),
-			       2 => array('sitename' => 'ServerFault'));
+			           2 => array('sitename' => 'ServerFault'),
+			           3 => array('sitename' => 'Meta'));
 		
 		$sitename = $sites[$siteid]['sitename'];
 		
@@ -242,6 +243,11 @@ class Tracker extends Controller {
     function sfupdate($user)
     {
         $this->_update("ServerFault", "serverfault.com", 2, $user);
+    }
+    
+    function metaupdate($user)
+    {
+        $this->_update("Meta", "meta.stackoverflow.com", 3, $user);
     }
 
     
