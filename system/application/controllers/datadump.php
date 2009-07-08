@@ -1,7 +1,7 @@
 <?php
 class Datadump extends Controller {
 
-    function bt-mainfeed()
+    function mainfeed()
     {
         echo "hi";
     }
