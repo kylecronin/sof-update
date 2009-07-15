@@ -47,7 +47,7 @@ class Tracker extends Controller {
 
 		$sites = array(1 => array('sitename' => 'StackOverflow'),
 			           2 => array('sitename' => 'ServerFault'),
-			           3 => array('sitename' => 'Meta')
+			           3 => array('sitename' => 'Meta'),
 			           4 => array('sitename' => 'SuperUser'));
 		
 		$sitename = $sites[$siteid]['sitename'];
