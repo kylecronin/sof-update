@@ -47,7 +47,8 @@ class Tracker extends Controller {
 
 		$sites = array(1 => array('sitename' => 'StackOverflow'),
 			           2 => array('sitename' => 'ServerFault'),
-			           3 => array('sitename' => 'Meta'));
+			           3 => array('sitename' => 'Meta')
+			           4 => array('sitename' => 'SuperUser'));
 		
 		$sitename = $sites[$siteid]['sitename'];
 		
@@ -68,7 +69,7 @@ class Tracker extends Controller {
 			$ch = curl_init($urls[$urlkey]);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			//curl_setopt($ch, CURLOPT_HEADER, TRUE);
-			curl_setopt($ch, CURLOPT_COOKIE, 'shhsecret="Welcome to ServerFault"');
+			curl_setopt($ch, CURLOPT_COOKIE, 'shhsecret="Welcome to SuperUser"');
 			$handles[$urlkey] = $ch;
 			curl_multi_add_handle($mh, $ch);
 		}
@@ -248,6 +249,11 @@ class Tracker extends Controller {
     function metaupdate($user)
     {
         $this->_update("Meta", "meta.stackoverflow.com", 3, $user);
+    }
+    
+    function suupdate($user)
+    {
+        $this->_update("SuperUser", "superuser.com", 4, $user);
     }
 
     

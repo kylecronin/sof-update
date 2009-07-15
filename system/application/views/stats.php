@@ -43,9 +43,11 @@ a:active { color: #333333; }
 ]</td></tr>
 
 <tr><td><b>site:</b></td><td><b><?=$site?></b></td><td> [
-<a href="/tracker/stats/<?=$order?>/<?=$num?>/0/<?=$lt?>">both</a>&nbsp;
+<a href="/tracker/stats/<?=$order?>/<?=$num?>/0/<?=$lt?>">all</a>&nbsp;
 <a href="/tracker/stats/<?=$order?>/<?=$num?>/1/<?=$lt?>">SO</a>&nbsp;
 <a href="/tracker/stats/<?=$order?>/<?=$num?>/2/<?=$lt?>">SF</a>&nbsp;
+<a href="/tracker/stats/<?=$order?>/<?=$num?>/4/<?=$lt?>">SU</a>&nbsp;
+<a href="/tracker/stats/<?=$order?>/<?=$num?>/3/<?=$lt?>">META</a>&nbsp;
 ]</td></tr>
 
 </table>
@@ -80,6 +82,11 @@ a:active { color: #333333; }
         {
             $name = "meta.stackoverflow.com";
             $abbrev = "META";
+        }
+        else if ($r['site'] == 4)
+        {
+            $name = "superuser.com";
+            $abbrev = "SU";
         }
         else
         {

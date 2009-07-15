@@ -3,7 +3,9 @@ class Datadump extends Controller {
 
     function mainfeed()
     {
-        echo "hi";
+        $sofeed = file_get_contents("http://blog.stackoverflow.com/category/cc-wiki-dump/feed/");
+        
+        echo $sofeed;
     }
 
 }
