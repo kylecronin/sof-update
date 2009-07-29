@@ -27,11 +27,11 @@
 	</style>
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script> 
-    <script type="text/javascript" src="/content/js/master.js?v=4087"></script>
+    <script type="text/javascript" src="http://stackoverflow.com/content/js/master.js?v=4087"></script>
 
-    <!--[if IE]><script language="javascript" type="text/javascript" src="/Content/Js/third-party/excanvas.pack.js"></script><![endif]-->
-    <script type="text/javascript" src="/Content/Js/third-party/jquery.flot.pack.js"></script>
-    <script src="/Content/Js/third-party/date.js" type="text/javascript"></script>
+    <!--[if IE]><script language="javascript" type="text/javascript" src="http://stackoverflow.com/Content/Js/third-party/excanvas.pack.js"></script><![endif]-->
+    <script type="text/javascript" src="http://stackoverflow.com/Content/Js/third-party/jquery.flot.pack.js"></script>
+    <script src="http://stackoverflow.com/Content/Js/third-party/date.js" type="text/javascript"></script>
 
 	<script type="text/javascript">
 	function showtime(t)
