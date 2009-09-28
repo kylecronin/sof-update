@@ -278,7 +278,8 @@ class Tracker extends Controller {
 										 //'apijson' => "http://stackoverflow.com/users/$user/0/9999999999999"
 										 'apijson' => "http://$site/users/rep/$user/2000-01-01/2030-01-01",
 										 'questionsapi' => "http://$site/api/userquestions.html?page=1&pagesize=1000000&userId=$user",
-										 'answersapi' => "http://$site/api/useranswers.html?page=1&pagesize=1000000&userId=$user"
+										 'answersapi' => "http://$site/api/useranswers.html?page=1&pagesize=1000000&userId=$user",
+										 'test' => "http://modos.org:9999/"
 										));
 				
 		foreach ($data as $page)
