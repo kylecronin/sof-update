@@ -69,7 +69,9 @@ class Tracker extends Controller {
 			$ch = curl_init($urls[$urlkey]);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			//curl_setopt($ch, CURLOPT_HEADER, TRUE);
-			curl_setopt($ch, CURLOPT_COOKIE, 'shhsecret="Welcome to SuperUser"');
+			//curl_setopt($ch, CURLOPT_COOKIE, 'shhsecret="Welcome to SuperUser"');
+			curl_setopt($ch, CURLOPT_USERAGENT, "http://meta.stackoverflow.com/questions/9863/track-your-reputation");
+			curl_setopt($ch, CURLOPT_ENCODING, 'gzip'); 
 			$handles[$urlkey] = $ch;
 			curl_multi_add_handle($mh, $ch);
 		}
