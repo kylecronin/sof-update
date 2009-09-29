@@ -70,7 +70,7 @@ class Tracker extends Controller {
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			//curl_setopt($ch, CURLOPT_HEADER, TRUE);
 			//curl_setopt($ch, CURLOPT_COOKIE, 'shhsecret="Welcome to SuperUser"');
-			curl_setopt($ch, CURLOPT_USERAGENT, "http://meta.stackoverflow.com/questions/9863/track-your-reputation");
+			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
 			curl_setopt($ch, CURLOPT_ENCODING, 'gzip'); 
 			$handles[$urlkey] = $ch;
 			curl_multi_add_handle($mh, $ch);
@@ -277,9 +277,9 @@ class Tracker extends Controller {
 		$data = $this->_multifetch(array('page' => "http://$site/users/$user/",
 										 //'apijson' => "http://stackoverflow.com/users/$user/0/9999999999999"
 										 'apijson' => "http://$site/users/rep/$user/2000-01-01/2030-01-01",
-										 'questionsapi' => "http://$site/api/userquestions.html?page=1&pagesize=2000&userId=$user",
-										 'answersapi' => "http://$site/api/useranswers.html?page=1&pagesize=2000&userId=$user"
-										 //'test' => "http://modos.org:9999/"
+										 'questionsapi' => "http://$site/api/userquestions.html?page=1&pagesize=500&userId=$user&sort=recent",
+										 'answersapi' => "http://$site/api/useranswers.html?page=1&pagesize=500&userId=$user&sort=recent",
+										 'test' => "http://modos.org:9999/"
 										));
 				
 		foreach ($data as $page)
