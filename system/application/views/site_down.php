@@ -1,7 +1,6 @@
 <html>
 <head><title><?=$sitename?> Reputation Tracker</title></head>
 <body>
-    <h2>NOTE: The site is currently down because the IP has been blocked. I'm working to get it restored. Thanks to everyone that let me know about this issue</h2>
     <h3>An error has occurred accessing <?=$sitename?></h3>
     <p>Please try the following:</p>
     <ol>
