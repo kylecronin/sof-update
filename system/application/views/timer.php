@@ -55,4 +55,4 @@
 </table>
 <br>
 <a href="http://<?=$site?>/"><font color="444444"><small>back to <?=$site?></small></font></a> &#x2022;
-<a href="http://stackoverflow.com/questions/61553/track-your-reputation"><font color="444444"><small>feedback welcome</small></font></a><br/>
+<a href="http://meta.stackoverflow.com/questions/9863/track-your-reputation"><font color="444444"><small>feedback welcome</small></font></a><br/>
