@@ -312,7 +312,7 @@ class Tracker extends Controller {
 
 		// extract number of badges from $page, store in $badge
 		//preg_match('/iv class="summarycount ar".{10,60} (\d+)<\/d.{10,140}Badges/s', $page, $badge);
-		preg_match('/ar">(\d+)</div></td>\s*<td class="summary-header"><h1>Badges/s', $page, $badge);
+		preg_match('/ar">(\d+)<\/div><\/td>\s*<td class="summary-header"><h1>Badges/s', $page, $badge);
 		$badge = $badge[1];
 		echo "$badge\n";
 		return;
