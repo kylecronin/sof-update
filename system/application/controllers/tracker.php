@@ -301,7 +301,7 @@ class Tracker extends Controller {
 		
 		
 		// extract reputation from $page, store in $rep
-		preg_match('/summarycount">([,\d]+)<\/div>\s*<div style="margin-top:5px; font-weight:bold">reputation</div>/s', $page, $rep);
+		preg_match('/summarycount">([,\d]+)<\/div>\s*<div style="margin-top:5px; font-weight:bold">reputation<\/div>/s', $page, $rep);
 		if (empty($rep))
 		{
 		    $this->load->view('site_down', compact('user', 'sitename'));
