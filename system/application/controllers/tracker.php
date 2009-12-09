@@ -301,19 +301,21 @@ class Tracker extends Controller {
 		
 		
 		// extract reputation from $page, store in $rep
-		preg_match('/summarycount">([,\d]+)<\/div>\s*<div style="margin-top:5px; font-weight:bold">reputation<\/div>/s', $page, $rep);
+		preg_match('/summarycount">([,\d]+)<\/div>\s*<div style="margin-top:5px; font-weight:bold">reputation/s', $page, $rep);
 		if (empty($rep))
 		{
 		    $this->load->view('site_down', compact('user', 'sitename'));
 			return;
 		}
 		$rep = preg_replace("/,/", "", $rep[1]);
-		echo $rep;
-		return;
+		echo "$rep\n";
 
 		// extract number of badges from $page, store in $badge
-		preg_match('/iv class="summarycount ar".{10,60} (\d+)<\/d.{10,140}Badges/s', $page, $badge);
+		//preg_match('/iv class="summarycount ar".{10,60} (\d+)<\/d.{10,140}Badges/s', $page, $badge);
+		preg_match('/ar">(\d+)</div></td>\s*<td class="summary-header"><h1>Badges/s', $page, $badge)
 		$badge = $badge[1];
+		echo "$badge\n";
+		return;
 
 		// extract questions from $page, store in $questions (array)
 		// for a $q in $questions:
