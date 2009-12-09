@@ -276,7 +276,7 @@ class Tracker extends Controller {
 		$before = microtime(true);
 		$data = $this->_multifetch(array('page' => "http://$site/users/$user/",
 										 //'apijson' => "http://stackoverflow.com/users/$user/0/9999999999999"
-										 'apijson' => "http://$site/users/rep/$user/2000-01-01/2030-01-01",
+										 //'apijson' => "http://$site/users/rep/$user/2000-01-01/2030-01-01",
 										 'questionsapi' => "http://$site/api/userquestions.html?page=1&pagesize=500&userId=$user&sort=recent",
 										 'answersapi' => "http://$site/api/useranswers.html?page=1&pagesize=500&userId=$user&sort=recent"
 										 //'test' => "http://modos.org:9999/"
@@ -379,7 +379,7 @@ class Tracker extends Controller {
 		
 		$this->load->view('header', compact('user', 'sitename'));
 		$this->load->view('overview', compact('questions', 'answers', 'answercount', 'rep', 'badge', 'dbitem'));
-		$this->load->view('reputation', array('site' => $site, 'posts' => $this->_readapijson($apijson, $user, $siteid)));
+		//$this->load->view('reputation', array('site' => $site, 'posts' => $this->_readapijson($apijson, $user, $siteid)));
 		
 		$this->load->view('questans', array('siteid' => $siteid, 'stuff' => $questions, 'count' => count($questions), 'name' => "questions <font color=\"AAAAAA\"><small><i>(<a href=\"http://$site/questions/ask\"><font color=\"999999\">ask</font></a>)</i></small></font>"));
 		////$this->load->view('questans', array('stuff' => $answers, 'count' => $answercount, 'name' => 'answers <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions"><font color="999999">answer</font></a>)</i></small></font>'));
