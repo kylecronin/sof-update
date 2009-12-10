@@ -305,16 +305,16 @@ class Tracker extends Controller {
 		if (empty($rep))
 		{
 		    $this->load->view('site_down', compact('user', 'sitename'));
-			return;
+			exit(0);
 		}
 		$rep = preg_replace("/,/", "", $rep[1]);
-		echo "$rep\n";
+		//echo "$rep\n";
 
 		// extract number of badges from $page, store in $badge
 		//preg_match('/iv class="summarycount ar".{10,60} (\d+)<\/d.{10,140}Badges/s', $page, $badge);
 		preg_match('/ar">(\d+)<\/div><\/td>\s*<td class="summary-header"><h1>Badges/s', $page, $badge);
 		$badge = $badge[1];
-		echo "$badge\n";
+		//echo "$badge\n";
 		//return;
 
 		// extract questions from $page, store in $questions (array)
@@ -335,11 +335,11 @@ class Tracker extends Controller {
 		//	$a[3] => answer text
 		$areg = '/answer-votes.*?>([-\d]*).*?#(\d*)".*?>([^<]*)/';
 		preg_match_all($areg, $answersapi, $answers, PREG_SET_ORDER);
-		print_r($answers);
-		exit(0);
+		//print_r($answers);
+		//exit(0);
 
 		$acreg = '/"answers".*?<div.*?>(\d+)/s';
-		//preg_match_all($acreg, $page, $ac, PREG_SET_ORDER);
+		preg_match_all($acreg, $page, $ac, PREG_SET_ORDER);
 		//print_r($ac);
 		//return;
 	
@@ -348,8 +348,8 @@ class Tracker extends Controller {
 		//$answercount = $ac[1];
 		//echo($ac[1]);
 		//$answercount = count($answers);
-		//$answercount = $ac[0][1];
-        $answercount=281;
+		$answercount = $ac[0][1];
+        //$answercount=281;
 
 		// get existing profile and insert updated one
 		$dbitem = $this->db->query("SELECT * FROM profile WHERE user = '$user' AND site = '$siteid' ORDER BY date DESC LIMIT 1")->row();
@@ -388,7 +388,7 @@ class Tracker extends Controller {
 
 		//print_r($profile);
 		
-		$this->load->view('header', compact('user', 'sitename'));
+		$this->load->view('header', compact('user', 'sitename')); exit(0);
 		$this->load->view('overview', compact('questions', 'answers', 'answercount', 'rep', 'badge', 'dbitem'));
 		//$this->load->view('reputation', array('site' => $site, 'posts' => $this->_readapijson($apijson, $user, $siteid)));
 		
