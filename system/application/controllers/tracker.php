@@ -335,8 +335,8 @@ class Tracker extends Controller {
 		//	$a[3] => answer text
 		$areg = '/answer-votes.*?>([-\d]*).*?#(\d*)".*?>([^<]*)/';
 		preg_match_all($areg, $answersapi, $answers, PREG_SET_ORDER);
-		//print_r($answers);
-		//return;
+		print_r($answers);
+		return;
 
 		$acreg = '/"answers".*?<div.*?>(\d+)/s';
 		//preg_match_all($acreg, $page, $ac, PREG_SET_ORDER);
