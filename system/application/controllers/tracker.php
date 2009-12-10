@@ -340,8 +340,8 @@ class Tracker extends Controller {
 
 		$acreg = '/"answers".*?<div.*?>(\d+)/s';
 		preg_match_all($acreg, $page, $ac, PREG_SET_ORDER);
-		print_r($ac);
-		return;
+		//print_r($ac);
+		//return;
 	
 
 
