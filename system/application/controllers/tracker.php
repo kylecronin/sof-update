@@ -315,15 +315,17 @@ class Tracker extends Controller {
 		preg_match('/ar">(\d+)<\/div><\/td>\s*<td class="summary-header"><h1>Badges/s', $page, $badge);
 		$badge = $badge[1];
 		echo "$badge\n";
-		return;
+		//return;
 
 		// extract questions from $page, store in $questions (array)
 		// for a $q in $questions:
 		//	$q[1] => votes
 		//	$q[2] => question id
 		//	$q[3] => question text
-		$qreg = '/question-summary narrow.*?>(-?\d+)<.*?\/questions\/(\d*).*?>(.*?)<\/a>/s';
+		$qreg = '/question-summary narrow.*?>.*?mini-counts">(-?\d+)<.*?\/questions\/(\d*).*?>(.*?)<\/a>/s';
 		preg_match_all($qreg, $questionsapi, $questions, PREG_SET_ORDER);
+		print_r($questions);
+		return;
 		
 
 		// extract answers from $page, store in $answers (array)
