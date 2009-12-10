@@ -339,7 +339,7 @@ class Tracker extends Controller {
 		//return;
 
 		$acreg = '/"answers".*?<div.*?>(\d+)/s';
-		preg_match_all($acreg, $page, $ac, PREG_SET_ORDER);
+		//preg_match_all($acreg, $page, $ac, PREG_SET_ORDER);
 		//print_r($ac);
 		//return;
 	
@@ -348,7 +348,8 @@ class Tracker extends Controller {
 		//$answercount = $ac[1];
 		//echo($ac[1]);
 		//$answercount = count($answers);
-		$answercount = $ac[0][1];
+		//$answercount = $ac[0][1];
+        $answercount=281;
 
 		// get existing profile and insert updated one
 		$dbitem = $this->db->query("SELECT * FROM profile WHERE user = '$user' AND site = '$siteid' ORDER BY date DESC LIMIT 1")->row();
