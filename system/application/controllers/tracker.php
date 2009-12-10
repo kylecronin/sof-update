@@ -324,8 +324,8 @@ class Tracker extends Controller {
 		//	$q[3] => question text
 		$qreg = '/question-summary narrow.*?>.*?mini-counts">(-?\d+)<.*?\/questions\/(\d*).*?>(.*?)<\/a>/s';
 		preg_match_all($qreg, $questionsapi, $questions, PREG_SET_ORDER);
-		print_r($questions);
-		return;
+		//print_r($questions);
+		//return;
 		
 
 		// extract answers from $page, store in $answers (array)
@@ -335,6 +335,8 @@ class Tracker extends Controller {
 		//	$a[3] => answer text
 		$areg = '/answer-votes.*?>([-\d]*).*?#(\d*)">([^<]*)/';
 		preg_match_all($areg, $answersapi, $answers, PREG_SET_ORDER);
+		print_r($answers);
+		return;
 
 		$acreg = '/"answers".*?<div.*?>(\d+)/s';
 		preg_match_all($acreg, $page, $ac, PREG_SET_ORDER);
