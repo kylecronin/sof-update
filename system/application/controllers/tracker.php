@@ -337,14 +337,19 @@ class Tracker extends Controller {
 			exit(0);
 		}
 		$rep = preg_replace("/,/", "", $rep[1]);
-		echo "$rep\n"; exit(0);
+		echo "$rep\n";
 
 		// extract number of badges from $page, store in $badge
 		//preg_match('/iv class="summarycount ar".{10,60} (\d+)<\/d.{10,140}Badges/s', $page, $badge);
-		preg_match('/ar">(\d+)<\/div><\/td>\s*<td class="summary-header"><h1>Badges/s', $page, $badge);
+		if ($trilogy)
+		    $exp = '/ar">(\d+)<\/div><\/td>\s*<td class="summary-header"><h1>Badges/s';
+		else
+		    $exp = '/iv class="summarycount".{10,60} (\d+)<\/d.{10,140}Badges/s';
+		
+		preg_match(, $page, $badge);
 		$badge = $badge[1];
-		//echo "$badge\n";
-		//return;
+		echo "$badge\n";
+		exit(0); //return;
 
 		// extract questions from $page, store in $questions (array)
 		// for a $q in $questions:
