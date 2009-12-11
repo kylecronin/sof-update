@@ -268,14 +268,20 @@ class Tracker extends Controller {
         
         if (!$dbitem)
         {
-            $this->db->query("INSERT INTO sites (name, domain) VALUES (\"Site Name\", \"$domain\")");
-            
             $src = file_get_contents("http://$domain/");
             preg_match('/<title>(.*?)<\/title>/', $src, $title);
+            echo "site not found";
             print_r($title);
+        
+        
+            $this->db->query("INSERT INTO sites (name, domain) VALUES (\"$title\", \"$domain\")");
+            
+
             
             //$dbitem = $this->db->query("SELECT * FROM sites WHERE domain IS \"$domain\"")->row();
         }
+        echo "site found";
+        print_r($dbitem);
     
         //$this->_update($dbitem->name, $dbitem->domain, $dbitem->id, $user);
     
