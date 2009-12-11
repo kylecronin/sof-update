@@ -346,7 +346,7 @@ class Tracker extends Controller {
 		else
 		    $exp = '/iv class="summarycount".{10,60} (\d+)<\/d.{10,140}Badges/s';
 		
-		preg_match(, $page, $badge);
+		preg_match($exp, $page, $badge);
 		$badge = $badge[1];
 		echo "$badge\n";
 		exit(0); //return;
