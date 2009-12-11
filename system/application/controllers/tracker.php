@@ -388,7 +388,7 @@ class Tracker extends Controller {
 
 		//print_r($profile);
 		
-		$this->load->view('header', compact('user', 'sitename')); exit(0);
+		$this->load->view('header', compact('user', 'sitename')); return;
 		$this->load->view('overview', compact('questions', 'answers', 'answercount', 'rep', 'badge', 'dbitem'));
 		//$this->load->view('reputation', array('site' => $site, 'posts' => $this->_readapijson($apijson, $user, $siteid)));
 		
