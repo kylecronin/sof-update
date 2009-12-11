@@ -337,7 +337,7 @@ class Tracker extends Controller {
 			exit(0);
 		}
 		$rep = preg_replace("/,/", "", $rep[1]);
-		echo "$rep\n";
+		//echo "$rep\n";
 
 		// extract number of badges from $page, store in $badge
 		//preg_match('/iv class="summarycount ar".{10,60} (\d+)<\/d.{10,140}Badges/s', $page, $badge);
@@ -348,16 +348,19 @@ class Tracker extends Controller {
 		
 		preg_match($exp, $page, $badge);
 		$badge = $badge[1];
-		echo "$badge\n";
-		exit(0); //return;
+		//echo "$badge\n";
+		//exit(0); //return;
 
 		// extract questions from $page, store in $questions (array)
 		// for a $q in $questions:
 		//	$q[1] => votes
 		//	$q[2] => question id
 		//	$q[3] => question text
-		$qreg = '/question-summary narrow.*?>.*?mini-counts">(-?\d+)<.*?\/questions\/(\d*).*?>(.*?)<\/a>/s';
-		preg_match_all($qreg, $questionsapi, $questions, PREG_SET_ORDER);
+		if ($trilogy)
+		    $exp = '/question-summary narrow.*?>.*?mini-counts">(-?\d+)<.*?\/questions\/(\d*).*?>(.*?)<\/a>/s';
+		else
+		    $exp = '/question-summary narrow.*?>(-?\d+)<.*?\/questions\/(\d*).*?>(.*?)<\/a>/s';
+		preg_match_all($exp, $questionsapi, $questions, PREG_SET_ORDER);
 		//print_r($questions);
 		//return;
 		
@@ -367,13 +370,16 @@ class Tracker extends Controller {
 		//	$a[1] => votes
 		//	$a[2] => answer id
 		//	$a[3] => answer text
-		$areg = '/answer-votes.*?>([-\d]*).*?#(\d*)".*?>([^<]*)/';
-		preg_match_all($areg, $answersapi, $answers, PREG_SET_ORDER);
+		if ($trilogy)
+		    $exp = '/answer-votes.*?>([-\d]*).*?#(\d*)".*?>([^<]*)/';
+		else
+		    $exp = '/answer-votes.*?>([-\d]*).*?#(\d*)">([^<]*)/';
+		preg_match_all($exp, $answersapi, $answers, PREG_SET_ORDER);
 		//print_r($answers);
 		//exit(0);
 
-		$acreg = '/"answers".*?<div.*?>(\d+)/s';
-		preg_match_all($acreg, $page, $ac, PREG_SET_ORDER);
+        $exp = '/"answers".*?<div.*?>(\d+)/s';
+		preg_match_all($exp, $page, $ac, PREG_SET_ORDER);
 		//print_r($ac);
 		//return;
 	
