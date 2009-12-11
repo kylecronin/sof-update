@@ -270,6 +270,7 @@ class Tracker extends Controller {
         {
             $src = file_get_contents("http://$domain/");
             preg_match('/<title>(.*?)<\/title>/', $src, $title);
+            $title = $title[1];
             echo "site not found";
             print_r($title);
         
