@@ -44,7 +44,9 @@
 		return substr($ret, 0, strlen($ret)-13);
 	}
 	
-	$updates = "3 today, 7 this week, 22 this month, 182 total";
+	$startofday = mktime(0, 0, 0, date('m'), date('d')-date('w'), date('Y'));
+	
+	$updates = date('Y-m-d H:i:s', $startofday);
 ?>
 <table border="0">
 	<tr><td align="right"><small><b>interval</b></small></td><td><small>&nbsp;</small></td><td><small><?=RelativeTime($dbitem->date)?></small></td></tr>
