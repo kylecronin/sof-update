@@ -260,6 +260,8 @@ class Tracker extends Controller {
     
     function seupdate($domain, $user)
     {
+        $domain = preg_replace('/_/', '.', $domain);
+    
         $this->load->database();
         $dbitem = $this->db->query("SELECT * FROM sites WHERE domain=\"$domain\"")->row();
         
