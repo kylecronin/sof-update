@@ -389,11 +389,12 @@ class Tracker extends Controller {
 		//print_r($profile);
 		
 		$this->load->view('header', compact('user', 'sitename'));
-		$this->load->view('overview', compact('questions', 'answers', 'answercount', 'rep', 'badge', 'dbitem')); return;
+		$this->load->view('overview', compact('questions', 'answers', 'answercount', 'rep', 'badge', 'dbitem'));
 		//$this->load->view('reputation', array('site' => $site, 'posts' => $this->_readapijson($apijson, $user, $siteid)));
 		
 		$this->load->view('questans', array('siteid' => $siteid, 'stuff' => $questions, 'count' => count($questions), 'name' => "questions <font color=\"AAAAAA\"><small><i>(<a href=\"http://$site/questions/ask\"><font color=\"999999\">ask</font></a>)</i></small></font>"));
 		////$this->load->view('questans', array('stuff' => $answers, 'count' => $answercount, 'name' => 'answers <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions"><font color="999999">answer</font></a>)</i></small></font>'));
+		return;
 		$this->load->view('answers', array('site' => $site, 'answers' => $this->_readstats($answersapi, $siteid), 'count' => $answercount));
 		
 		if ($data)
