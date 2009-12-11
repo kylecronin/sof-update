@@ -261,7 +261,7 @@ class Tracker extends Controller {
     function seupdate($domain, $user)
     {
         $this->load->database();
-        $dbitem = $this->db->query("SELECT * FROM sites WHERE domain IS \"$domain\"")->row();
+        $dbitem = $this->db->query("SELECT * FROM sites WHERE domain=\"$domain\"")->row();
         
         if (!dbitem)
         {
