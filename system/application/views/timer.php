@@ -43,9 +43,12 @@
 		
 		return substr($ret, 0, strlen($ret)-13);
 	}
+	
+	$updates = "3 today, 7 this week, 22 this month, 182 total";
 ?>
 <table border="0">
 	<tr><td align="right"><small><b>interval</b></small></td><td><small>&nbsp;</small></td><td><small><?=RelativeTime($dbitem->date)?></small></td></tr>
+	<tr><td align="right"><small><b>updates</b></small></td><td><small>&nbsp;</small></td><td><small><?=$updates?></small></td></tr>
 	<tr><td align="right"><small><b>last update</b></small></td><td><small>&nbsp;</small></td><td><small>
 		<script type="text/javascript">showtime(<?=$dbitem->date."000"?>)</script>
 	</small></td></tr>
