@@ -64,7 +64,6 @@ a:active { color: #333333; }
 
     $count = 0;
     $dateformat = "m-d H:i";
-    
 
     foreach($query->result_array() as $r)
     {

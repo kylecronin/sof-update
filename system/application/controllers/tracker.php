@@ -497,6 +497,9 @@ class Tracker extends Controller {
 			$ob = "min(date) DESC";
 		if (!strcmp($order, "user"))
 		    $ob = "user ASC";
+		    
+		$query = $this->db->query("SELECT * FROM sites");
+		print_r($query->result_array());
 			
 
 		$query = $this->db->query("SELECT user, site, count(user), max(date), min(date) FROM profile WHERE $where GROUP BY user, site HAVING $having ORDER BY $ob LIMIT $num");
