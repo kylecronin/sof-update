@@ -264,6 +264,7 @@ class Tracker extends Controller {
     
         $this->load->database();
         $dbitem = $this->db->query("SELECT * FROM sites WHERE domain=\"$domain\"")->row();
+        print_r($dbitem);
         
         if (!$dbitem)
         {
