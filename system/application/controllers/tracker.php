@@ -404,8 +404,17 @@ class Tracker extends Controller {
 		$pageload = number_format($during-$before, 2, '.', '');
 		//$page2load = number_format($during-$between, 2, '.', '');
 		$dbprocess = number_format($after-$during, 2, '.', '');
+		
+		$startofday = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+    	$startofweek = mktime(0, 0, 0, date('m'), date('d')-date('w'), date('Y'));
+    	$startofmonth = mktime(0, 0, 0, date('m'), 1, date('Y'));
+    	$startofalltime = 0;
+    	
+    	$dbitem = $this->db->query("SELECT COUNT(*) FROM profile WHERE user = '$user' AND site = '$siteid' AND date >= $startofday");
+    	print_r($dbitem);
+    	$updates = "test";
 
-		$this->load->view('timer', compact('pageload', 'dbprocess', 'dbitem'));
+		$this->load->view('timer', compact('pageload', 'dbprocess', 'dbitem', 'updates'));
 		$this->load->view('footer');
 		
 	}
