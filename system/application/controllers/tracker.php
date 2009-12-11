@@ -394,8 +394,9 @@ class Tracker extends Controller {
 		
 		$this->load->view('questans', array('site' => $site, 'siteid' => $siteid, 'stuff' => $questions, 'count' => count($questions), 'name' => "questions <font color=\"AAAAAA\"><small><i>(<a href=\"http://$site/questions/ask\"><font color=\"999999\">ask</font></a>)</i></small></font>"));
 		////$this->load->view('questans', array('stuff' => $answers, 'count' => $answercount, 'name' => 'answers <font color="AAAAAA"><small><i>(<a href="http://stackoverflow.com/questions"><font color="999999">answer</font></a>)</i></small></font>'));
-		return;
 		$this->load->view('answers', array('site' => $site, 'answers' => $this->_readstats($answersapi, $siteid), 'count' => $answercount));
+		
+		return;
 		
 		if ($data)
 			$this->load->view('rep', compact('data', 'user', 'siteid'));
