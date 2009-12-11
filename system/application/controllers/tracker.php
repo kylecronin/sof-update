@@ -264,7 +264,7 @@ class Tracker extends Controller {
     
         $this->load->database();
         $dbitem = $this->db->query("SELECT * FROM sites WHERE domain=\"$domain\"")->row();
-        print_r($dbitem);
+        //print_r($dbitem);
         
         if (!$dbitem)
         {
@@ -276,9 +276,9 @@ class Tracker extends Controller {
             $dbitem = $this->db->query("SELECT * FROM sites WHERE domain=\"$domain\"")->row();
         }
         
-        print_r($dbitem);
+        //print_r($dbitem);
     
-        //$this->_update($dbitem->name, $dbitem->domain, $dbitem->id, $user);
+        $this->_update($dbitem->name, $dbitem->domain, $dbitem->id, $user);
     
     }
 
