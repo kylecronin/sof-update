@@ -273,7 +273,7 @@ class Tracker extends Controller {
             $title = $title[1];
         
             $this->db->query("INSERT INTO sites (name, domain) VALUES (\"$title\", \"$domain\")");
-            $dbitem = $this->db->query("SELECT * FROM sites WHERE domain IS \"$domain\"")->row();
+            $dbitem = $this->db->query("SELECT * FROM sites WHERE domain=\"$domain\"")->row();
         }
         
         print_r($dbitem);
