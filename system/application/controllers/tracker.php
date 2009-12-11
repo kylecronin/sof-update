@@ -240,22 +240,22 @@ class Tracker extends Controller {
 
     function update($user)
     {   
-        $this->_update("StackOverflow", "stackoverflow.com", 1, $user);
+        $this->_update("StackOverflow", "stackoverflow.com", 1, true, $user);
     }
 
     function sfupdate($user)
     {
-        $this->_update("ServerFault", "serverfault.com", 2, $user);
+        $this->_update("ServerFault", "serverfault.com", 2, true, $user);
     }
     
     function metaupdate($user)
     {
-        $this->_update("Meta", "meta.stackoverflow.com", 3, $user);
+        $this->_update("Meta", "meta.stackoverflow.com", 3, true, $user);
     }
     
     function suupdate($user)
     {
-        $this->_update("SuperUser", "superuser.com", 4, $user);
+        $this->_update("SuperUser", "superuser.com", 4, true, $user);
     }
     
     function seupdate($domain, $user)
@@ -278,12 +278,12 @@ class Tracker extends Controller {
         
         //print_r($dbitem);
     
-        $this->_update($dbitem->name, $dbitem->domain, $dbitem->id, $user);
+        $this->_update($dbitem->name, $dbitem->domain, $dbitem->id, false, $user);
     
     }
 
     
-    function _update($sitename, $site, $siteid, $user)
+    function _update($sitename, $site, $siteid, $trilogy, $user)
     {    
 		$this->load->database();
 		
@@ -317,22 +317,27 @@ class Tracker extends Controller {
 									
 		extract($data);
 		
-		print_r($data);
-		exit(0);
+		/*print_r($data);
+		exit(0);*/
 		
 		
 		$during = microtime(true);
 		
 		
 		// extract reputation from $page, store in $rep
-		preg_match('/summarycount">([,\d]+)<\/div>\s*<div style="margin-top:5px; font-weight:bold">reputation/s', $page, $rep);
+		if ($trilogy)
+		    $exp = '/summarycount">([,\d]+)<\/div>\s*<div style="margin-top:5px; font-weight:bold">reputation/s';
+		else
+		    $exp = '/summarycount">.*?([,\d]+)<\/div>.*?Reputation/s';
+		
+		preg_match($exp, $page, $rep);
 		if (empty($rep))
 		{
 		    $this->load->view('site_down', compact('user', 'sitename'));
 			exit(0);
 		}
 		$rep = preg_replace("/,/", "", $rep[1]);
-		//echo "$rep\n";
+		echo "$rep\n"; exit(0);
 
 		// extract number of badges from $page, store in $badge
 		//preg_match('/iv class="summarycount ar".{10,60} (\d+)<\/d.{10,140}Badges/s', $page, $badge);
