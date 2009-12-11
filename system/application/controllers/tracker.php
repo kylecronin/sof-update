@@ -44,13 +44,16 @@ class Tracker extends Controller {
 		}
 		
 		$data = substr_replace($data, "", -2); // remove last comma
+		
+		$this->load->database();
+        $dbitem = $this->db->query("SELECT * FROM sites WHERE id=\"$siteid\"")->row();
 
 		$sites = array(1 => array('sitename' => 'StackOverflow'),
 			           2 => array('sitename' => 'ServerFault'),
 			           3 => array('sitename' => 'Meta'),
 			           4 => array('sitename' => 'SuperUser'));
 		
-		$sitename = $sites[$siteid]['sitename'];
+		$sitename = $dbitem->name;
 		
 		$this->load->view('header', compact('sitename'));
 		$this->load->view('chart', compact('data'));
