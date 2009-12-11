@@ -499,7 +499,11 @@ class Tracker extends Controller {
 		    $ob = "user ASC";
 		    
 		$query = $this->db->query("SELECT * FROM sites");
-		print_r($query->result_array());
+		//print_r($query->result_array());
+		$sites = array();
+		foreach ($query->result_array() as $row)
+		    $sites[$row['id']] = $row;
+		print_r($sites);
 			
 
 		$query = $this->db->query("SELECT user, site, count(user), max(date), min(date) FROM profile WHERE $where GROUP BY user, site HAVING $having ORDER BY $ob LIMIT $num");
