@@ -93,7 +93,7 @@ class Tracker extends Controller {
 	}
 	
 	function _readstats($source, $siteid)
-	{	
+	{
 		// extract answers from $page, store in $answers (array)
 		// for an $a in $answers:
 		//	$a[1] => votes
@@ -181,7 +181,7 @@ class Tracker extends Controller {
 	
 	function _readapijson($source, $user, $siteid)
 	{
-	//	echo $source;
+	    //	echo $source;
 	
 		$areg = '/{"PostUrl":"(\d+)\/?(\d*)#?\d*","PostTitle":"(.*?)","Rep":(-?\d+)}/s';
 		preg_match_all($areg, $source, $answers, PREG_SET_ORDER);
@@ -256,6 +256,26 @@ class Tracker extends Controller {
     function suupdate($user)
     {
         $this->_update("SuperUser", "superuser.com", 4, $user);
+    }
+    
+    function seupdate($domain, $user)
+    {
+        $this->load->database();
+        $dbitem = $this->db->query("SELECT * FROM sites WHERE domain IS \"$domain\"")->row();
+        
+        if (!dbitem)
+        {
+            $this->db->query("INSERT INTO sites (name, domain) VALUES (\"Site Name\", \"$domain\")");
+            
+            $src = file_get_contents("http://$domain/");
+            preg_match('/<title>(.*?)</title>/', $src, $title);
+            print_r($title);
+            
+            //$dbitem = $this->db->query("SELECT * FROM sites WHERE domain IS \"$domain\"")->row();
+        }
+    
+        //$this->_update($dbitem->name, $dbitem->domain, $dbitem->id, $user);
+    
     }
 
     
