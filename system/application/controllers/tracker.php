@@ -415,7 +415,7 @@ class Tracker extends Controller {
     	$month = $this->db->query("SELECT COUNT(*) as c FROM profile WHERE user = '$user' AND site = '$siteid' AND date >= $startofmonth")->row();
     	$all = $this->db->query("SELECT COUNT(*) as c FROM profile WHERE user = '$user' AND site = '$siteid' AND date >= $startofalltime")->row();
 
-    	$updates = "".$today['c']." today, ".$week['c']." this week, ".$month['c']." this month, ".$all['c']." total";
+    	$updates = "".$today->c." today, ".$week->c." this week, ".$month->c." this month, ".$all->c." total";
 
 		$this->load->view('timer', compact('pageload', 'dbprocess', 'dbitem', 'updates'));
 		$this->load->view('footer');
