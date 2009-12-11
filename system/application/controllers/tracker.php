@@ -270,7 +270,7 @@ class Tracker extends Controller {
             $this->db->query("INSERT INTO sites (name, domain) VALUES (\"Site Name\", \"$domain\")");
             
             $src = file_get_contents("http://$domain/");
-            preg_match('/<title>(.*?)</title>/', $src, $title);
+            preg_match('/<title>(.*?)<\/title>/', $src, $title);
             print_r($title);
             
             //$dbitem = $this->db->query("SELECT * FROM sites WHERE domain IS \"$domain\"")->row();
