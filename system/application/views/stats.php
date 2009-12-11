@@ -66,7 +66,7 @@ a:active { color: #333333; }
     $dateformat = "m-d H:i";
 
     foreach($query->result_array() as $r)
-    {
+    {    
         if ($r['site'] == 1)
         {
             $name = "stackoverflow.com";
@@ -92,6 +92,9 @@ a:active { color: #333333; }
             $name = "UNKNOWN";
             $abbrev = "BAD!";
         }
+        
+        $name = $sites[$r['site']]['domain'];
+        $abbrev = $sites[$r['site']]['domain'];
     
     
     	echo "<tr><td>".$r['count(user)']."</td>";
