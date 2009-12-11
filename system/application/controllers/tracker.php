@@ -317,8 +317,8 @@ class Tracker extends Controller {
 									
 		extract($data);
 		
-		/*print_r($data);
-		exit(0);*/
+		print_r($data);
+		exit(0);
 		
 		
 		$during = microtime(true);
