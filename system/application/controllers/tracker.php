@@ -410,9 +410,12 @@ class Tracker extends Controller {
     	$startofmonth = mktime(0, 0, 0, date('m'), 1, date('Y'));
     	$startofalltime = 0;
     	
-    	$dbitem = $this->db->query("SELECT COUNT(*) FROM profile WHERE user = '$user' AND site = '$siteid' AND date >= $startofday");
-    	print_r($dbitem);
-    	$updates = "test";
+    	$today = $this->db->query("SELECT COUNT(*) as c FROM profile WHERE user = '$user' AND site = '$siteid' AND date >= $startofday")->row();
+    	$week = $this->db->query("SELECT COUNT(*) as c FROM profile WHERE user = '$user' AND site = '$siteid' AND date >= $startofweek")->row();
+    	$month = $this->db->query("SELECT COUNT(*) as c FROM profile WHERE user = '$user' AND site = '$siteid' AND date >= $startofmonth")->row();
+    	$all = $this->db->query("SELECT COUNT(*) as c FROM profile WHERE user = '$user' AND site = '$siteid' AND date >= $startofalltime")->row();
+
+    	$updates = "".$today['c']." today, ".$week['c']." this week, ".$month['c']." this month, ".$all['c']." total";
 
 		$this->load->view('timer', compact('pageload', 'dbprocess', 'dbitem', 'updates'));
 		$this->load->view('footer');
