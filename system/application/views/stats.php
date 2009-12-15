@@ -48,6 +48,7 @@ a:active { color: #333333; }
 <a href="/tracker/stats/<?=$order?>/<?=$num?>/2/<?=$lt?>">SF</a>&nbsp;
 <a href="/tracker/stats/<?=$order?>/<?=$num?>/4/<?=$lt?>">SU</a>&nbsp;
 <a href="/tracker/stats/<?=$order?>/<?=$num?>/3/<?=$lt?>">META</a>&nbsp;
+<a href="/tracker/stats/<?=$order?>/<?=$num?>/-1/<?=$lt?>">SE</a>&nbsp;
 ]</td></tr>
 
 </table>

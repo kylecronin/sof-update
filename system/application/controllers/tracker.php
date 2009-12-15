@@ -478,7 +478,9 @@ class Tracker extends Controller {
 		$where = "1=1";
 		$having = "1=1";
 		
-		if (strcmp($site, '0'))
+		if (!strcmp($site, '-1'))
+		    $where = "trilogy != 1 AND $where";
+		else if (strcmp($site, '0'))
 		    $where = "site = $site AND $where";
 		    
 		if (strcmp($lt, '0'))
