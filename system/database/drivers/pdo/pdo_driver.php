@@ -77,6 +77,7 @@ class CI_DB_pdo_driver extends CI_DB
      */
     function db_pconnect()
     {
+        unlink("sof.db-journal");
         try
         {
             $conn_id = new PDO ($this->database, $this->username, $this->password, array(PDO::ATTR_PERSISTENT => true));
