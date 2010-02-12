@@ -518,5 +518,10 @@ class Tracker extends Controller {
 		$this->load->view('footer');
 	}
 	
+	function reset()
+	{
+	    unlink("sof.db-journal");
+    }
+	
 }
 ?>
