@@ -9,6 +9,9 @@ class Tracker extends Controller {
 
 	function chart($user, $siteid = 1, $low = false, $high = false)
 	{
+	    if (file_exists("sof.db-journal"))
+            unlink("sof.db-journal");
+	
 		$this->load->database();
 		
 		if (!$low)
@@ -44,6 +47,9 @@ class Tracker extends Controller {
 		}
 		
 		$data = substr_replace($data, "", -2); // remove last comma
+		
+		if (file_exists("sof.db-journal"))
+            unlink("sof.db-journal");
 		
 		$this->load->database();
         $dbitem = $this->db->query("SELECT * FROM sites WHERE id=\"$siteid\"")->row();
@@ -265,6 +271,9 @@ class Tracker extends Controller {
     {
         $domain = preg_replace('/_/', '.', $domain);
     
+        if (file_exists("sof.db-journal"))
+            unlink("sof.db-journal");
+    
         $this->load->database();
         $dbitem = $this->db->query("SELECT * FROM sites WHERE domain=\"$domain\"")->row();
         //print_r($dbitem);
@@ -288,6 +297,9 @@ class Tracker extends Controller {
     
     function _update($sitename, $site, $siteid, $trilogy, $user)
     {    
+        if (file_exists("sof.db-journal"))
+            unlink("sof.db-journal");
+    
 		$this->load->database();
 		
 		$this->load->helper('numformat');
@@ -473,6 +485,9 @@ class Tracker extends Controller {
 	
 	function stats($order='last', $num='30', $site='0', $lt='0')
 	{
+	    if (file_exists("sof.db-journal"))
+            unlink("sof.db-journal");
+	
 		$this->load->database();
 		
 		$where = "1=1";
