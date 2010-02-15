@@ -494,7 +494,7 @@ class Tracker extends Controller {
 		$having = "1=1";
 		
 		if (!strcmp($site, '-1'))
-		    $where = "site > 4 AND $where";
+		    $where = "trilogy != 1 AND $where";
 		else if (strcmp($site, '0'))
 		    $where = "site = $site AND $where";
 		    
