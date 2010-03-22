@@ -300,7 +300,7 @@ class Tracker extends Controller {
         if (file_exists("sof.db-journal"))
             unlink("sof.db-journal");
     
-		$this->load->database();
+
 		
 		$this->load->helper('numformat');
 		
@@ -320,6 +320,8 @@ class Tracker extends Controller {
 										 'answersapi' => "http://$site/api/useranswers.html?page=1&pagesize=500&userId=$user&sort=recent"
 										 //'test' => "http://modos.org:9999/"
 										));
+										
+		$this->load->database();
 				
 		foreach ($data as $page)
 		{
