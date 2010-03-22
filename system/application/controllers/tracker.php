@@ -321,7 +321,7 @@ class Tracker extends Controller {
 										 //'test' => "http://modos.org:9999/"
 										));
 										
-		$this->load->database();
+		
 				
 		foreach ($data as $page)
 		{
@@ -407,6 +407,9 @@ class Tracker extends Controller {
 		//$answercount = count($answers);
 		$answercount = $ac[0][1];
         //$answercount=281;
+        
+        // we've gone this far, but now we have to initialize the db
+        $this->load->database();
 
 		// get existing profile and insert updated one
 		$dbitem = $this->db->query("SELECT * FROM profile WHERE user = '$user' AND site = '$siteid' ORDER BY date DESC LIMIT 1")->row();
