@@ -359,7 +359,7 @@ class Tracker extends Controller {
 		// extract number of badges from $page, store in $badge
 		//preg_match('/iv class="summarycount ar".{10,60} (\d+)<\/d.{10,140}Badges/s', $page, $badge);
 		if ($trilogy)
-		    $exp = '/ar">(\d+)<\/div><\/td>\s*<td class="summary-header"><h1>Badges/s';
+		    $exp = '/ar">(\d+)<\/div><\/td>\s*<td class="summary-header"><h2>Badges/s';
 		else
 		    $exp = '/iv class="summarycount".{10,60} (\d+)<\/d.{10,140}Badges/s';
 		
