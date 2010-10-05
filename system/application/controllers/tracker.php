@@ -301,8 +301,12 @@ class Tracker extends Controller {
         if (file_exists("sof.db-journal"))
             unlink("sof.db-journal");    
 
-        print_r($_SERVER['REMOTE_ADDR']);
-        exit(0);
+        if ($_SERVER['REMOTE_ADDR'] == '24.31.159.206')
+        {
+            echo "hello kyle";
+            exit(0);
+        }
+        
 		
 		$this->load->helper('numformat');
 		
