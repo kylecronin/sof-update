@@ -294,6 +294,34 @@ class Tracker extends Controller {
         $this->_update($dbitem->name, $dbitem->domain, $dbitem->id, false, $user);
     
     }
+    
+    function se2update($domain, $user)
+    {
+        $domain = preg_replace('/_/', '.', $domain);
+        $domain = "$domain.stackexchange.com";
+    
+        if (file_exists("sof.db-journal"))
+            unlink("sof.db-journal");
+    
+        $this->load->database();
+        $dbitem = $this->db->query("SELECT * FROM sites WHERE domain=\"$domain\"")->row();
+        //print_r($dbitem);
+        
+        if (!$dbitem)
+        {
+            $src = file_get_contents("http://$domain/");
+            preg_match('/<title>(.*?)<\/title>/', $src, $title);
+            $title = $title[1];
+        
+            $this->db->query("INSERT INTO sites (name, domain) VALUES (\"$title\", \"$domain\")");
+            $dbitem = $this->db->query("SELECT * FROM sites WHERE domain=\"$domain\"")->row();
+        }
+        
+        //print_r($dbitem);
+    
+        $this->_update($dbitem->name, $dbitem->domain, $dbitem->id, true, $user);
+    
+    }
 
     
     function _update($sitename, $site, $siteid, $trilogy, $user)
