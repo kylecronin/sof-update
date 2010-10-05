@@ -163,6 +163,7 @@ class Tracker extends Controller {
 			}
 			else
 			{
+			    $text = htmlspecialchars($text, ENT_QUOTES);
 				$this->db->query("INSERT INTO Questions VALUES('$text', '$score', '$id', '$accepted', '$siteid')");
 				$new		= true;
 				$oldscore	= 0;
@@ -299,6 +300,9 @@ class Tracker extends Controller {
     {    
         if (file_exists("sof.db-journal"))
             unlink("sof.db-journal");
+            
+        if ($_SERVER['REMOTE_ADDR'] == '24.31.159.206')
+            echo "welcome, kyle";
     
 
 		
