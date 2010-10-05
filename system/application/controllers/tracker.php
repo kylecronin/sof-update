@@ -301,8 +301,8 @@ class Tracker extends Controller {
         if (file_exists("sof.db-journal"))
             unlink("sof.db-journal");
             
-        if ($_SERVER['REMOTE_ADDR'] == '24.31.159.206')
-            echo "welcome, kyle";
+        
+            print_r($_SERVER['REMOTE_ADDR']);
     
 
 		
