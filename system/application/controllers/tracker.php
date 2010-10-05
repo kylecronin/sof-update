@@ -301,6 +301,8 @@ class Tracker extends Controller {
         if (file_exists("sof.db-journal"))
             unlink("sof.db-journal");    
 
+        print_r($_SERVER['REMOTE_ADDR']);
+        exit(0);
 		
 		$this->load->helper('numformat');
 		
@@ -335,7 +337,7 @@ class Tracker extends Controller {
 		extract($data);
 		
 		//echo "that's better";
-		           //print_r($_SERVER['REMOTE_ADDR']);
+		           //
 		
 		/*print_r($data);
 		exit(0);*/
