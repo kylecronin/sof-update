@@ -299,11 +299,7 @@ class Tracker extends Controller {
     function _update($sitename, $site, $siteid, $trilogy, $user)
     {    
         if (file_exists("sof.db-journal"))
-            unlink("sof.db-journal");
-            
-        
-            print_r($_SERVER['REMOTE_ADDR']);
-    
+            unlink("sof.db-journal");    
 
 		
 		$this->load->helper('numformat');
@@ -337,6 +333,8 @@ class Tracker extends Controller {
 		}
 									
 		extract($data);
+		
+		           print_r($_SERVER['REMOTE_ADDR']);
 		
 		/*print_r($data);
 		exit(0);*/
