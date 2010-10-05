@@ -334,7 +334,7 @@ class Tracker extends Controller {
 									
 		extract($data);
 		
-		echo "am I going crazy?";
+		echo "that's better";
 		           print_r($_SERVER['REMOTE_ADDR']);
 		
 		/*print_r($data);
