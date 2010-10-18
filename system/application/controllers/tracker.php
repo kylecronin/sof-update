@@ -355,6 +355,8 @@ class Tracker extends Controller {
 										 //'test' => "http://modos.org:9999/"
 										));
 										
+		print_r($data); exit(0);
+										
 		
 				
 		foreach ($data as $page)
