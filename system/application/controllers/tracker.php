@@ -355,7 +355,7 @@ class Tracker extends Controller {
 										 //'test' => "http://modos.org:9999/"
 										));
 										
-		print_r($data); exit(0);
+		//print_r($data); exit(0);
 										
 		
 				
@@ -436,15 +436,18 @@ class Tracker extends Controller {
 
         $exp = '/"answers".*?<div.*?>(\d+)/s';
 		preg_match_all($exp, $page, $ac, PREG_SET_ORDER);
+		$answercount = $ac[0][1];
 		//print_r($ac);
 		//return;
+		
+		print_r(compact('questions', 'answers', 'answercount', 'rep', 'badge', 'dbitem')); exit(0);
 	
 
 
 		//$answercount = $ac[1];
 		//echo($ac[1]);
 		//$answercount = count($answers);
-		$answercount = $ac[0][1];
+		
         //$answercount=281;
         
         // we've gone this far, but now we have to initialize the db
